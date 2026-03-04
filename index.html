@@ -56,6 +56,20 @@
     .post-card .article-box .article-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
     .post-card .article-box .article-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
     .section-header { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
+    .hot-articles-header { font-size: 18px; font-weight: 700; color: #ff6b35; margin: 40px 0 8px; padding-bottom: 10px; border-bottom: 2px solid #ff6b35; display: flex; align-items: center; gap: 8px; }
+    .hot-articles-header .fire { font-size: 20px; }
+    .hot-articles-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
+    .hot-article-card { background: linear-gradient(135deg, #1a1208 0%, #161616 40%); border: 1px solid #3d2e0a; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; transition: border-color 0.2s; }
+    .hot-article-card:hover { border-color: #ff6b35; }
+    .hot-article-card .ha-rank { display: inline-block; background: #ff6b35; color: #000; font-weight: 800; font-size: 12px; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 6px; margin-right: 8px; }
+    .hot-article-card .ha-source { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
+    .hot-article-card .ha-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: #ffd699; }
+    .hot-article-card .ha-heat { font-size: 12px; color: #ff6b35; margin-bottom: 12px; }
+    .hot-article-card .ha-body { font-size: 14px; line-height: 1.85; color: var(--text-secondary); margin-bottom: 14px; }
+    .hot-article-card .ha-body strong { color: var(--text); }
+    .hot-article-card .ha-links { display: flex; gap: 10px; flex-wrap: wrap; }
+    .hot-article-card .ha-links a { font-size: 13px; color: var(--accent); text-decoration: none; padding: 5px 12px; border-radius: 8px; background: rgba(29,155,240,0.08); transition: background 0.2s; }
+    .hot-article-card .ha-links a:hover { background: rgba(29,155,240,0.15); }
     .footer { text-align: center; padding: 40px 0 20px; color: var(--text-secondary); font-size: 13px; }
     .footer a { color: var(--accent); text-decoration: none; }
     @media (max-width: 600px) { .container { padding: 12px; } .post-card { padding: 16px; } .header h1 { font-size: 22px; } }
@@ -71,7 +85,7 @@
   <div class="summary-banner">
     <h2>今日速览</h2>
     <p>
-      今天时间线三大焦点：<span class="keyword">Dario Amodei 发出惊人预言</span>——"指数增长没有天花板，今年会让所有人震惊"；<span class="keyword">GPT-5.4 泄露细节疯传</span>——2M 上下文、持久状态、全分辨率图像处理；<span class="keyword">Qwen 团队疑似内爆</span>——Jeremy Howard 质疑"到底发生了什么"，多名核心研究员离职。此外，<span class="keyword">Claude 商业市场份额飙升至 ~70%</span>，Apple 发布 M5 Max 搅动 AI 硬件格局。
+      今天时间线三大焦点：<span class="keyword">Dario Amodei 发出惊人预言</span>——"指数增长没有天花板，今年会让所有人震惊"；<span class="keyword">GPT-5.4 泄露细节疯传</span>——2M 上下文、持久状态、全分辨率图像处理；<span class="keyword">Qwen 团队疑似内爆</span>——Jeremy Howard 质疑"到底发生了什么"，多名核心研究员离职。此外，<span class="keyword">Claude 商业市场份额飝升至 ~70%</span>，Apple 发布 M5 Max 搭动 AI 硬件格局。
     </p>
   </div>
 
@@ -90,7 +104,7 @@
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
     <div class="author"><span class="author-name">Julian Goldie SEO</span> <span class="author-handle">@JulianGoldieSEO</span></div>
-    <div class="content">GPT-5.4 刚泄露出来，完全是个颠覆性产品。聊天中再也不会有"金鱼记忆"了。不再有模糊、压缩的 AI 视觉。这是 GPT-5.4 的玩法：→ 2M 令牌窗口，可覆盖整本书 → 全分辨率图像处理以提升精度 → 自动化代理执行多步骤任务</div>
+    <div class="content">GPT-5.4 刚泄露出来，完全是个颠覆性产品。聚天中再也不会有"金鱼记忆"了。不再有模糊、压缩的 AI 视觉。这是 GPT-5.4 的玩法：→ 2M 令牌窗口，可覆盖整本书 → 全分辨率图像处理以提升精度 → 自动化代理执行多步骤任务</div>
     <a class="link-btn" href="https://x.com/JulianGoldieSEO/status/2029137738864402700" target="_blank">→ 查看原帖</a>
   </div>
 
@@ -128,7 +142,7 @@
   <div class="post-card" data-tag="people">
     <span class="tag tag-people">人物动态</span>
     <div class="author"><span class="author-name">Chubby</span> <span class="author-handle">@kimmonismus</span></div>
-    <div class="content">Dario Amodei 说："我们没有看到碰到天花板。今年会有让所有人惊讶的激进加速。" 指数级增长让人措手不及。"我们正站在某件惊人事物的边缘。我们需要以正确的方式来管理它。"</div>
+    <div class="content">Dario Amodei 说："我们没有看到碰到天花板。今年会有让所有人惊讶的激进加速。" 指数级增长让人掩手不及。"我们正站在某件惊人事物的边缘。我们需要以正确的方式来管理它。"</div>
     <div class="article-box">
       <div class="article-title">Dario Amodei 关键语录：AI 扩展——没有天花板，加速指数增长</div>
       <div class="article-desc">"我们没有看到碰壁。我认为今年将会有一次让所有人都感到惊讶的激进加速。指数增长总是让人措手不及——有个古老的寓言叫棋盘的后半段：第一格放一粒米，第二格两粒，第四格四粒。到第64格时你就有了数十亿甚至数万亿粒米。我们正站在第64格中的第40格，从第40格到第64格的速度会比你想象得更快——即使你已经看到它到目前为止有多快。我不认为人们做好了准备。我认为我们正处于某种不可思议事物的边缘。"</div>
@@ -166,7 +180,7 @@
     <div class="content">@steipete 为 @openclaw 设计的那种记忆系统值得注意。6 种不同的记忆并行工作并相互支持。还有哪些应用的内存管理更好？</div>
     <div class="article-box">
       <div class="article-title">OpenClaw Agent 记忆系统架构</div>
-      <div class="article-desc">该系统包含六层记忆：SOUL.md（身份与行为——定义个性、语气和边界，首先读取）、AGENTS.md（操作指令——持久化系统提示和行为参数）、USER.md（用户画像与偏好——学习到的习惯、工作细节、定制化交互）、Daily Logs（临时记忆——存储当天/当周事件和对话日志）、HEARTBEAT.md（日常/预测性任务——安排起床提醒、每 .fit 运动等常规动作）、MEMORY.md（持久长期记忆——里程碑、重要决策、项目目标、隐私设置）。这种分层设计让 Agent 能同时具备短期上下文感知和长期记忆保持。</div>
+      <div class="article-desc">该系统包含六层记忆：SOUL.md（身份与行为——定义个性、语气和边界，首先读取）、AGENTS.md（操作指令——持久化系统提示和行为参数）、USER.md（用户画像与偏好——学习到的习惯、工作细节、定制化交互）、Daily Logs（临时记忆——存储当天/当周事件和对话日志）、HEARTBEAT.md（日常/预测性任务——安排起床提醒、每 .fit 运动等常规动作）、MEMORY.md（持久长期记忆——里程碑、重要决策、项目目标、隐秄设置）。这种分层设计让 Agent 能同时具备短期上下文感知和长期记忆保持。</div>
     </div>
     <a class="link-btn" href="https://x.com/Satvikkharb/status/2029093807963476098" target="_blank">→ 查看原帖</a>
   </div>
@@ -191,7 +205,7 @@
 
   <div class="post-card" data-tag="tool">
     <span class="tag tag-tool">工具/教程</span>
-    <div class="author"><span class="author-name">摆烂程序媛</span> <span class="author-handle">@wanerfu</span></div>
+    <div class="author"><span class="author-name">摆烀程序媛</span> <span class="author-handle">@wanerfu</span></div>
     <div class="content">Grok 3 是一位天才的股票交易员。但大多数人不知道如何使用。以下是股票交易自动化的 10 个提示。</div>
     <a class="link-btn" href="https://x.com/wanerfu/status/2029015560328184038" target="_blank">→ 查看原帖</a>
   </div>
@@ -219,7 +233,7 @@
   <div class="post-card" data-tag="news">
     <span class="tag tag-news">行业/时政</span>
     <div class="author"><span class="author-name">Yuchen Jin</span> <span class="author-handle">@Yuchenj_UW</span></div>
-    <div class="content">2025 年 2 月：ChatGPT 占据了美国商务市场的 90%。2026 年 2 月：Claude 的市场份额已飙升至约 70%。Anthropic 的增长简直疯狂。他们押注编程和代理人的赌注显然得到了回报。</div>
+    <div class="content">2025 年 2 月：ChatGPT 占据了美国商务市场的 90%。2026 年 2 月：Claude 的市场份额已飙升至约 70%。Anthropic 的增长简直疯狂。他们押注编程和代理人的赌注显煶得到了回报。</div>
     <div class="article-box">
       <div class="article-title">Anthropic 领跑 AI 商业聊天市场</div>
       <div class="article-desc">根据 Ramp 经济学实验室的数据（基于 50,000+ 美国企业在 Ramp 金融运营平台上的公司卡和账单支付数据，排除非 OpenAI 和 Anthropic 的 AI 模型支出），截至 2026 年 2 月，Anthropic 旗下产品（包括 Claude Team、Claude Pro、Claude Max、Claude Enterprise 等）在美国企业 AI 聊天订阅总支出中的占比已超过 ChatGPT 系列产品（ChatGPT Pro、Plus、Business）。这标志着短短一年内市场格局的戏剧性逆转。</div>
@@ -239,6 +253,63 @@
     <div class="author"><span class="author-name">Commentary Donald J. Trump Posts</span> <span class="author-handle">@TrumpDailyPosts</span></div>
     <div class="content">这个故事迄今已超过 400 万次浏览。（特朗普宣布对伊朗的"命令"立即生效——附完整推文及信息。）</div>
     <a class="link-btn" href="https://x.com/TrumpDailyPosts/status/2029046737940431266" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <!-- ===== 今日热文 ===== -->
+  <div class="hot-articles-header"><span class="fire">🔥</span> 今日 AI 热文 TOP 3</div>
+  <div class="hot-articles-sub">过去 24 小时 X 上讨论最多的 AI 深度文章，全文翻译摘要</div>
+
+  <div class="hot-article-card">
+    <div class="ha-source"><span class="ha-rank">1</span>TechCrunch · Sarah Perez · 2026-03-03</div>
+    <div class="ha-title">ChatGPT 新模型 GPT-5.3 Instant：不再让你"冷静一下"</div>
+    <div class="ha-heat">21.2K 条 X 讨论</div>
+    <div class="ha-body">
+      OpenAI 发布了 GPT-5.3 Instant 更新，旨在解决用户长期抱怨的"尬聊"问题。<strong>核心改进：</strong>模型不再使用居高临下的语气——告别"冷静一下""停下来深呼吸"等令人恼火的说教式回复。<br><br>
+      <strong>具体变化：</strong>回答更准确，网页搜索结果更丰富、更有上下文；大幅减少不必要的拒绝回答，削弱了过度防御或说教的前置铺垫——模型现在会直接聚焦用户问题，不再加无谓的免责声明；对话风格更自然流畅，去掉了多余的感叹和空洞宣言。<br><br>
+      <strong>可用性：</strong>即日起面向所有 ChatGPT 用户开放，开发者可通过 API 使用 <code>gpt-5.3-chat-latest</code>。旧版 GPT-5.2 Instant 将保留三个月供付费用户使用，6月3日退役。<br><br>
+      <strong>后续：</strong>OpenAI 同时暛示 GPT-5.4 将"比你想象的更快到来"，引发广泛猜测。
+    </div>
+    <div class="ha-links">
+      <a href="https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/" target="_blank">📄 阅读原文</a>
+      <a href="https://x.com/search?q=GPT-5.3%20Instant&f=top" target="_blank">💬 查看 X 讨论</a>
+    </div>
+  </div>
+
+  <div class="hot-article-card">
+    <div class="ha-source"><span class="ha-rank">2</span>VentureBeat / TechCrunch / Bloomberg · 2026-03-04</div>
+    <div class="ha-title">阿里巴巴 Qwen 团队核心人物接连出走——到底发生了什么？</div>
+    <div class="ha-heat">14.5K 条 X 讨论</div>
+    <div class="ha-body">
+      Qwen 技术负责人<strong>林俊阳（Junyang Lin）</strong>在 X 上宣布离开项目，震动 AI 圈。他自 2019 年加入阿里巴巴，2023 年起成为 Qwen 的技术核心和对外代言人。<br><br>
+      <strong>并非孤例：</strong>这是 2026 年 Q1 第三位高层离开——后训练负责人<strong>余博文</strong>同日辞职，专注编程方向的研究科学家<strong>惠彬元</strong>已于一月离职。同事暛示林的离开"并非自愿"。<br><br>
+      <strong>背景矛盾：</strong>离职潮发生在 Qwen 势头正盛之时——2月月活从 3100 万暴涨至 2.03 亿，跃升为全球第三大 AI 产品（仅次于 ChatGPT 和豆包）。刚发布的 Qwen 3.5 小模型获得好评。<br><br>
+      <strong>世界反应：</strong>Jeremy Howard 在 X 上发文质疑"Qwen 到底怎么了？某种内爆吗？"，引发广泛讨论。多方猜测涉及阿里内部管理层变动和研究方向分歧。
+    </div>
+    <div class="ha-links">
+      <a href="https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/" target="_blank">📄 TechCrunch</a>
+      <a href="https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in-wake-of-latest-open-source-release/" target="_blank">📄 VentureBeat</a>
+      <a href="https://x.com/search?q=Qwen%20Junyang%20Lin&f=top" target="_blank">💬 查看 X 讨论</a>
+    </div>
+  </div>
+
+  <div class="hot-article-card">
+    <div class="ha-source"><span class="ha-rank">3</span>The Neuron Daily / NxCode · 2026-03-02</div>
+    <div class="ha-title">OpenAI 三次泄露 GPT-5.4——2M 上下文窗口、全分辨率视觉、代理能力</div>
+    <div class="ha-heat">X 热传中</div>
+    <div class="ha-body">
+      OpenAI 在 Codex 代码提交中不小心泄露了 GPT-5.4 的存在——而且泄露了<strong>三次</strong>。<br><br>
+      <strong>泄露经过：</strong>两个 PR 在 OpenAI 公开的 Codex GitHub 仓库中直接引用了 GPT-5.4——一个添加全分辨率视觉支持，另一个是快速模式切换。此外，Codex 的网络安全屏蔽代码中出现了模型名 <code>gpt-5.4-ab-arm1-1020-1p-codexswic-ev3</code>。一名 OpenAI 员工还发布了模型选择器截图后迅速删除。<br><br>
+      <strong>已知特性：</strong><br>
+      · <strong>200 万 token 上下文窗口</strong>——比 GPT-5 的 40 万窗口跃升 5 倍，可处理整本书<br>
+      · <strong>全分辨率图像处理</strong>——新增 <code>"detail": "original"</code> 参数，直接传入原始图像字节（PNG/JPEG/WebP）<br>
+      · <strong>增强代理能力</strong>——向"真正能独立完成多步骤任务的代理"迈进<br><br>
+      <strong>发布时间：</strong>Manifold 预测市场给出 55% 概率在 4 月前发布，74% 概率在 6 月前。7 个月内出了 5 个 GPT-5 变体——"GPT-5.9 可能在我们还没学完上三个模型之前就发布了"。
+    </div>
+    <div class="ha-links">
+      <a href="https://www.theneurondaily.com/p/openai-leaked-gpt-5-4-three-times" target="_blank">📄 The Neuron Daily</a>
+      <a href="https://www.nxcode.io/resources/news/gpt-5-4-leaked-openai-codex-context-window-vision-release-2026" target="_blank">📄 NxCode 详解</a>
+      <a href="https://x.com/search?q=GPT-5.4%20leak&f=top" target="_blank">💬 查看 X 讨论</a>
+    </div>
   </div>
 
   <div class="footer">
