@@ -70,6 +70,12 @@
     .hot-article-card .ha-links { display: flex; gap: 10px; flex-wrap: wrap; }
     .hot-article-card .ha-links a { font-size: 13px; color: var(--accent); text-decoration: none; padding: 5px 12px; border-radius: 8px; background: rgba(29,155,240,0.08); transition: background 0.2s; }
     .hot-article-card .ha-links a:hover { background: rgba(29,155,240,0.15); }
+    .hot-btn { border-color: #ff6b35; color: #ff6b35; }
+    .hot-btn:hover { background: rgba(255,107,53,0.12); border-color: #ff8555; color: #ff8555; }
+    .ha-full-text { font-size: 14px; line-height: 2; color: #ccc; margin-bottom: 14px; }
+    .ha-full-text p { margin-bottom: 12px; }
+    .ha-full-text strong { color: #ffd699; }
+    .ha-full-text h3 { font-size: 15px; color: #ff6b35; margin: 18px 0 8px; font-weight: 700; }
     .footer { text-align: center; padding: 40px 0 20px; color: var(--text-secondary); font-size: 13px; }
     .footer a { color: var(--accent); text-decoration: none; }
     @media (max-width: 600px) { .container { padding: 12px; } .post-card { padding: 16px; } .header h1 { font-size: 22px; } }
@@ -96,6 +102,7 @@
     <button class="filter-btn" onclick="filterPosts('people')">人物动态</button>
     <button class="filter-btn" onclick="filterPosts('product')">产品发布</button>
     <button class="filter-btn" onclick="filterPosts('news')">行业/时政</button>
+    <button class="filter-btn hot-btn" onclick="document.getElementById('hot-articles').scrollIntoView({behavior:'smooth'})">🔥 热文 TOP3</button>
   </div>
 
   <!-- ===== AI 模型 ===== -->
@@ -256,18 +263,35 @@
   </div>
 
   <!-- ===== 今日热文 ===== -->
-  <div class="hot-articles-header"><span class="fire">🔥</span> 今日 AI 热文 TOP 3</div>
-  <div class="hot-articles-sub">过去 24 小时 X 上讨论最多的 AI 深度文章，全文翻译摘要</div>
+  <div id="hot-articles" class="hot-articles-header"><span class="fire">🔥</span> 今日 AI 热文 TOP 3</div>
+  <div class="hot-articles-sub">过去 24 小时 X 上讨论最多的 AI 深度文章，完整全文翻译</div>
 
+  <!-- 热文 #1 -->
   <div class="hot-article-card">
     <div class="ha-source"><span class="ha-rank">1</span>TechCrunch · Sarah Perez · 2026-03-03</div>
     <div class="ha-title">ChatGPT 新模型 GPT-5.3 Instant：不再让你"冷静一下"</div>
     <div class="ha-heat">21.2K 条 X 讨论</div>
-    <div class="ha-body">
-      OpenAI 发布了 GPT-5.3 Instant 更新，旨在解决用户长期抱怨的"尬聊"问题。<strong>核心改进：</strong>模型不再使用居高临下的语气——告别"冷静一下""停下来深呼吸"等令人恼火的说教式回复。<br><br>
-      <strong>具体变化：</strong>回答更准确，网页搜索结果更丰富、更有上下文；大幅减少不必要的拒绝回答，削弱了过度防御或说教的前置铺垫——模型现在会直接聚焦用户问题，不再加无谓的免责声明；对话风格更自然流畅，去掉了多余的感叹和空洞宣言。<br><br>
-      <strong>可用性：</strong>即日起面向所有 ChatGPT 用户开放，开发者可通过 API 使用 <code>gpt-5.3-chat-latest</code>。旧版 GPT-5.2 Instant 将保留三个月供付费用户使用，6月3日退役。<br><br>
-      <strong>后续：</strong>OpenAI 同时暗示 GPT-5.4 将"比你想象的更快到来"，引发广泛猜测。
+    <div class="ha-full-text">
+      <h3>令人恼火的"说教式 AI"终于走了</h3>
+      <p>OpenAI 发布了 GPT-5.3 Instant 模型，目标是消除用户长期以来最大的抱怨——ChatGPT 那令人窒息的居高临下的语气。OpenAI 在社交媒体上表示："我们听到了你们的反馈，5.3 Instant 减少了那些让人尴尬的回复。"</p>
+
+      <h3>问题的由来</h3>
+      <p>GPT-5.2 Instant 模型的语气让用户忍无可忍，甚至有人因此取消了订阅。典型的问题回复是：当用户表达困惑或沮丧时，聊天机器人的第一句话是"首先——你并没有问题（You're not broken）"。这种自以为是的"心理辅导"式开场白一直让大家火大。更早的版本更糟——遇到用户情绪激动，它会说"你应该冷静一下""让我们先深呼吸"，结果适得其反，让用户觉得自己被无视和轻视了。</p>
+
+      <h3>GPT-5.3 Instant 的核心改进</h3>
+      <p><strong>1. 不再说教：</strong>模型不再默认用居高临下的方式回应用户情绪，而是先承认情绪、不做评判，然后直接给出有针对性的解决方案。即使在压力情境下，也能保持支持性的沟通方式。</p>
+      <p><strong>2. 更好的上下文理解：</strong>模型在把握对话细微差别方面有了显著提升，能够在更长的对话中保持上下文连贯性。</p>
+      <p><strong>3. 更快的响应速度：</strong>在提升情感智能的同时，响应速度也更快了。</p>
+      <p><strong>4. 多语言和个性化支持：</strong>增强了多语言能力，并加入了可定制的个性设置。</p>
+
+      <h3>为什么这很重要</h3>
+      <p>研究表明，用户更喜欢 AI 能<strong>承认</strong>他们的情绪，而不是<strong>否定</strong>它们。这次更新反映了整个行业的一个认知转变：有效的 AI 交互不仅需要准确处理语言，更需要理解人类心理。这标志着对话式 AI 的成熟——从僵硬的脚本走向真正有帮助的对话。</p>
+
+      <h3>受益行业</h3>
+      <p><strong>客户服务：</strong>减少用户挫败感。<strong>心理健康初筛：</strong>提供更富同理心的初步支持。<strong>教育领域：</strong>用鼓励而非评判的方式给予反馈。</p>
+
+      <h3>可用性</h3>
+      <p>即日起面向所有 ChatGPT 用户开放，开发者可通过 API 调用。旧版 GPT-5.2 Instant 将保留三个月，6 月 3 日退役。OpenAI 同时暗示 GPT-5.4 将"比你想象的更快到来"。</p>
     </div>
     <div class="ha-links">
       <a href="https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/" target="_blank">📄 阅读原文</a>
@@ -275,35 +299,72 @@
     </div>
   </div>
 
+  <!-- 热文 #2 -->
   <div class="hot-article-card">
-    <div class="ha-source"><span class="ha-rank">2</span>VentureBeat / TechCrunch / Bloomberg · 2026-03-04</div>
+    <div class="ha-source"><span class="ha-rank">2</span>OfficeChai / TechCrunch / Bloomberg · 2026-03-04</div>
     <div class="ha-title">阿里巴巴 Qwen 团队核心人物接连出走——到底发生了什么？</div>
     <div class="ha-heat">14.5K 条 X 讨论</div>
-    <div class="ha-body">
-      Qwen 技术负责人<strong>林俊阳（Junyang Lin）</strong>在 X 上宣布离开项目，震动 AI 圈。他自 2019 年加入阿里巴巴，2023 年起成为 Qwen 的技术核心和对外代言人。<br><br>
-      <strong>并非孤例：</strong>这是 2026 年 Q1 第三位高层离开——后训练负责人<strong>余博文</strong>同日辞职，专注编程方向的研究科学家<strong>惠彬元</strong>已于一月离职。同事暗示林的离开"并非自愿"。<br><br>
-      <strong>背景矛盾：</strong>离职潮发生在 Qwen 势头正盛之时——2月月活从 3100 万暴涨至 2.03 亿，跃升为全球第三大 AI 产品（仅次于 ChatGPT 和豆包）。刚发布的 Qwen 3.5 小模型获得好评。<br><br>
-      <strong>业界反应：</strong>Jeremy Howard 在 X 上发文质疑"Qwen 到底怎么了？某种内爆吗？"，引发广泛讨论。多方猜测涉及阿里内部管理层变动和研究方向分歧。
+    <div class="ha-full-text">
+      <h3>林俊阳宣布离职</h3>
+      <p>阿里巴巴 Qwen AI 项目技术负责人<strong>林俊阳（Junyang Lin）</strong>在 X 上发布了一条简短声明："me stepping down. bye my beloved qwen."（我辞职了。再见，我亲爱的 Qwen。）这条推文引发了数百次转发和数千个点赞。</p>
+
+      <h3>不仅仅是幕后研究员</h3>
+      <p>林俊阳不只是一名普通研究员——他是 Qwen 项目面向全球的"代言人"。他定期在社交媒体上分享模型发布信息、基准测试结果，并与全球开发者社区互动。正是他的活跃存在，让这个来自中国的 AI 项目在国际舞台上有了一张可辨识的人脸。</p>
+
+      <h3>集体出走</h3>
+      <p>林俊阳并非唯一离开的人。团队另一名研究员<strong>李凯鑫（Kaixin Li）</strong>宣布："正式告别 @Alibaba_Qwen。感谢与杰出的人共事的机会。为我们的影响力感到骄傲。继续向前！"<strong>惠彬元（Binyuan Hui）</strong>的个人主页也改成了"前 Qwen 成员技术人员"。此外，据晚点 LatePost 报道，负责后训练方向的<strong>余博文</strong>也在同一天辞职。</p>
+
+      <h3>并非自愿？</h3>
+      <p>Qwen 团队成员<strong>陈昌</strong>的一条帖子暗示林俊阳的离开并非自愿："我知道离开不是你的选择。就在昨晚，我们还肩并肩地一起发布 Qwen 3.5 小模型。"</p>
+
+      <h3>林俊阳的贡献</h3>
+      <p>林俊阳 2019 年加入阿里巴巴，晋升至高级算法专家，2023 年起正式担任 Qwen 技术负责人。他此前的研究项目包括 M6、OFA 和 Chinese-CLIP。根据 Google Scholar 数据，他的论文累计引用超过 <strong>42,000 次</strong>，仅 Qwen3 技术报告一篇就获得约 9,000 次引用。</p>
+
+      <h3>Qwen 的全球影响力</h3>
+      <p>在林俊阳的带领下，Qwen 从最初的 70 亿参数模型发展成一个全面的产品组合——涵盖语言模型、视觉语言变体、语音系统和专业推理模型。整个生态系统在 Hugging Face 上实现了超过 <strong>6 亿次</strong>下载和超过 <strong>17 万</strong>个衍生版本，在该指标上超过了 Meta 的 Llama。《财富》杂志在 2025 年"改变世界"榜单中表彰了阿里巴巴对开源 AI 的贡献。</p>
+
+      <h3>中国 AI 面临的结构性挑战</h3>
+      <p>林俊阳曾公开承认中国 AI 研究面临的结构性困难：美国的算力基础设施可能比中国<strong>高出一到两个数量级</strong>。他强调，中国的实验室往往将大部分资源用于完成交付任务，而非探索开创性的研究方向。</p>
+
+      <h3>业界反应</h3>
+      <p>fast.ai 创始人 Jeremy Howard 在 X 上发文质疑："Qwen 到底怎么了？某种内爆吗？这真让人难过也令人担忧。"引发广泛讨论。多方猜测涉及阿里内部管理层变动和研究方向分歧。林俊阳未来的去向尚未公开，但鉴于他的知名度，他的下一步行动必将引起广泛关注。</p>
     </div>
     <div class="ha-links">
+      <a href="https://officechai.com/ai/alibaba-qwens-tech-lead-junyang-lin-steps-down/" target="_blank">📄 OfficeChai</a>
       <a href="https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/" target="_blank">📄 TechCrunch</a>
       <a href="https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in-wake-of-latest-open-source-release/" target="_blank">📄 VentureBeat</a>
       <a href="https://x.com/search?q=Qwen%20Junyang%20Lin&f=top" target="_blank">💬 查看 X 讨论</a>
     </div>
   </div>
 
+  <!-- 热文 #3 -->
   <div class="hot-article-card">
     <div class="ha-source"><span class="ha-rank">3</span>The Neuron Daily / NxCode · 2026-03-02</div>
     <div class="ha-title">OpenAI 三次泄露 GPT-5.4——2M 上下文窗口、全分辨率视觉、代理能力</div>
     <div class="ha-heat">X 热传中</div>
-    <div class="ha-body">
-      OpenAI 在 Codex 代码提交中不小心泄露了 GPT-5.4 的存在——而且泄露了<strong>三次</strong>。<br><br>
-      <strong>泄露经过：</strong>两个 PR 在 OpenAI 公开的 Codex GitHub 仓库中直接引用了 GPT-5.4——一个添加全分辨率视觉支持，另一个是快速模式切换。此外，Codex 的网络安全屏蔽代码中出现了模型名 <code>gpt-5.4-ab-arm1-1020-1p-codexswic-ev3</code>。一名 OpenAI 员工还发布了模型选择器截图后迅速删除。<br><br>
-      <strong>已知特性：</strong><br>
-      · <strong>200 万 token 上下文窗口</strong>——比 GPT-5 的 40 万窗口跃升 5 倍，可处理整本书<br>
-      · <strong>全分辨率图像处理</strong>——新增 <code>"detail": "original"</code> 参数，直接传入原始图像字节（PNG/JPEG/WebP）<br>
-      · <strong>增强代理能力</strong>——向"真正能独立完成多步骤任务的代理"迈进<br><br>
-      <strong>发布时间：</strong>Manifold 预测市场给出 55% 概率在 4 月前发布，74% 概率在 6 月前。7 个月内出了 5 个 GPT-5 变体——"GPT-5.9 可能在我们还没学完上三个模型之前就发布了"。
+    <div class="ha-full-text">
+      <h3>三次"不小心"</h3>
+      <p>OpenAI 本周在多个渠道意外泄露了 GPT-5.4 的存在。对于一家以保密著称的公司来说，连续泄露三次可以说是相当罕见。</p>
+
+      <h3>第一次泄露：错误信息中的线索</h3>
+      <p>开发者 <strong>Corey Noles</strong> 在使用 Codex 时收到了一条网络安全屏蔽错误信息，其中直接提到了模型名 <code>gpt-5.4-ab-arm1-1020-1p-codexswic-ev3</code>。这暴露了 GPT-5.4 作为 GPT-5.3-Codex 后继者的存在——而后者仅在三周前才刚刚发布。</p>
+
+      <h3>第二次泄露：GitHub Pull Request</h3>
+      <p>在 OpenAI 的公开 Codex GitHub 仓库中，出现了两个引用 GPT-5.4 的 Pull Request。其中一个将最低模型版本设置为 (5, 4)，另一个描述了一个"为 GPT-5.4 切换快速模式"的 slash 命令。两个 PR 在数小时内被通过 force push 删除。一个 PR 添加了全分辨率视觉支持，工程师的提交记录中引用了"GPT-5.4 or newer"用于图像处理，后来被改为"gpt-5.3-codex or newer"。</p>
+
+      <h3>第三次泄露：员工截图</h3>
+      <p>OpenAI Codex 团队成员 <strong>Tibo</strong> 发布了一张截图，显示 GPT-5.4 出现在模型选择器中，但很快就删除了。此外，用户 @nicdunz 报告称"alpha-gpt-5.4"曾短暂出现在公开的 <code>/models</code> API 端点中，不过这一信息缺乏独立验证。</p>
+
+      <h3>已知特性</h3>
+      <p><strong>200 万 token 上下文窗口：</strong>这一容量代表了巨大的飞跃——大约可容纳 5,000 页文本，或者将整个大型代码库放入一次会话中。这远远超过了 GPT-5 的 40 万 token，也超过了 Gemini 2.5 Pro 当前的 100 万 token 窗口。</p>
+      <p><strong>全分辨率图像处理：</strong>泄露的代码引入了一个新的 <code>"detail": "original"</code> API 参数，允许直接传入未压缩的原始图像（支持 PNG/JPEG/WebP 格式）进行处理。这对架构图、UI 截图、医学影像和技术图纸的处理特别有意义。</p>
+      <p><strong>增强的代理能力：</strong>GPT-5.4 据报道将具备"真正能独立完成多步骤任务的代理"能力，代表了超越 GPT-5.3-Codex 编程聚焦的更广泛的自主能力。</p>
+
+      <h3>发布时间线推测</h3>
+      <p>基于加速的发布节奏——GPT-5（2025 年 8 月）、GPT-5.1（2025 年 11 月）、GPT-5.2（2025 年 12 月）、GPT-5.3-Codex（2026 年 2 月）——2026 年 3 月或 4 月发布看起来是合理的。Manifold 预测市场给出 55% 的概率在 4 月前发布，74% 的概率在 6 月前。</p>
+
+      <h3>竞争格局</h3>
+      <p>这一进展直接挑战了 Claude Opus 4.6（20 万 token）和 Gemini 2.5 Pro（100 万 token）在上下文窗口竞赛中的地位。7 个月内出了 5 个 GPT-5 变体，有人调侃："GPT-5.9 可能在我们还没学完上三个模型之前就发布了。"</p>
     </div>
     <div class="ha-links">
       <a href="https://www.theneurondaily.com/p/openai-leaked-gpt-5-4-three-times" target="_blank">📄 The Neuron Daily</a>
