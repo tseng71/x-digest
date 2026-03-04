@@ -1,217 +1,68 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>X 每日精选</title>
-<style>
-  :root {
-    --bg: #0a0a0a;
-    --card-bg: #161616;
-    --card-border: #2a2a2a;
-    --text: #e8e8e8;
-    --text-secondary: #8b8b8b;
-    --accent: #1d9bf0;
-    --accent-hover: #1a8cd8;
-    --tag-ai: #7c3aed;
-    --tag-news: #dc2626;
-    --tag-tool: #059669;
-    --tag-people: #d97706;
-    --tag-product: #2563eb;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.7;
-  }
-  .container { max-width: 780px; margin: 0 auto; padding: 20px 16px; }
-
-  /* Header */
-  .header {
-    text-align: center;
-    padding: 40px 0 30px;
-    border-bottom: 1px solid var(--card-border);
-    margin-bottom: 30px;
-  }
-  .header h1 {
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-  }
-  .header h1 span { color: var(--accent); }
-  .date-badge {
-    display: inline-block;
-    margin-top: 16px;
-    font-size: 15px;
-    color: var(--text-secondary);
-    background: var(--card-bg);
-    padding: 6px 16px;
-    border-radius: 20px;
-    border: 1px solid var(--card-border);
-  }
-
-  /* Summary Banner */
-  .summary-banner {
-    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-    border: 1px solid #2a2a4a;
-    border-radius: 12px;
-    padding: 20px 24px;
-    margin-bottom: 28px;
-  }
-  .summary-banner h2 {
-    font-size: 15px;
-    color: var(--accent);
-    margin-bottom: 10px;
-    font-weight: 600;
-  }
-  .summary-banner p {
-    font-size: 14px;
-    color: var(--text-secondary);
-    line-height: 1.8;
-  }
-  .summary-banner .keyword {
-    color: var(--text);
-    font-weight: 500;
-  }
-
-  /* Filter Tags */
-  .filters {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-bottom: 24px;
-  }
-  .filter-btn {
-    padding: 6px 14px;
-    border-radius: 20px;
-    font-size: 13px;
-    border: 1px solid var(--card-border);
-    background: transparent;
-    color: var(--text-secondary);
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .filter-btn:hover, .filter-btn.active {
-    border-color: var(--accent);
-    color: var(--accent);
-    background: rgba(29,155,240,0.08);
-  }
-
-  /* Post Cards */
-  .post-card {
-    background: var(--card-bg);
-    border: 1px solid var(--card-border);
-    border-radius: 12px;
-    padding: 20px 22px;
-    margin-bottom: 16px;
-    transition: border-color 0.2s;
-    position: relative;
-  }
-  .post-card:hover {
-    border-color: #3a3a3a;
-  }
-  .post-card .tag {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 4px;
-    margin-bottom: 10px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .tag-ai { background: rgba(124,58,237,0.15); color: #a78bfa; }
-  .tag-news { background: rgba(220,38,38,0.15); color: #fca5a5; }
-  .tag-tool { background: rgba(5,150,105,0.15); color: #6ee7b7; }
-  .tag-people { background: rgba(217,119,6,0.15); color: #fcd34d; }
-  .tag-product { background: rgba(37,99,235,0.15); color: #93c5fd; }
-
-  .post-card .author {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 12px;
-  }
-  .post-card .author-name {
-    font-weight: 600;
-    font-size: 14px;
-  }
-  .post-card .author-handle {
-    font-size: 13px;
-    color: var(--text-secondary);
-  }
-  .post-card .content {
-    font-size: 15px;
-    line-height: 1.8;
-    margin-bottom: 14px;
-  }
-  .post-card .link-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-size: 13px;
-    color: var(--accent);
-    text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 8px;
-    background: rgba(29,155,240,0.08);
-    transition: background 0.2s;
-  }
-  .post-card .link-btn:hover {
-    background: rgba(29,155,240,0.15);
-  }
-  .post-card .article-box {
-    border: 1px solid var(--card-border);
-    border-radius: 8px;
-    padding: 14px 16px;
-    margin: 12px 0;
-    background: rgba(255,255,255,0.02);
-  }
-  .post-card .article-box .article-title {
-    font-weight: 600;
-    font-size: 14px;
-    margin-bottom: 6px;
-  }
-  .post-card .article-box .article-desc {
-    font-size: 13px;
-    color: var(--text-secondary);
-    line-height: 1.6;
-  }
-
-  /* Section Headers */
-  .section-header {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin: 32px 0 16px;
-    padding-bottom: 8px;
-    border-bottom: 1px solid var(--card-border);
-  }
-
-  /* Footer */
-  .footer {
-    text-align: center;
-    padding: 40px 0 20px;
-    color: var(--text-secondary);
-    font-size: 13px;
-  }
-  .footer a { color: var(--accent); text-decoration: none; }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    .container { padding: 12px; }
-    .post-card { padding: 16px; }
-    .header h1 { font-size: 22px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>X 每日精选</title>
+  <style>
+    :root {
+      --bg: #0a0a0a;
+      --card-bg: #161616;
+      --card-border: #2a2a2a;
+      --text: #e8e8e8;
+      --text-secondary: #8b8b8b;
+      --accent: #1d9bf0;
+      --accent-hover: #1a8cd8;
+      --tag-ai: #7c3aed;
+      --tag-news: #dc2626;
+      --tag-tool: #059669;
+      --tag-people: #d97706;
+      --tag-product: #2563eb;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .container { max-width: 780px; margin: 0 auto; padding: 20px 16px; }
+    .header { text-align: center; padding: 40px 0 30px; border-bottom: 1px solid var(--card-border); margin-bottom: 30px; }
+    .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
+    .header h1 span { color: var(--accent); }
+    .date-badge { display: inline-block; margin-top: 16px; font-size: 15px; color: var(--text-secondary); background: var(--card-bg); padding: 6px 16px; border-radius: 20px; border: 1px solid var(--card-border); }
+    .summary-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px 24px; margin-bottom: 28px; }
+    .summary-banner h2 { font-size: 15px; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
+    .summary-banner p { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
+    .summary-banner .keyword { color: var(--text); font-weight: 500; }
+    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
+    .filter-btn { padding: 6px 14px; border-radius: 20px; font-size: 13px; border: 1px solid var(--card-border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(29,155,240,0.08); }
+    .post-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; transition: border-color 0.2s; }
+    .post-card:hover { border-color: #3a3a3a; }
+    .post-card .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .tag-ai { background: rgba(124,58,237,0.15); color: #a78bfa; }
+    .tag-news { background: rgba(220,38,38,0.15); color: #fca5a5; }
+    .tag-tool { background: rgba(5,150,105,0.15); color: #6ee7b7; }
+    .tag-people { background: rgba(217,119,6,0.15); color: #fcd34d; }
+    .tag-product { background: rgba(37,99,235,0.15); color: #93c5fd; }
+    .post-card .author { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
+    .post-card .author-name { font-weight: 600; font-size: 14px; }
+    .post-card .author-handle { font-size: 13px; color: var(--text-secondary); }
+    .post-card .content { font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
+    .post-card .link-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); text-decoration: none; padding: 6px 12px; border-radius: 8px; background: rgba(29,155,240,0.08); transition: background 0.2s; }
+    .post-card .link-btn:hover { background: rgba(29,155,240,0.15); }
+    .post-card .article-box { border: 1px solid var(--card-border); border-radius: 8px; padding: 14px 16px; margin: 12px 0; background: rgba(255,255,255,0.02); }
+    .post-card .article-box .article-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
+    .post-card .article-box .article-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+    .section-header { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
+    .footer { text-align: center; padding: 40px 0 20px; color: var(--text-secondary); font-size: 13px; }
+    .footer a { color: var(--accent); text-decoration: none; }
+    @media (max-width: 600px) { .container { padding: 12px; } .post-card { padding: 16px; } .header h1 { font-size: 22px; } }
+  </style>
 </head>
 <body>
 <div class="container">
-
   <div class="header">
     <h1><span>X</span> 每日精选</h1>
     <span class="date-badge">2026 年 3 月 4 日 · 星期三</span>
@@ -220,7 +71,7 @@
   <div class="summary-banner">
     <h2>今日速览</h2>
     <p>
-      今天你的时间线被三件事刷屏：<span class="keyword">OpenAI 确认 GPT-5.4 即将发布</span>（2M上下文 + 持久状态），<span class="keyword">OpenClaw Agent 生态持续爆发</span>（入门指南、架构优化、Mission Control 教程齐发），以及 <span class="keyword">AI 人才剧变</span>——Qwen 技术负责人林俊阳离职、Max Schwarzer 从 OpenAI 跳槽 Anthropic。
+      今天时间线三大焦点：<span class="keyword">Dario Amodei 发出惊人预言</span>——"指数增长没有天花板，今年会让所有人震惊"；<span class="keyword">GPT-5.4 泄露细节疯传</span>——2M 上下文、持久状态、全分辨率图像处理；<span class="keyword">Qwen 团队疑似内爆</span>——Jeremy Howard 质疑"到底发生了什么"，多名核心研究员离职。此外，<span class="keyword">Claude 商业市场份额飙升至 ~70%</span>，Apple 发布 M5 Max 搅动 AI 硬件格局。
     </p>
   </div>
 
@@ -238,131 +89,37 @@
 
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">OpenAI</span>
-      <span class="author-handle">@OpenAI</span>
-    </div>
-    <div class="content">5.4 比你想得更快。</div>
-    <a class="link-btn" href="https://x.com/OpenAI" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Julian Goldie SEO</span> <span class="author-handle">@JulianGoldieSEO</span></div>
+    <div class="content">GPT-5.4 刚泄露出来，完全是个颠覆性产品。聊天中再也不会有"金鱼记忆"了。不再有模糊、压缩的 AI 视觉。这是 GPT-5.4 的玩法：→ 2M 令牌窗口，可覆盖整本书 → 全分辨率图像处理以提升精度 → 自动化代理执行多步骤任务</div>
+    <a class="link-btn" href="https://x.com/JulianGoldieSEO/status/2029137738864402700" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">OpenAI</span>
-      <span class="author-handle">@OpenAI</span>
-    </div>
-    <div class="content">ChatGPT 中的 GPT-5.3 Instant 现已向所有人推出。更准确，更少尴尬。</div>
-    <a class="link-btn" href="https://x.com/OpenAI" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Chris</span> <span class="author-handle">@chatgpt21</span></div>
+    <div class="content">AGI 已通过 5.3 实现。（附 ChatGPT 与 GPT-5.3 Instant 对话截图：终于正确回答了 blueberry 中有几个 L 的问题）</div>
+    <a class="link-btn" href="https://x.com/chatgpt21/status/2028971311582597364" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">Min Choi</span>
-      <span class="author-handle">@minchoi</span>
-    </div>
-    <div class="content">OpenAI 刚刚确认了 GPT-5.4... 如果 GPT-5.4 泄露的信息是真的（2M 上下文 + 持久状态）...</div>
-    <a class="link-btn" href="https://x.com/minchoi" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Kol Tregaskes</span> <span class="author-handle">@koltregaskes</span></div>
+    <div class="content">我们很快会有 GPT-5.4 思考模型吗？可能是在 3 月 25 日（ARC-3 发布）？还是更早？</div>
+    <a class="link-btn" href="https://x.com/koltregaskes/status/2029126465493844190" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">TestingCatalog News</span>
-      <span class="author-handle">@testingcatalog</span>
-    </div>
-    <div class="content">OpenAI 确认了之前的泄露消息，我们接下来会推出 GPT-5.4。很快但不是今天</div>
-    <a class="link-btn" href="https://x.com/testingcatalog" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Min Choi</span> <span class="author-handle">@minchoi</span></div>
+    <div class="content">这太疯狂了。Qwen 3.5 在 iPhone 17 上完全本地运行，且处于飞行模式……无需订阅。你的设备上不留任何数据。AI 订阅现在变成可选了。</div>
+    <a class="link-btn" href="https://x.com/minchoi/status/2028662814902993357" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="ai">
     <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">Kol Tregaskes</span>
-      <span class="author-handle">@koltregaskes</span>
-    </div>
-    <div class="content">我们很快会有 GPT-5.4 思考模型吗？可能是在 3 月 25 日（ARC 3 发布）？还是更早？</div>
-    <a class="link-btn" href="https://x.com/koltregaskes" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author">
-      <span class="author-name">Chris</span>
-      <span class="author-handle">@chatgpt21</span>
-    </div>
-    <div class="content">GPT 5.4 Pro 对比 GPT 5 Pro — 7 个月的差距</div>
-    <div class="article-box">
-      <div class="article-title">Voxelbench 模型对比测试</div>
-      <div class="article-desc">对比 GPT-5.4 (Pro?)、GPT-5.2-Codex(xHigh) 和 GPT-5.0-Pro 在图像生成上的表现差异。</div>
-    </div>
-    <a class="link-btn" href="https://x.com/chatgpt21" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 工具/教程 ===== -->
-  <div class="section-header">工具 / 教程</div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author">
-      <span class="author-name">Elvis</span>
-      <span class="author-handle">@elvissun</span>
-    </div>
-    <div class="content">zoe 每天消耗 2400 万+ opus token 来监控那些根本没运行的代理。把她的 cron 换成了一个两层系统：bash 预检查，空闲时零 token；webhook 仅在需要时触发 opus。约 95% 的 token 减少，输出更可靠。</div>
-    <div class="article-box">
-      <div class="article-title">OpenClaw + Codex/ClaudeCode Agent Swarm: 一人开发团队完整部署指南</div>
-      <div class="article-desc">不再直接使用 Codex 或 Claude Code，而是用 OpenClaw 作为编排层，由编排器 Zoe 生成代理、编写提示词、为每个任务挑选合适的模型。</div>
-    </div>
-    <a class="link-btn" href="https://x.com/elvissun" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author">
-      <span class="author-name">Dan Shipper</span>
-      <span class="author-handle">@danshipper</span>
-    </div>
-    <div class="content">我们刚写好了终极入门指南：OpenClaw。几乎每个人现在都有一个，它们彻底改变了我们的工作和生活方式。我们正在用它来：构建产品、回答客服咨询、预订难订的餐厅、跟踪...</div>
-    <div class="article-box">
-      <div class="article-title">OpenClaw 综合入门指南</div>
-      <div class="article-desc">来自 every.to 的 OpenClaw 综合入门指南，涵盖安装、配置到实际应用场景。</div>
-    </div>
-    <a class="link-btn" href="https://x.com/danshipper" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author">
-      <span class="author-name">Alex Finn</span>
-      <span class="author-handle">@AlexFinn</span>
-    </div>
-    <div class="content">给 OpenClaw 配一个任务控制中心后，它会强大 100 倍。Mission Control 是一个自定义仪表盘，允许你的 Claw 构建所需的任何工具。没有它，你的 OpenClaw 会差很多。在这个视频里我会带你看我整个任务控制台，并教你如何自己设置一个。</div>
-    <a class="link-btn" href="https://x.com/AlexFinn" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author">
-      <span class="author-name">岚叔</span>
-      <span class="author-handle">@LufzzLiz</span>
-    </div>
-    <div class="content">神佬力荐点文章可以发给龙虾分析学习下</div>
-    <div class="article-box">
-      <div class="article-title">OpenClaw养成记，从0开始！安装后必看！（40天实战经验+含角色提示词）</div>
-      <div class="article-desc">核心理念：不是调 prompt，不是换模型，不是重构架构——就是跟它们说话，给反馈，看着它们把内容记下来。</div>
-    </div>
-    <a class="link-btn" href="https://x.com/LufzzLiz" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author">
-      <span class="author-name">程序员鱼皮</span>
-      <span class="author-handle">@yupi996</span>
-    </div>
-    <div class="content">全程直播 AI 编程，搞了个「AI 热点监控项目」和「AI 热点发现 Skills」争取做吃瓜最快的人！</div>
-    <a class="link-btn" href="https://x.com/yupi996" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Wes Roth</span> <span class="author-handle">@WesRoth</span></div>
+    <div class="content">等等，OpenAI 有命名团队？ OpenAI 可能终于要抛弃那堆让人摸不着头脑的数字了。（引用 @thsottiaux：我们起名团队一直在脑洞大开中）</div>
+    <a class="link-btn" href="https://x.com/WesRoth/status/2029119657626484739" target="_blank">→ 查看原帖</a>
   </div>
 
   <!-- ===== 人物动态 ===== -->
@@ -370,46 +127,73 @@
 
   <div class="post-card" data-tag="people">
     <span class="tag tag-people">人物动态</span>
-    <div class="author">
-      <span class="author-name">宝玉</span>
-      <span class="author-handle">@dotey</span>
-    </div>
-    <div class="content">Qwen 技术负责人 Junyang Lin 今天在 X 上发了一条简短的告别："我退出了。再见，我挚爱的 Qwen。"</div>
+    <div class="author"><span class="author-name">Chubby</span> <span class="author-handle">@kimmonismus</span></div>
+    <div class="content">Dario Amodei 说："我们没有看到碰到天花板。今年会有让所有人惊讶的激进加速。" 指数级增长让人措手不及。"我们正站在某件惊人事物的边缘。我们需要以正确的方式来管理它。"</div>
     <div class="article-box">
-      <div class="article-title">事件背景</div>
-      <div class="article-desc">就在昨天，Qwen 团队刚发布了 Qwen3.5 小模型系列（0.8B 到 9B）。24小时前林俊阳还在跟马斯克互动，马斯克夸 Qwen3.5 小模型"智能密度惊人"。</div>
+      <div class="article-title">Dario Amodei 关键语录：AI 扩展——没有天花板，加速指数增长</div>
+      <div class="article-desc">"我们没有看到碰壁。我认为今年将会有一次让所有人都感到惊讶的激进加速。指数增长总是让人措手不及——有个古老的寓言叫棋盘的后半段：第一格放一粒米，第二格两粒，第四格四粒。到第64格时你就有了数十亿甚至数万亿粒米。我们正站在第64格中的第40格，从第40格到第64格的速度会比你想象得更快——即使你已经看到它到目前为止有多快。我不认为人们做好了准备。我认为我们正处于某种不可思议事物的边缘。"</div>
     </div>
-    <a class="link-btn" href="https://x.com/dotey" target="_blank">→ 查看原帖</a>
+    <a class="link-btn" href="https://x.com/kimmonismus/status/2029142700843303263" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="people">
     <span class="tag tag-people">人物动态</span>
-    <div class="author">
-      <span class="author-name">Junyang Lin</span>
-      <span class="author-handle">@JustinLin610</span>
-    </div>
-    <div class="content">我退出了。再见了，我心爱的 Qwen。</div>
-    <a class="link-btn" href="https://x.com/JustinLin610" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Jeremy Howard</span> <span class="author-handle">@jeremyphoward</span></div>
+    <div class="content">Qwen 到底发生了什么鬼?! 某种内爆吗？这真的让人难过也令人担忧。他们一直是如此强大的团队，现在却在失去一些最出色的研究者。（引用 @huybery：再见 Qwen，我也是。）</div>
+    <a class="link-btn" href="https://x.com/jeremyphoward/status/2028992903314567224" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="people">
     <span class="tag tag-people">人物动态</span>
-    <div class="author">
-      <span class="author-name">Max Schwarzer</span>
-      <span class="author-handle">@max_a_schwarzer</span>
-    </div>
-    <div class="content">我决定离开 OpenAI。我为自己在这里参与的所有工作感到无比自豪——从帮助创建推理范式，到扩展推理时计算，与同事们一起研究强化学习算法，再到发布 o1-preview...</div>
-    <a class="link-btn" href="https://x.com/max_a_schwarzer" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Bo Wang</span> <span class="author-handle">@BoWang87</span></div>
+    <div class="content">Donald Knuth 教授以"震惊！震惊！"开头了他的新论文。Claude Opus 4.6 刚刚解决了他花了好几周研究的一个未解问题——来自《计算机程序设计艺术》的一条图分解猜想。他把那篇论文命名为"Claude 的周期"。31 次探索。大约 1 小时。</div>
+    <a class="link-btn" href="https://x.com/BoWang87/status/2028935492977475623" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="people">
     <span class="tag tag-people">人物动态</span>
-    <div class="author">
-      <span class="author-name">Chubby</span>
-      <span class="author-handle">@kimmonismus</span>
+    <div class="author"><span class="author-name">宝玉</span> <span class="author-handle">@dotey</span></div>
+    <div class="content">OpenAI CEO Sam Altman 在周二的全员大会上对员工摊牌：五角大楼怎么使用 OpenAI 的 AI，公司说了不算。他举了具体的例子——"也许你觉得打伊朗是对的、入侵委内瑞拉是错的，但你没有资格对此发表意见。"他明确表示，OpenAI 不能"做出作战决策"。</div>
+    <a class="link-btn" href="https://x.com/dotey/status/2029050086789931338" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <!-- ===== 工具/教程 ===== -->
+  <div class="section-header">工具 / 教程</div>
+
+  <div class="post-card" data-tag="tool">
+    <span class="tag tag-tool">工具/教程</span>
+    <div class="author"><span class="author-name">Satvik Kharb</span> <span class="author-handle">@Satvikkharb</span></div>
+    <div class="content">@steipete 为 @openclaw 设计的那种记忆系统值得注意。6 种不同的记忆并行工作并相互支持。还有哪些应用的内存管理更好？</div>
+    <div class="article-box">
+      <div class="article-title">OpenClaw Agent 记忆系统架构</div>
+      <div class="article-desc">该系统包含六层记忆：SOUL.md（身份与行为——定义个性、语气和边界，首先读取）、AGENTS.md（操作指令——持久化系统提示和行为参数）、USER.md（用户画像与偏好——学习到的习惯、工作细节、定制化交互）、Daily Logs（临时记忆——存储当天/当周事件和对话日志）、HEARTBEAT.md（日常/预测性任务——安排起床提醒、每 .fit 运动等常规动作）、MEMORY.md（持久长期记忆——里程碑、重要决策、项目目标、隐私设置）。这种分层设计让 Agent 能同时具备短期上下文感知和长期记忆保持。</div>
     </div>
-    <div class="content">对 OpenAI 是重大损失，对 Anthropic 是重大胜利：Max Schwarzer 换队了</div>
-    <a class="link-btn" href="https://x.com/kimmonismus" target="_blank">→ 查看原帖</a>
+    <a class="link-btn" href="https://x.com/Satvikkharb/status/2029093807963476098" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <div class="post-card" data-tag="tool">
+    <span class="tag tag-tool">工具/教程</span>
+    <div class="author"><span class="author-name">Peter Steinberger</span> <span class="author-handle">@steipete</span></div>
+    <div class="content">我在上面花了两天时间，真的还不算很好，主要忙着修复 BUG 和安全，但很高兴即便是简单的解决方案也能相当奏效。</div>
+    <a class="link-btn" href="https://x.com/steipete/status/2029094192136282177" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <div class="post-card" data-tag="tool">
+    <span class="tag tag-tool">工具/教程</span>
+    <div class="author"><span class="author-name">岚叔</span> <span class="author-handle">@LufzzLiz</span></div>
+    <div class="content">神佬力荐点文章可以发给龙虾分析学习下</div>
+    <div class="article-box">
+      <div class="article-title">OpenClaw 养成记，从 0 开始！安装后必看！（40天实战经验+含角色提示词）</div>
+      <div class="article-desc">核心理念：不是调 prompt，不是换模型，不是重构架构——就是跟它们说话，给反馈，看着它们把内容记下来。这篇文章详细介绍了从安装 OpenClaw 开始的完整养成流程，包括如何设置角色提示词、如何与 Agent 建立有效的反馈循环、如何让 Agent 逐步学习你的工作习惯和偏好。作者分享了 40 天的实战经验，强调关键在于"养"而不是"调"——通过持续的日常互动让 Agent 自然地适应你的工作方式。</div>
+    </div>
+    <a class="link-btn" href="https://x.com/LufzzLiz/status/2028972512294699229" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <div class="post-card" data-tag="tool">
+    <span class="tag tag-tool">工具/教程</span>
+    <div class="author"><span class="author-name">摆烂程序媛</span> <span class="author-handle">@wanerfu</span></div>
+    <div class="content">Grok 3 是一位天才的股票交易员。但大多数人不知道如何使用。以下是股票交易自动化的 10 个提示。</div>
+    <a class="link-btn" href="https://x.com/wanerfu/status/2029015560328184038" target="_blank">→ 查看原帖</a>
   </div>
 
   <!-- ===== 产品发布 ===== -->
@@ -417,32 +201,16 @@
 
   <div class="post-card" data-tag="product">
     <span class="tag tag-product">产品发布</span>
-    <div class="author">
-      <span class="author-name">Google DeepMind</span>
-      <span class="author-handle">@GoogleDeepMind</span>
-    </div>
-    <div class="content">Gemini 3.1 Flash-Lite 已上线。</div>
-    <a class="link-btn" href="https://x.com/GoogleDeepMind" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Alex Finn</span> <span class="author-handle">@AlexFinn</span></div>
+    <div class="content">苹果刚刚赢得了 AI 之战。他们发布了 MacBook Pro M5 Max。用 NVIDIA 芯片做需要花 4 万美元的事，现在一台 3000 美元的笔记本就能做到：· AI 速度提升 4 倍 · 最多可配置 128GB 统一内存 · 前沿智能随行。关于 Apple 最大的抱怨是什么？</div>
+    <a class="link-btn" href="https://x.com/AlexFinn/status/2028965108802830482" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="product">
     <span class="tag tag-product">产品发布</span>
-    <div class="author">
-      <span class="author-name">Google AI</span>
-      <span class="author-handle">@GoogleAI</span>
-    </div>
-    <div class="content">以下是 Gemini 3.1 Flash-Lite 如何解决实际问题的几个示例：首先，这款大容量图像排序器展示了模型快速分析和排序大量内容（如图片）的能力——这在过去可能代价过高或速度过慢...</div>
-    <a class="link-btn" href="https://x.com/GoogleAI" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="product">
-    <span class="tag tag-product">产品发布</span>
-    <div class="author">
-      <span class="author-name">ARC Prize</span>
-      <span class="author-handle">@arcprize</span>
-    </div>
-    <div class="content">ARC-AGI-3 发布派对。2026 年 3 月 25 日 / 旧金山。ARC-AGI-3 发布：@GregKamradt。炉边对话：@fchollet 和 @sama（由 @deedydas 主持）。在 @ycombinator 直播现场加入我们。</div>
-    <a class="link-btn" href="https://x.com/arcprize" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">Tibor Blaho</span> <span class="author-handle">@btibor91</span></div>
+    <div class="content">OpenAI 正在 ChatGPT 中推出账户切换功能，让你同时登录 2 个账户（例如个人和工作），并可通过账户菜单在它们之间切换而无需登出。</div>
+    <a class="link-btn" href="https://x.com/btibor91/status/2029113455819800773" target="_blank">→ 查看原帖</a>
   </div>
 
   <!-- ===== 行业/时政 ===== -->
@@ -450,31 +218,32 @@
 
   <div class="post-card" data-tag="news">
     <span class="tag tag-news">行业/时政</span>
-    <div class="author">
-      <span class="author-name">Sam Altman</span>
-      <span class="author-handle">@sama</span>
+    <div class="author"><span class="author-name">Yuchen Jin</span> <span class="author-handle">@Yuchenj_UW</span></div>
+    <div class="content">2025 年 2 月：ChatGPT 占据了美国商务市场的 90%。2026 年 2 月：Claude 的市场份额已飙升至约 70%。Anthropic 的增长简直疯狂。他们押注编程和代理人的赌注显然得到了回报。</div>
+    <div class="article-box">
+      <div class="article-title">Anthropic 领跑 AI 商业聊天市场</div>
+      <div class="article-desc">根据 Ramp 经济学实验室的数据（基于 50,000+ 美国企业在 Ramp 金融运营平台上的公司卡和账单支付数据，排除非 OpenAI 和 Anthropic 的 AI 模型支出），截至 2026 年 2 月，Anthropic 旗下产品（包括 Claude Team、Claude Pro、Claude Max、Claude Enterprise 等）在美国企业 AI 聊天订阅总支出中的占比已超过 ChatGPT 系列产品（ChatGPT Pro、Plus、Business）。这标志着短短一年内市场格局的戏剧性逆转。</div>
     </div>
-    <div class="content">对 Anthropic 强加 SCR 指定对我们的行业、我们的国家，以及显然他们的公司都会很糟糕。我们在事前和事后都跟国防部说过。我们说我们之所以愿意迅速达成，部分原因是希望能促成局势降级。我觉得...</div>
-    <a class="link-btn" href="https://x.com/sama" target="_blank">→ 查看原帖</a>
+    <a class="link-btn" href="https://x.com/Yuchenj_UW/status/2028974344710606905" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="post-card" data-tag="news">
     <span class="tag tag-news">行业/时政</span>
-    <div class="author">
-      <span class="author-name">CuiMao</span>
-      <span class="author-handle">@CuiMao</span>
-    </div>
-    <div class="article-box">
-      <div class="article-title">三问Qwen — 阿里高管你敢不敢回答我</div>
-      <div class="article-desc">2026年3月3号凌晨，林俊阳在X上发了六个词。我卸任了。再见，我亲爱的千问。24小时之前，他还在X上跟马斯克互动。马斯克夸Qwen3.5小模型"智能密度惊人"，他开心地回了句"thx..."</div>
-    </div>
-    <a class="link-btn" href="https://x.com/CuiMao" target="_blank">→ 查看原帖</a>
+    <div class="author"><span class="author-name">NIK</span> <span class="author-handle">@ns123abc</span></div>
+    <div class="content">🚨 速报：OpenAI CEO 全员会议成绩单泄露了。Altman 对他的员工说："你没资格对此表态"——关于伊朗是否会打击、还是委内瑞拉？入侵是好是坏？OpenAI 并不能"决定"国防部如何使用他们的 AI 的具体操作决策。</div>
+    <a class="link-btn" href="https://x.com/dotey/status/2029050086789931338" target="_blank">→ 查看原帖</a>
+  </div>
+
+  <div class="post-card" data-tag="news">
+    <span class="tag tag-news">行业/时政</span>
+    <div class="author"><span class="author-name">Commentary Donald J. Trump Posts</span> <span class="author-handle">@TrumpDailyPosts</span></div>
+    <div class="content">这个故事迄今已超过 400 万次浏览。（特朗普宣布对伊朗的"命令"立即生效——附完整推文及信息。）</div>
+    <a class="link-btn" href="https://x.com/TrumpDailyPosts/status/2029046737940431266" target="_blank">→ 查看原帖</a>
   </div>
 
   <div class="footer">
     <p>由 Claude (Cowork) 自动生成 · <a href="https://x.com/tseng713">@tseng713</a> 的 Following 时间线</p>
   </div>
-
 </div>
 
 <script>
@@ -483,11 +252,9 @@ function filterPosts(tag) {
   const btns = document.querySelectorAll('.filter-btn');
   btns.forEach(b => b.classList.remove('active'));
   event.target.classList.add('active');
-
   cards.forEach(card => {
     card.style.display = (tag === 'all' || card.dataset.tag === tag) ? 'block' : 'none';
   });
-
   document.querySelectorAll('.section-header').forEach(sec => {
     if (tag === 'all') { sec.style.display = 'block'; return; }
     let next = sec.nextElementSibling;
