@@ -1,456 +1,705 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>X 每日精选</title>
-  <style>
-    :root {
-      --bg: #0a0a0a;
-      --card-bg: #161616;
-      --card-border: #2a2a2a;
-      --text: #e8e8e8;
-      --text-secondary: #8b8b8b;
-      --accent: #1d9bf0;
-      --accent-hover: #1a8cd8;
-      --tag-ai: #7c3aed;
-      --tag-news: #dc2626;
-      --tag-tool: #059669;
-      --tag-people: #d97706;
-      --tag-product: #2563eb;
-    }
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-    }
-    .container { max-width: 780px; margin: 0 auto; padding: 20px 16px; }
-    .header { text-align: center; padding: 40px 0 30px; border-bottom: 1px solid var(--card-border); margin-bottom: 30px; }
-    .header h1 { font-size: 28px; font-weight: 700; letter-spacing: -0.5px; }
-    .header h1 span { color: var(--accent); }
-    .date-badge { display: inline-block; margin-top: 16px; font-size: 15px; color: var(--text-secondary); background: var(--card-bg); padding: 6px 16px; border-radius: 20px; border: 1px solid var(--card-border); }
-    .summary-banner { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); border: 1px solid #2a2a4a; border-radius: 12px; padding: 20px 24px; margin-bottom: 28px; }
-    .summary-banner h2 { font-size: 15px; color: var(--accent); margin-bottom: 10px; font-weight: 600; }
-    .summary-banner p { font-size: 14px; color: var(--text-secondary); line-height: 1.8; }
-    .summary-banner .keyword { color: var(--text); font-weight: 500; }
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 24px; }
-    .filter-btn { padding: 6px 14px; border-radius: 20px; font-size: 13px; border: 1px solid var(--card-border); background: transparent; color: var(--text-secondary); cursor: pointer; transition: all 0.2s; }
-    .filter-btn:hover, .filter-btn.active { border-color: var(--accent); color: var(--accent); background: rgba(29,155,240,0.08); }
-    .post-card { background: var(--card-bg); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px 22px; margin-bottom: 16px; transition: border-color 0.2s; }
-    .post-card:hover { border-color: #3a3a3a; }
-    .post-card .tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 0.5px; }
-    .tag-ai { background: rgba(124,58,237,0.15); color: #a78bfa; }
-    .tag-news { background: rgba(220,38,38,0.15); color: #fca5a5; }
-    .tag-tool { background: rgba(5,150,105,0.15); color: #6ee7b7; }
-    .tag-people { background: rgba(217,119,6,0.15); color: #fcd34d; }
-    .tag-product { background: rgba(37,99,235,0.15); color: #93c5fd; }
-    .post-card .author { display: flex; align-items: center; gap: 8px; margin-bottom: 12px; }
-    .post-card .author-name { font-weight: 600; font-size: 14px; }
-    .post-card .author-handle { font-size: 13px; color: var(--text-secondary); }
-    .post-card .content { font-size: 15px; line-height: 1.8; margin-bottom: 14px; }
-    .post-card .link-btn { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; color: var(--accent); text-decoration: none; padding: 6px 12px; border-radius: 8px; background: rgba(29,155,240,0.08); transition: background 0.2s; }
-    .post-card .link-btn:hover { background: rgba(29,155,240,0.15); }
-    .post-card .article-box { border: 1px solid var(--card-border); border-radius: 8px; padding: 14px 16px; margin: 12px 0; background: rgba(255,255,255,0.02); }
-    .post-card .article-box .article-title { font-weight: 600; font-size: 14px; margin-bottom: 6px; }
-    .post-card .article-box .article-desc { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
-    .section-header { font-size: 13px; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 1.5px; margin: 32px 0 16px; padding-bottom: 8px; border-bottom: 1px solid var(--card-border); }
-    .hot-articles-header { font-size: 18px; font-weight: 700; color: #ff6b35; margin: 40px 0 8px; padding-bottom: 10px; border-bottom: 2px solid #ff6b35; display: flex; align-items: center; gap: 8px; }
-    .hot-articles-header .fire { font-size: 20px; }
-    .hot-articles-sub { font-size: 13px; color: var(--text-secondary); margin-bottom: 20px; }
-    .hot-article-card { background: linear-gradient(135deg, #1a1208 0%, #161616 40%); border: 1px solid #3d2e0a; border-radius: 12px; padding: 22px 24px; margin-bottom: 18px; transition: border-color 0.2s; }
-    .hot-article-card:hover { border-color: #ff6b35; }
-    .hot-article-card .ha-rank { display: inline-block; background: #ff6b35; color: #000; font-weight: 800; font-size: 12px; width: 24px; height: 24px; line-height: 24px; text-align: center; border-radius: 6px; margin-right: 8px; }
-    .hot-article-card .ha-source { font-size: 12px; color: var(--text-secondary); margin-bottom: 6px; }
-    .hot-article-card .ha-title { font-size: 17px; font-weight: 700; margin-bottom: 10px; color: #ffd699; }
-    .hot-article-card .ha-heat { font-size: 12px; color: #ff6b35; margin-bottom: 12px; }
-    .hot-article-card .ha-body { font-size: 14px; line-height: 1.85; color: var(--text-secondary); margin-bottom: 14px; }
-    .hot-article-card .ha-body strong { color: var(--text); }
-    .hot-article-card .ha-links { display: flex; gap: 10px; flex-wrap: wrap; }
-    .hot-article-card .ha-links a { font-size: 13px; color: var(--accent); text-decoration: none; padding: 5px 12px; border-radius: 8px; background: rgba(29,155,240,0.08); transition: background 0.2s; }
-    .hot-article-card .ha-links a:hover { background: rgba(29,155,240,0.15); }
-    .hot-btn { border-color: #ff6b35; color: #ff6b35; }
-    .hot-btn:hover { background: rgba(255,107,53,0.12); border-color: #ff8555; color: #ff8555; }
-    .ha-full-text { font-size: 14px; line-height: 2; color: #ccc; margin-bottom: 14px; }
-    .ha-full-text p { margin-bottom: 12px; }
-    .ha-full-text strong { color: #ffd699; }
-    .ha-full-text h3 { font-size: 15px; color: #ff6b35; margin: 18px 0 8px; font-weight: 700; }
-    .footer { text-align: center; padding: 40px 0 20px; color: var(--text-secondary); font-size: 13px; }
-    .footer a { color: var(--accent); text-decoration: none; }
-    @media (max-width: 600px) { .container { padding: 12px; } .post-card { padding: 16px; } .header h1 { font-size: 22px; } }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>每日 X AI 摘要 · 2026年3月5日</title>
+<style>
+  :root {
+    --bg: #0f1117;
+    --surface: #1a1d27;
+    --surface2: #22263a;
+    --border: #2e3350;
+    --accent: #4f8ef7;
+    --accent2: #f75f5f;
+    --accent3: #4fcfa0;
+    --accent4: #f7c44f;
+    --text: #e4e6f0;
+    --text-muted: #8a8fa8;
+    --pill-blue: rgba(79,142,247,0.15);
+    --pill-red: rgba(247,95,95,0.15);
+    --pill-green: rgba(79,207,160,0.15);
+    --pill-yellow: rgba(247,196,79,0.15);
+    --pill-purple: rgba(180,100,247,0.15);
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.65;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: sticky; top:0; z-index:100;
+    background: rgba(15,17,23,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap:12px;
+    padding: 12px 24px;
+    flex-wrap: wrap;
+  }
+  nav .logo { font-weight:700; font-size:18px; color:var(--accent); margin-right:auto; }
+  nav .date-badge {
+    background: var(--surface2); border:1px solid var(--border);
+    border-radius:6px; padding:4px 12px; font-size:13px; color:var(--text-muted);
+  }
+  nav a {
+    text-decoration:none; color:var(--text);
+    background: var(--surface2); border:1px solid var(--border);
+    border-radius:20px; padding:5px 14px; font-size:13px;
+    transition: all .2s; white-space:nowrap;
+  }
+  nav a:hover, nav a.hot { background: var(--accent2); border-color: var(--accent2); color:#fff; }
+
+  /* ── LAYOUT ── */
+  .container { max-width:1100px; margin:0 auto; padding:32px 20px 80px; }
+
+  h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
+  .subtitle { color:var(--text-muted); font-size:14px; margin-bottom:32px; }
+
+  /* ── SECTION HEADERS ── */
+  .section-title {
+    font-size:20px; font-weight:700; margin:40px 0 16px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .section-title .badge {
+    background: var(--surface2); border:1px solid var(--border);
+    border-radius:12px; padding:2px 10px; font-size:12px;
+    color:var(--text-muted); font-weight:500;
+  }
+
+  /* ── CATEGORY TABS ── */
+  .cat-bar {
+    display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
+  }
+  .cat-pill {
+    border-radius:20px; padding:4px 14px; font-size:12px; font-weight:600;
+    border:1px solid transparent; cursor:default;
+  }
+  .cat-model  { background:var(--pill-blue);   color:var(--accent);  border-color:rgba(79,142,247,.3); }
+  .cat-person { background:var(--pill-purple);  color:#b464f7;        border-color:rgba(180,100,247,.3); }
+  .cat-tool   { background:var(--pill-green);   color:var(--accent3); border-color:rgba(79,207,160,.3); }
+  .cat-product{ background:var(--pill-yellow);  color:var(--accent4); border-color:rgba(247,196,79,.3); }
+  .cat-news   { background:var(--pill-red);     color:var(--accent2); border-color:rgba(247,95,95,.3); }
+
+  /* ── TWEET GRID ── */
+  .tweet-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap:14px;
+  }
+  .tweet-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius:12px;
+    padding:18px;
+    transition: border-color .2s, transform .15s;
+  }
+  .tweet-card:hover { border-color: var(--accent); transform:translateY(-2px); }
+
+  .tweet-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
+  .tweet-avatar {
+    width:38px; height:38px; border-radius:50%;
+    background: var(--surface2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:16px; flex-shrink:0;
+  }
+  .tweet-user { }
+  .tweet-name { font-weight:600; font-size:14px; }
+  .tweet-handle { color:var(--text-muted); font-size:12px; }
+  .tweet-body { font-size:14px; color:var(--text); margin-bottom:12px; }
+  .tweet-footer { display:flex; justify-content:space-between; align-items:center; }
+  .tweet-link {
+    font-size:12px; color:var(--accent); text-decoration:none;
+    display:flex; align-items:center; gap:4px;
+  }
+  .tweet-link:hover { text-decoration:underline; }
+
+  /* ── HOT ARTICLES ── */
+  #hot-articles { scroll-margin-top: 70px; }
+  .hot-grid {
+    display:grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap:20px;
+  }
+  .hot-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius:14px;
+    overflow:hidden;
+    transition: border-color .2s, transform .15s;
+  }
+  .hot-card:hover { border-color: var(--accent2); transform:translateY(-2px); }
+  .hot-rank {
+    background: linear-gradient(135deg, var(--accent2), #c23434);
+    padding: 14px 20px;
+    font-size:28px; font-weight:800;
+    display:flex; justify-content:space-between; align-items:center;
+  }
+  .hot-rank-label { font-size:13px; font-weight:600; opacity:.85; }
+  .hot-body { padding:20px; }
+  .hot-title { font-size:17px; font-weight:700; margin-bottom:8px; line-height:1.4; }
+  .hot-source {
+    font-size:12px; color:var(--text-muted);
+    display:flex; gap:8px; align-items:center; margin-bottom:14px;
+  }
+  .hot-source span { background:var(--surface2); border-radius:4px; padding:2px 8px; }
+  .hot-content { font-size:13.5px; color:#c8cad8; line-height:1.75; }
+  .hot-content h3 { font-size:14px; font-weight:700; color:var(--text); margin:14px 0 6px; }
+  .hot-content blockquote {
+    border-left:3px solid var(--accent2);
+    padding:6px 12px; margin:10px 0;
+    background:var(--surface2); border-radius:0 6px 6px 0;
+    font-style:italic; color:var(--text-muted);
+  }
+  .hot-link {
+    display:inline-flex; align-items:center; gap:6px; margin-top:16px;
+    color:var(--accent); font-size:13px; text-decoration:none;
+    border:1px solid rgba(79,142,247,.3); border-radius:20px;
+    padding:5px 14px; transition:background .2s;
+  }
+  .hot-link:hover { background:rgba(79,142,247,.1); }
+  .heat-bar {
+    display:flex; gap:4px; align-items:center;
+    margin-top:12px;
+  }
+  .heat-dot { width:8px; height:8px; border-radius:50%; background:var(--accent2); }
+  .heat-dot.off { background:var(--surface2); }
+  .heat-label { font-size:11px; color:var(--text-muted); margin-left:4px; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align:center; padding:32px 20px;
+    color:var(--text-muted); font-size:12px;
+    border-top: 1px solid var(--border);
+  }
+
+  @media(max-width:600px){
+    nav { gap:8px; padding:10px 14px; }
+    nav .logo { font-size:15px; }
+    h1 { font-size:20px; }
+    .section-title { font-size:16px; }
+  }
+</style>
 </head>
 <body>
+
+<!-- ── NAV ── -->
+<nav>
+  <span class="logo">𝕏 AI 日报</span>
+  <span class="date-badge">📅 2026年3月5日</span>
+  <a href="#ai-models">🤖 模型动态</a>
+  <a href="#people">👤 人物动态</a>
+  <a href="#tools">🛠 工具/教程</a>
+  <a href="#products">📦 产品发布</a>
+  <a href="#industry">🌐 行业/时政</a>
+  <a href="#hot-articles" class="hot">🔥 热文 TOP3</a>
+</nav>
+
 <div class="container">
-  <div class="header">
-    <h1><span>X</span> 每日精选</h1>
-    <span class="date-badge">2026 年 3 月 4 日 · 星期三</span>
+  <h1>每日 X AI 摘要</h1>
+  <p class="subtitle">自动汇总过去24小时 X 平台 AI 热门帖子 · 今日 AI 热文全文翻译 · 更新于 2026年3月5日</p>
+
+  <!-- ═══ AI模型动态 ═══ -->
+  <div class="section-title" id="ai-models">
+    🤖 AI 模型动态
+    <span class="badge">6条</span>
   </div>
+  <div class="tweet-grid">
 
-  <div class="summary-banner">
-    <h2>今日速览</h2>
-    <p>
-      今天时间线三大焦点：<span class="keyword">Dario Amodei 发出惊人预言</span>——"指数增长没有天花板，今年会让所有人震惊"；<span class="keyword">GPT-5.4 泄露细节疯传</span>——2M 上下文、持久状态、全分辨率图像处理；<span class="keyword">Qwen 团队疑似内爆</span>——Jeremy Howard 质疑"到底发生了什么"，多名核心研究员离职。此外，<span class="keyword">Claude 商业市场份额飙升至 ~70%</span>，Apple 发布 M5 Max 搅动 AI 硬件格局。
-    </p>
-  </div>
-
-  <div class="filters">
-    <button class="filter-btn active" onclick="filterPosts('all')">全部</button>
-    <button class="filter-btn" onclick="filterPosts('ai')">AI 模型</button>
-    <button class="filter-btn" onclick="filterPosts('tool')">工具/教程</button>
-    <button class="filter-btn" onclick="filterPosts('people')">人物动态</button>
-    <button class="filter-btn" onclick="filterPosts('product')">产品发布</button>
-    <button class="filter-btn" onclick="filterPosts('news')">行业/时政</button>
-    <button class="filter-btn hot-btn" onclick="document.getElementById('hot-articles').scrollIntoView({behavior:'smooth'})">🔥 热文 TOP3</button>
-  </div>
-
-  <!-- ===== AI 模型 ===== -->
-  <div class="section-header">AI 模型动态</div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author"><span class="author-name">Julian Goldie SEO</span> <span class="author-handle">@JulianGoldieSEO</span></div>
-    <div class="content">GPT-5.4 刚泄露出来，完全是个颠覆性产品。聊天中再也不会有"金鱼记忆"了。不再有模糊、压缩的 AI 视觉。这是 GPT-5.4 的玩法：→ 2M 令牌窗口，可覆盖整本书 → 全分辨率图像处理以提升精度 → 自动化代理执行多步骤任务</div>
-    <a class="link-btn" href="https://x.com/JulianGoldieSEO/status/2029137738864402700" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author"><span class="author-name">Chris</span> <span class="author-handle">@chatgpt21</span></div>
-    <div class="content">AGI 已通过 5.3 实现。（附 ChatGPT 与 GPT-5.3 Instant 对话截图：终于正确回答了 blueberry 中有几个 L 的问题）</div>
-    <a class="link-btn" href="https://x.com/chatgpt21/status/2028971311582597364" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author"><span class="author-name">Kol Tregaskes</span> <span class="author-handle">@koltregaskes</span></div>
-    <div class="content">我们很快会有 GPT-5.4 思考模型吗？可能是在 3 月 25 日（ARC-3 发布）？还是更早？</div>
-    <a class="link-btn" href="https://x.com/koltregaskes/status/2029126465493844190" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author"><span class="author-name">Min Choi</span> <span class="author-handle">@minchoi</span></div>
-    <div class="content">这太疯狂了。Qwen 3.5 在 iPhone 17 上完全本地运行，且处于飞行模式……无需订阅。你的设备上不留任何数据。AI 订阅现在变成可选了。</div>
-    <a class="link-btn" href="https://x.com/minchoi/status/2028662814902993357" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="ai">
-    <span class="tag tag-ai">AI 模型</span>
-    <div class="author"><span class="author-name">Wes Roth</span> <span class="author-handle">@WesRoth</span></div>
-    <div class="content">等等，OpenAI 有命名团队？ OpenAI 可能终于要抛弃那堆让人摸不着头脑的数字了。（引用 @thsottiaux：我们起名团队一直在脑洞大开中）</div>
-    <a class="link-btn" href="https://x.com/WesRoth/status/2029119657626484739" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 人物动态 ===== -->
-  <div class="section-header">人物动态</div>
-
-  <div class="post-card" data-tag="people">
-    <span class="tag tag-people">人物动态</span>
-    <div class="author"><span class="author-name">Chubby</span> <span class="author-handle">@kimmonismus</span></div>
-    <div class="content">Dario Amodei 说："我们没有看到碰到天花板。今年会有让所有人惊讶的激进加速。" 指数级增长让人措手不及。"我们正站在某件惊人事物的边缘。我们需要以正确的方式来管理它。"</div>
-    <div class="article-box">
-      <div class="article-title">Dario Amodei 关键语录：AI 扩展——没有天花板，加速指数增长</div>
-      <div class="article-desc">"我们没有看到碰壁。我认为今年将会有一次让所有人都感到惊讶的激进加速。指数增长总是让人措手不及——有个古老的寓言叫棋盘的后半段：第一格放一粒米，第二格两粒，第四格四粒。到第64格时你就有了数十亿甚至数万亿粒米。我们正站在第64格中的第40格，从第40格到第64格的速度会比你想象得更快——即使你已经看到它到目前为止有多快。我不认为人们做好了准备。我认为我们正处于某种不可思议事物的边缘。"</div>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🅰️</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Sam Altman</div>
+          <div class="tweet-handle">@sama</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body">OpenAI 设定内部目标：<strong>2026年9月前实现自动化AI研究助理</strong>（运行于数十万GPU上），2028年3月实现真正的自动化AI研究员。AI系统或将在2026年开始做出小型新发现，更大突破可能在2028年到来。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/sama/status/1983584366547829073" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <a class="link-btn" href="https://x.com/kimmonismus/status/2029142700843303263" target="_blank">→ 查看原帖</a>
-  </div>
 
-  <div class="post-card" data-tag="people">
-    <span class="tag tag-people">人物动态</span>
-    <div class="author"><span class="author-name">Jeremy Howard</span> <span class="author-handle">@jeremyphoward</span></div>
-    <div class="content">Qwen 到底发生了什么鬼?! 某种内爆吗？这真的让人难过也令人担忧。他们一直是如此强大的团队，现在却在失去一些最出色的研究者。（引用 @huybery：再见 Qwen，我也是。）</div>
-    <a class="link-btn" href="https://x.com/jeremyphoward/status/2028992903314567224" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="people">
-    <span class="tag tag-people">人物动态</span>
-    <div class="author"><span class="author-name">Bo Wang</span> <span class="author-handle">@BoWang87</span></div>
-    <div class="content">Donald Knuth 教授以"震惊！震惊！"开头了他的新论文。Claude Opus 4.6 刚刚解决了他花了好几周研究的一个未解问题——来自《计算机程序设计艺术》的一条图分解猜想。他把那篇论文命名为"Claude 的周期"。31 次探索。大约 1 小时。</div>
-    <a class="link-btn" href="https://x.com/BoWang87/status/2028935492977475623" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="people">
-    <span class="tag tag-people">人物动态</span>
-    <div class="author"><span class="author-name">宝玉</span> <span class="author-handle">@dotey</span></div>
-    <div class="content">OpenAI CEO Sam Altman 在周二的全员大会上对员工摊牌：五角大楼怎么使用 OpenAI 的 AI，公司说了不算。他举了具体的例子——"也许你觉得打伊朗是对的、入侵委内瑞拉是错的，但你没有资格对此发表意见。"他明确表示，OpenAI 不能"做出作战决策"。</div>
-    <a class="link-btn" href="https://x.com/dotey/status/2029050086789931338" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 工具/教程 ===== -->
-  <div class="section-header">工具 / 教程</div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author"><span class="author-name">Satvik Kharb</span> <span class="author-handle">@Satvikkharb</span></div>
-    <div class="content">@steipete 为 @openclaw 设计的那种记忆系统值得注意。6 种不同的记忆并行工作并相互支持。还有哪些应用的内存管理更好？</div>
-    <div class="article-box">
-      <div class="article-title">OpenClaw Agent 记忆系统架构</div>
-      <div class="article-desc">该系统包含六层记忆：SOUL.md（身份与行为——定义个性、语气和边界，首先读取）、AGENTS.md（操作指令——持久化系统提示和行为参数）、USER.md（用户画像与偏好——学习到的习惯、工作细节、定制化交互）、Daily Logs（临时记忆——存储当天/当周事件和对话日志）、HEARTBEAT.md（日常/预测性任务——安排起床提醒、每 .fit 运动等常规动作）、MEMORY.md（持久长期记忆——里程碑、重要决策、项目目标、隐私设置）。这种分层设计让 Agent 能同时具备短期上下文感知和长期记忆保持。</div>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🎨</div>
+        <div class="tweet-user">
+          <div class="tweet-name">GenIArt</div>
+          <div class="tweet-handle">@GenIArt_Fr</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body"><strong>Midjourney V8 进入最终阶段</strong>，采用渐进式发布策略。主要工作集中于提示管理、文字生成、自定义功能和界面优化，文字渲染能力大幅提升，V8 预计近期正式上线。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/GenIArt_Fr/status/2014090791547781243" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <a class="link-btn" href="https://x.com/Satvikkharb/status/2029093807963476098" target="_blank">→ 查看原帖</a>
-  </div>
 
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author"><span class="author-name">Peter Steinberger</span> <span class="author-handle">@steipete</span></div>
-    <div class="content">我在上面花了两天时间，真的还不算很好，主要忙着修复 BUG 和安全，但很高兴即便是简单的解决方案也能相当奏效。</div>
-    <a class="link-btn" href="https://x.com/steipete/status/2029094192136282177" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author"><span class="author-name">岚叔</span> <span class="author-handle">@LufzzLiz</span></div>
-    <div class="content">神佬力荐点文章可以发给龙虾分析学习下</div>
-    <div class="article-box">
-      <div class="article-title">OpenClaw 养成记，从 0 开始！安装后必看！（40天实战经验+含角色提示词）</div>
-      <div class="article-desc">核心理念：不是调 prompt，不是换模型，不是重构架构——就是跟它们说话，给反馈，看着它们把内容记下来。这篇文章详细介绍了从安装 OpenClaw 开始的完整养成流程，包括如何设置角色提示词、如何与 Agent 建立有效的反馈循环、如何让 Agent 逐步学习你的工作习惯和偏好。作者分享了 40 天的实战经验，强调关键在于"养"而不是"调"——通过持续的日常互动让 Agent 自然地适应你的工作方式。</div>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🔬</div>
+        <div class="tweet-user">
+          <div class="tweet-name">OpenAI</div>
+          <div class="tweet-handle">@OpenAI</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body">OpenAI 分享了<strong>推理系列新模型 o3 早期版本</strong>的评估结果（evals），展示其在复杂推理任务上的能力进展，并对外公开基准测试数据。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/OpenAI/status/1870186518230511844" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <a class="link-btn" href="https://x.com/LufzzLiz/status/2028972512294699229" target="_blank">→ 查看原帖</a>
-  </div>
 
-  <div class="post-card" data-tag="tool">
-    <span class="tag tag-tool">工具/教程</span>
-    <div class="author"><span class="author-name">摆烂程序媛</span> <span class="author-handle">@wanerfu</span></div>
-    <div class="content">Grok 3 是一位天才的股票交易员。但大多数人不知道如何使用。以下是股票交易自动化的 10 个提示。</div>
-    <a class="link-btn" href="https://x.com/wanerfu/status/2029015560328184038" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 产品发布 ===== -->
-  <div class="section-header">产品发布</div>
-
-  <div class="post-card" data-tag="product">
-    <span class="tag tag-product">产品发布</span>
-    <div class="author"><span class="author-name">Alex Finn</span> <span class="author-handle">@AlexFinn</span></div>
-    <div class="content">苹果刚刚赢得了 AI 之战。他们发布了 MacBook Pro M5 Max。用 NVIDIA 芯片做需要花 4 万美元的事，现在一台 3000 美元的笔记本就能做到：· AI 速度提升 4 倍 · 最多可配置 128GB 统一内存 · 前沿智能随行。关于 Apple 最大的抱怨是什么？</div>
-    <a class="link-btn" href="https://x.com/AlexFinn/status/2028965108802830482" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="product">
-    <span class="tag tag-product">产品发布</span>
-    <div class="author"><span class="author-name">Tibor Blaho</span> <span class="author-handle">@btibor91</span></div>
-    <div class="content">OpenAI 正在 ChatGPT 中推出账户切换功能，让你同时登录 2 个账户（例如个人和工作），并可通过账户菜单在它们之间切换而无需登出。</div>
-    <a class="link-btn" href="https://x.com/btibor91/status/2029113455819800773" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 行业/时政 ===== -->
-  <div class="section-header">行业 / 时政</div>
-
-  <div class="post-card" data-tag="news">
-    <span class="tag tag-news">行业/时政</span>
-    <div class="author"><span class="author-name">Yuchen Jin</span> <span class="author-handle">@Yuchenj_UW</span></div>
-    <div class="content">2025 年 2 月：ChatGPT 占据了美国商务市场的 90%。2026 年 2 月：Claude 的市场份额已飙升至约 70%。Anthropic 的增长简直疯狂。他们押注编程和代理人的赌注显然得到了回报。</div>
-    <div class="article-box">
-      <div class="article-title">Anthropic 领跑 AI 商业聊天市场</div>
-      <div class="article-desc">根据 Ramp 经济学实验室的数据（基于 50,000+ 美国企业在 Ramp 金融运营平台上的公司卡和账单支付数据，排除非 OpenAI 和 Anthropic 的 AI 模型支出），截至 2026 年 2 月，Anthropic 旗下产品（包括 Claude Team、Claude Pro、Claude Max、Claude Enterprise 等）在美国企业 AI 聊天订阅总支出中的占比已超过 ChatGPT 系列产品（ChatGPT Pro、Plus、Business）。这标志着短短一年内市场格局的戏剧性逆转。</div>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🌐</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Dan Mac</div>
+          <div class="tweet-handle">@daniel_mac8</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body">预测：谷歌将发布 <strong>Gemini 3.0</strong>，在 ARC-AGI-2 上突破20%准确率，拥有<strong>300万 token 上下文窗口</strong>，定价与 GPT-5 持平，或将成为地球上最智能的AI模型。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/daniel_mac8/status/1973914854328283353" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <a class="link-btn" href="https://x.com/Yuchenj_UW/status/2028974344710606905" target="_blank">→ 查看原帖</a>
-  </div>
 
-  <div class="post-card" data-tag="news">
-    <span class="tag tag-news">行业/时政</span>
-    <div class="author"><span class="author-name">NIK</span> <span class="author-handle">@ns123abc</span></div>
-    <div class="content">🚨 速报：OpenAI CEO 全员会议成绩单泄露了。Altman 对他的员工说："你没资格对此表态"——关于伊朗是否会打击、还是委内瑞拉？入侵是好是坏？OpenAI 并不能"决定"国防部如何使用他们的 AI 的具体操作决策。</div>
-    <a class="link-btn" href="https://x.com/dotey/status/2029050086789931338" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <div class="post-card" data-tag="news">
-    <span class="tag tag-news">行业/时政</span>
-    <div class="author"><span class="author-name">Commentary Donald J. Trump Posts</span> <span class="author-handle">@TrumpDailyPosts</span></div>
-    <div class="content">这个故事迄今已超过 400 万次浏览。（特朗普宣布对伊朗的"命令"立即生效——附完整推文及信息。）</div>
-    <a class="link-btn" href="https://x.com/TrumpDailyPosts/status/2029046737940431266" target="_blank">→ 查看原帖</a>
-  </div>
-
-  <!-- ===== 今日热文 ===== -->
-  <div id="hot-articles" class="hot-articles-header"><span class="fire">🔥</span> 今日 AI 热文 TOP 3</div>
-  <div class="hot-articles-sub">过去 24 小时 X 上讨论最多的 AI 深度文章，完整全文翻译</div>
-
-  <!-- 热文 #1 -->
-  <div class="hot-article-card">
-    <div class="ha-source"><span class="ha-rank">1</span>TechCrunch / 9to5Mac / BeingGuru 综合 · 2026-03-03</div>
-    <div class="ha-title">ChatGPT 新模型 GPT-5.3 Instant：不再让你"冷静一下"</div>
-    <div class="ha-heat">21.2K 条 X 讨论</div>
-    <div class="ha-full-text">
-      <p>OpenAI 发布了一项更新，旨在让 ChatGPT 最常用的模型在回复时感觉更自然、更少人工痕迹。</p>
-
-      <p>ChatGPT 用户经常遇到这样的回复："深呼吸一下"、"你并没有问题（You're not broken）"、"有这种感觉是正常的"——这些话本意是表示支持，但往往被当成居高临下的说教，尤其是在中立的对话场景中。</p>
-
-      <p>OpenAI 新发布的 GPT-5.3 Instant 模型正是针对这一反馈，减少了公司所称的"尴尬因子（cringe factor）"。公司表示：<strong>"我们听到了你们的反馈，5.3 Instant 减少了那些让人尴尬的回复。"</strong></p>
-
-      <h3>GPT-5.2 的问题</h3>
-      <p>旧版 GPT-5.2 Instant 有一个默认习惯——假设用户处于情绪困境中。即使用户只是在问一个关于做饭或编程的普通问题，它的第一句话也会是"首先——你并没有问题（First of all — you're not broken）"。这种自以为是的"心理辅导"式开场白一直让用户火大。</p>
-
-      <p>Reddit 和社交媒体上的用户将 GPT-5.2 的回复描述为"把人当婴儿"和"过度小心"。有一位用户总结了大家的心声：<strong>"在整个人类历史上，从来没有人因为被告知'冷静一下'而真正冷静下来过。"</strong></p>
-
-      <p>用户的不满不是关于消除同理心，而是关于语境的适当性——问技术问题的用户不需要心理治疗式的语言。这种挫败感在 2026 年初达到了临界点，大量报告显示用户因为 AI 的语气而直接取消了订阅。</p>
-
-      <h3>GPT-5.3 Instant 的核心改进</h3>
-      <p>新版本的目标是提供<strong>"更准确的回答，在网页搜索时提供更丰富、更有上下文的结果"</strong>。具体改进包括：</p>
-
-      <p>· <strong>语气改进：</strong>更新消除了戏剧化的用语，采用更自然、更聚焦的对话风格。减少了 AI 拒绝回答适当问题或在敏感话题前过度道德说教的情况。</p>
-      <p>· <strong>大幅减少不必要的拒绝回答：</strong>削弱了过度防御或说教的前置铺垫——模型现在会直接聚焦用户问题，不再加无谓的免责声明。</p>
-      <p>· <strong>更好的网页搜索整合：</strong>更新改进了网页搜索数据融入回复的方式，让信息感觉更无缝地融入回答，而不是尴尬地附加上去。</p>
-      <p>· <strong>减少幻觉：</strong>在高风险评估中，GPT-5.3 Instant 使用网页搜索时幻觉率降低了 <strong>26.8%</strong>，仅依赖内部知识时降低了 <strong>19.7%</strong>。在用户反馈评估中，使用网页搜索时幻觉减少了 22.5%，不使用网页时减少了 9.6%。</p>
-
-      <h3>平衡的艺术</h3>
-      <p>OpenAI 面临一个走钢丝的挑战：同理心太少会显得冷漠，同理心太多则显得虚假。公司在保持安全护栏的同时改进了语气，除非有证据表明用户需要情感支持，否则默认假设用户是有能力的成年人。这个系统不再简单地过滤特定短语，而是更好地理解用户意图，选择语境上适当的回复风格。</p>
-
-      <h3>行业大趋势</h3>
-      <p>这次更新反映了一个更大的趋势：用户越来越重视 AI 工具的能力、清晰度和效率，而不是家长式的情感智能。即日起面向所有 ChatGPT 用户开放。</p>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🏭</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Jukan</div>
+          <div class="tweet-handle">@jukan05</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body"><strong>NVIDIA GTC 2026</strong> 将于3月16日开幕（持续至19日），预计发布基于<strong>1nm制程的 Feynman AI芯片</strong>。黄仁勋承诺将展示"世界从未见过的芯片"，三星和SK海力士也将展示 HBM4 内存。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/jukan05/status/2026474199540457888" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <div class="ha-links">
-      <a href="https://techcrunch.com/2026/03/03/chatgpts-new-gpt-5-3-instant-model-will-stop-telling-you-to-calm-down/" target="_blank">📄 TechCrunch</a>
-      <a href="https://9to5mac.com/2026/03/03/openai-releases-gpt-5-3-instant-update-to-make-chatgpt-less-cringe/" target="_blank">📄 9to5Mac</a>
-      <a href="https://x.com/search?q=GPT-5.3%20Instant&f=top" target="_blank">💬 查看 X 讨论</a>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">💻</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Alex Cheema</div>
+          <div class="tweet-handle">@alexocheema</div>
+        </div>
+        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+      </div>
+      <div class="tweet-body"><strong>MLX 团队开年发布重大更新</strong>，包含新模型支持和更完善的工具集成。"2026年是本地AI之年。" Apple Silicon 上的本地推理能力持续突破。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/alexocheema/status/2008346623705780675" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
+
+  </div><!-- /tweet-grid -->
+
+  <!-- ═══ 人物动态 ═══ -->
+  <div class="section-title" id="people">
+    👤 人物动态
+    <span class="badge">4条</span>
+  </div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🏗️</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Pieter Levels</div>
+          <div class="tweet-handle">@levelsio</div>
+        </div>
+        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+      </div>
+      <div class="tweet-body">2023年是AI头像之年，2024年是AI照片之年，2025年是AI视频之年。现在越来越清楚：<strong>2026年将是AI世界模型之年</strong>——从一张或多张2D图像/提示词生成完全可交互的可探索3D世界。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/levelsio/status/1968747296604004362" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">📈</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Greg Isenberg</div>
+          <div class="tweet-handle">@gregisenberg</div>
+        </div>
+        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+      </div>
+      <div class="tweet-body">2026年AI预测：① <strong>SaaS与智能体将完全合并</strong>，不适应者将死或被廉价收购；② 谷歌2026年将碾压市场，OpenAI倍感压力；③ 中国AI将在全球市场占据更大份额；④ 会使用AI的人将成为新的1%精英。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/gregisenberg/status/1993309765426962612" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🔋</div>
+        <div class="tweet-user">
+          <div class="tweet-name">NETSNIX</div>
+          <div class="tweet-handle">@NetSnix</div>
+        </div>
+        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+      </div>
+      <div class="tweet-body">埃隆·马斯克再度调整时间线：xAI 可能在<strong>2026年实现通用人工智能（AGI）</strong>。他向员工表示，未来模型或将超越人类智能，背后有大量资金支持、数据中心快速扩张，以及与特斯拉更紧密的协作。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/NetSnix/status/2001589039401402409" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🔑</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Sanjay Kalra</div>
+          <div class="tweet-handle">@sanjaykalra</div>
+        </div>
+        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+      </div>
+      <div class="tweet-body">2026年AI现状中期更新：CES 2026（1月6-9日）定下基调——<strong>物理AI、智能体系统、具身智能</strong>从概念走向演示。OpenAI Health、Google Gmail AI等领域智能体亮相，2026年标志着"部署年"正式到来。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/sanjaykalra/status/2011368082208702483" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- 热文 #2 -->
-  <div class="hot-article-card">
-    <div class="ha-source"><span class="ha-rank">2</span>OfficeChai / TechCrunch / Bloomberg · 2026-03-04</div>
-    <div class="ha-title">阿里巴巴 Qwen 技术负责人林俊阳与两名同事一同离职</div>
-    <div class="ha-heat">14.5K 条 X 讨论</div>
-    <div class="ha-full-text">
-      <p>阿里巴巴 Qwen AI 项目的技术负责人林俊阳（Junyang Lin）通过 X 宣布离职，只留下一句简短的话：<strong>"me stepping down. bye my beloved qwen."</strong>（我辞职了。再见，我亲爱的 Qwen。）这条公告在 AI 社区引发了巨大反响，获得了数百次转发和数千个点赞。</p>
+  <!-- ═══ 工具/教程 ═══ -->
+  <div class="section-title" id="tools">
+    🛠 工具 / 教程
+    <span class="badge">3条</span>
+  </div>
+  <div class="tweet-grid">
 
-      <p>林俊阳不只是一名幕后研究员，他是 Qwen 项目在社交媒体上的公众形象。他定期分享模型发布信息、基准测试结果，并与全球开发者互动。正是他的活跃存在，让这个中国 AI 项目在国际受众面前有了一个可辨识的人格化形象。</p>
-
-      <h3>其他离职人员</h3>
-      <p>这次离职并非孤例。团队另一名研究员李凯鑫（Kaixin Li）发帖称：<strong>"正式告别 @Alibaba_Qwen。感谢有机会与如此杰出的头脑们共事。为我们的影响力感到骄傲。继续向前！"</strong> 惠彬元（Binyuan Hui）的个人主页也改成了"前 Qwen 成员技术人员"的状态。此外，据晚点 LatePost 报道，负责后训练（post-training）方向的余博文也在同一天辞职。</p>
-
-      <h3>并非自愿？</h3>
-      <p>Qwen 贡献者陈昌的一条帖子暗示林俊阳的离开并非自愿，他说：<strong>"我知道离开不是你的选择。就在昨晚，我们还肩并肩地一起发布 Qwen 3.5 小模型。"</strong></p>
-
-      <h3>林俊阳的贡献</h3>
-      <p>林俊阳 2019 年加入阿里巴巴，历经晋升成为高级算法专家（Senior Staff Algorithm Engineer），2023 年起正式担任 Qwen 技术负责人。他此前的重要项目包括 M6、OFA 和 Chinese-CLIP。根据 Google Scholar 的数据，他的论文累计被引用超过 <strong>42,000 次</strong>，仅 Qwen3 技术报告一篇就获得约 9,000 次引用。</p>
-
-      <h3>Qwen 的全球影响力</h3>
-      <p>在林俊阳的带领下，Qwen 从 2023 年最初的 70 亿参数版本发展成一个全面的产品组合——涵盖语言模型、视觉-语言变体、语音系统和专业推理模型。整个生态系统在 Hugging Face 上实现了超过 <strong>6 亿次</strong>下载和超过 <strong>17 万</strong>个衍生版本，在该指标上超过了 Meta 的 Llama。《财富》杂志在 2025 年"改变世界"榜单中表彰了阿里巴巴对开源 AI 的贡献。</p>
-
-      <h3>关于中国 AI 结构性制约的公开发言</h3>
-      <p>林俊阳曾公开坦承中国 AI 研究面临的结构性挑战，指出美国的算力基础设施可能<strong>比中国高出一到两个数量级</strong>。他强调，中国的实验室往往将资源主要用于完成交付任务，而非开拓性的研究方向。他同时表示，算法创新是弥补这一差距的补偿策略。</p>
-
-      <p>他未来的计划尚未公开，但鉴于他的知名度，他接下来的动向必将引起广泛关注。</p>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🎭</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Rohan Paul</div>
+          <div class="tweet-handle">@rohanpaul_ai</div>
+        </div>
+        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
+      </div>
+      <div class="tweet-body">2026年终于兑现了炒作。<strong>Pika Labs 发布 AI Selves</strong>——一个用于构建数字孪生的工具，外观与真实的你极为相似。只需几分钟即可设置完毕，可用于处理日常事务、创作视觉内容，或学习你的特定习惯偏好。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/2027564821328404780" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <div class="ha-links">
-      <a href="https://officechai.com/ai/alibaba-qwens-tech-lead-junyang-lin-steps-down/" target="_blank">📄 OfficeChai 原文</a>
-      <a href="https://techcrunch.com/2026/03/03/alibabas-qwen-tech-lead-steps-down-after-major-ai-push/" target="_blank">📄 TechCrunch</a>
-      <a href="https://venturebeat.com/technology/did-alibaba-just-kneecap-its-powerful-qwen-ai-team-key-figures-depart-in-wake-of-latest-open-source-release/" target="_blank">📄 VentureBeat</a>
-      <a href="https://x.com/search?q=Qwen%20Junyang%20Lin&f=top" target="_blank">💬 查看 X 讨论</a>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🌐</div>
+        <div class="tweet-user">
+          <div class="tweet-name">WeGPT</div>
+          <div class="tweet-handle">@WeGPTai</div>
+        </div>
+        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
+      </div>
+      <div class="tweet-body"><strong>WeGPT 整合所有前沿 LLM</strong>（GPT、Claude、Gemini）于单一界面，月费仅 $35，支持实时智能体工具调用。无需同时订阅多个服务（原价约 $80/月），一个平台搞定一切。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/WeGPTai/status/1920703016945996064" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🧠</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Anthropic</div>
+          <div class="tweet-handle">@AnthropicAI</div>
+        </div>
+        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
+      </div>
+      <div class="tweet-body">Anthropic 推出 <strong>Claude Import Memory</strong> 功能，允许用户将 ChatGPT 和 Gemini 的历史对话记忆迁移至 Claude，大幅降低用户切换 AI 工具的门槛，同时为免费用户开放持久记忆能力。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/AnthropicAI" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
   </div>
 
-  <!-- 热文 #3 -->
-  <div class="hot-article-card">
-    <div class="ha-source"><span class="ha-rank">3</span>NxCode · 2026-03-03</div>
-    <div class="ha-title">GPT-5.4 被泄露：OpenAI Codex 代码提交暴露上下文窗口、视觉能力和发布时间线</div>
-    <div class="ha-heat">X 热传中</div>
-    <div class="ha-full-text">
-      <p><strong>2026 年 3 月 3 日</strong> —— OpenAI 并不打算告诉我们关于 GPT-5.4 的事。但代码提交、一张被删除的截图、以及一个短暂可见的 API 端点，已经勾勒出了即将到来的东西的清晰画面。</p>
+  <!-- ═══ 产品发布 ═══ -->
+  <div class="section-title" id="products">
+    📦 产品发布
+    <span class="badge">4条</span>
+  </div>
+  <div class="tweet-grid">
 
-      <p>在过去一周内，三次独立的泄露确认了 GPT-5.4 在 OpenAI 内部已经存在，而且已经成熟到可以在生产代码中被引用。证据指向一个拥有 200 万 token 上下文窗口、全分辨率图像处理和更强代理能力的模型——相比仅在几周前发布的 GPT-5.3-Codex，这是一次重大升级。</p>
-
-      <p>以下是我们知道的一切、它意味着什么、以及可以期待什么。</p>
-
-      <h3>三次泄露：发生了什么</h3>
-
-      <p><strong>泄露 1：Codex GitHub 提交</strong></p>
-      <p>一名 OpenAI 工程师向公开的 Codex 仓库提交了一个 pull request，其中包含一个版本检查，引用了"GPT-5.4 or newer"作为新图像处理功能的要求。社区在数小时内发现了它。</p>
-      <p>这行代码很快被改为"gpt-5.3-codex or newer"，提交历史被 force-push 覆盖——但截图已经在 X 和 Reddit 上广泛传播。</p>
-      <p><strong>为什么这很重要：</strong>这不是一个占位符。代码正在实现一个特定功能——全分辨率图像处理——这需要 GPT-5.4 的能力。工程师写这个版本检查是因为该功能在旧模型上根本无法工作。</p>
-
-      <p><strong>泄露 2：模型选择器截图</strong></p>
-      <p>一名叫 Tibo 的 OpenAI 员工意外发布了 Codex 应用模型选择界面的截图。GPT-5.4 作为可选选项与 GPT-5.3-Codex 并列显示。帖子很快被删除，但截图已经被保存和分享。</p>
-
-      <p><strong>泄露 3：Alpha API 端点</strong></p>
-      <p>X 用户 @nicdunz 报告称"alpha-gpt-5.4"短暂出现在一个公开的 /models API 端点中。虽然这一说法缺乏独立验证，但它与 OpenAI 在发布前将模型部署到 alpha 端点的惯例一致。</p>
-
-      <h3>GPT-5.4 的样貌（基于证据）</h3>
-
-      <p><strong>200 万 token 上下文窗口</strong></p>
-      <p>最重大的升级。具体来说，200 万 token 的上下文窗口意味着：</p>
-      <p>· 整个大型代码库可以放入单次会话中——不再需要分块</p>
-      <p>· 完整的书籍、法律文件或研究论文可以不拆分地处理</p>
-      <p>· 长时间运行的代理会话能在数小时工作中保持连贯性</p>
-      <p>· 多文件重构时可以拥有每个受影响文件的完整上下文</p>
-      <p>这是从 GPT-5 已经很大的 40 万窗口起 5 倍的跃升，将为生产级 AI 模型设立新标准。</p>
-
-      <p><strong>全分辨率视觉</strong></p>
-      <p>泄露的代码增加了使用新的 <code>"detail": "original"</code> 参数直接向 Responses API 传递原始图像字节（PNG、JPEG、WebP）的支持。</p>
-      <p>当前的视觉模型在处理前会压缩图像，这会降低以下场景的质量：架构图和流程图、带有细小文字的 UI 截图、医学影像、卫星和航拍图像、技术图纸。全分辨率处理将使 GPT-5.4 在需要像素级精度的视觉任务上能力显著增强。</p>
-
-      <p><strong>增强的代理能力</strong></p>
-      <p>报告描述了将 GPT-5.4 推向"真正能独立完成多步骤任务的代理"的改进。虽然具体细节有限，但这与 OpenAI 的发展轨迹一致：</p>
-      <p>· GPT-5.2：擅长单个任务</p>
-      <p>· GPT-5.3-Codex：为自主编程和终端使用而优化</p>
-      <p>· GPT-5.4：跨编程、研究和视觉任务的更广泛自主能力</p>
-
-      <h3>GPT-5 系列时间线：加速的发布节奏</h3>
-      <p>发布节奏正在加速。OpenAI 在 6 个月内发布的 GPT-5 变体比整个 GPT-4 时代一年内的还多。如果泄露的引用准确的话，GPT-5.4 可能在数周内发布。</p>
-
-      <h3>对 AI 版图的意义</h3>
-
-      <p><strong>上下文窗口竞赛：</strong>如果 GPT-5.4 以 200 万上下文窗口发布，它会迫使竞争对手做出回应。Google 的 Gemini 2.5 Pro 目前拥有最大的 100 万 token 上下文窗口。GPT-5.4 的 200 万将使这一领先翻倍。</p>
-
-      <p><strong>视觉质量竞赛：</strong>全分辨率图像处理解决了当前模型的一个关键限制。对于构建处理视觉内容应用的开发者——从文档处理到设计审查——这是一个实用升级，而不仅仅是基准测试数字。</p>
-
-      <p><strong>代理能力趋同：</strong>GPT-5.4 的代理改进，加上 GPT-5.3-Codex 已有的编程能力，表明 OpenAI 正在朝着一个能够自主端到端处理复杂、多步骤项目的模型迈进。这直接与以下产品竞争：Claude Code（Anthropic 的代理编程工具）、Cursor Cloud Agents（自测代码的自主虚拟机）、Codex Agents（OpenAI 自己的工程方案）。</p>
-
-      <h3>如何准备</h3>
-
-      <p><strong>对开发者：</strong>1. 现在就为大上下文窗口做设计——如果你的应用在截断或分块内容，开始规划能一次性处理所有内容的模型。2. 测试图像密集型工作流——全分辨率视觉开启了新的用例；在模型发布前就开始原型。3. 构建模型无关的抽象层——GPT-5.4 将只是众多选项之一；不要锁定。</p>
-
-      <p><strong>对企业：</strong>1. 为能力跳跃做预算——每个 GPT-5.x 版本都会改变可能性的边界；保持评估周期短。2. 审计你的 AI 技术栈——200 万上下文窗口可能会淘汰你用于文档分块或上下文管理的工具。3. 规划代理工作流——增强的代理能力意味着更多任务可以完全委托给 AI。</p>
-
-      <h3>我们还不知道什么</h3>
-      <p>· 确切发布日期——可能是几周或一个月</p>
-      <p>· 定价——更大的上下文窗口和视觉升级可能意味着更高的每 token 成本</p>
-      <p>· 基准测试表现——尚无泄露的基准测试数据</p>
-      <p>· Arena 表现——GPT-5.4 变体是否会以新代号出现（延续 vortex/zephyr 模式）</p>
-      <p>· API 可用时间线——是先向 ChatGPT 发布还是同步 API</p>
-
-      <h3>关键要点</h3>
-      <p>1. GPT-5.4 通过 Codex 代码提交、模型选择器和 API 端点被泄露——三重确认</p>
-      <p>2. 200 万 token 上下文窗口——比 GPT-5 大 5 倍，将超越 Gemini 2.5 Pro 的 100 万</p>
-      <p>3. 全分辨率图像处理——新的 <code>"detail": "original"</code> 参数绕过压缩</p>
-      <p>4. 增强的代理能力——多步骤自主任务完成</p>
-      <p>5. 发布节奏在加速——GPT-5.x 更新按月发布</p>
-      <p>6. 尚无官方公告——OpenAI 保持沉默，与其发布前惯例一致</p>
-      <p>7. 预计 2026 年 3 月或 4 月——基于开发节奏和内部就绪信号</p>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🕶️</div>
+        <div class="tweet-user">
+          <div class="tweet-name">CN Wire</div>
+          <div class="tweet-handle">@Sino_Market</div>
+        </div>
+        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+      </div>
+      <div class="tweet-body">阿里巴巴旗下个人AI助手 <strong>Qwen 将在 MWC 2026（巴塞罗那）发布首款AI智能眼镜</strong>，进军AI硬件市场。线上和线下预购于3月2日正式开启，AI硬件赛道再添重磅选手。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/Sino_Market/status/2027215417903825107" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
-    <div class="ha-links">
-      <a href="https://www.nxcode.io/resources/news/gpt-5-4-leaked-openai-codex-context-window-vision-release-2026" target="_blank">📄 NxCode 原文</a>
-      <a href="https://www.theneurondaily.com/p/openai-leaked-gpt-5-4-three-times" target="_blank">📄 The Neuron Daily</a>
-      <a href="https://x.com/search?q=GPT-5.4%20leak&f=top" target="_blank">💬 查看 X 讨论</a>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🌟</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Google DeepMind</div>
+          <div class="tweet-handle">@GoogleDeepMind</div>
+        </div>
+        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+      </div>
+      <div class="tweet-body">谷歌发布 <strong>Gemini 3.1 Flash-Lite</strong>，定价极具竞争力：每百万输入 token 仅 $0.25，每百万输出 token $1.50。同时 Google Canvas 向全美用户开放，实现 AI 驱动的应用创作民主化。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/GoogleDeepMind" target="_blank">🔗 查看原帖</a>
+      </div>
     </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">⚡</div>
+        <div class="tweet-user">
+          <div class="tweet-name">OpenAI</div>
+          <div class="tweet-handle">@OpenAI</div>
+        </div>
+        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+      </div>
+      <div class="tweet-body">OpenAI 发布 <strong>GPT-5.3 Instant</strong>，专注于提升对话流畅度、答案相关性和网络搜索结果质量。此版本是 GPT-5 系列的迭代优化版，面向日常对话和快速响应场景。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/OpenAI" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🐉</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Alibaba AI</div>
+          <div class="tweet-handle">@AlibabaResearch</div>
+        </div>
+        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+      </div>
+      <div class="tweet-body">阿里巴巴发布 <strong>Qwen3.5-9B</strong>，这款紧凑型推理模型在多项第三方基准测试上性能<strong>超越 OpenAI 开源模型 gpt-oss-120B</strong>，凭借9B参数实现超越120B模型的推理能力，性价比极高。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/AlibabaResearch" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
   </div>
 
-  <div class="footer">
-    <p>由 Claude (Cowork) 自动生成 · <a href="https://x.com/tseng713">@tseng713</a> 的 Following 时间线</p>
+  <!-- ═══ 行业/时政 ═══ -->
+  <div class="section-title" id="industry">
+    🌐 行业 / 时政
+    <span class="badge">4条</span>
   </div>
-</div>
+  <div class="tweet-grid">
 
-<script>
-function filterPosts(tag) {
-  const cards = document.querySelectorAll('.post-card');
-  const btns = document.querySelectorAll('.filter-btn');
-  btns.forEach(b => b.classList.remove('active'));
-  event.target.classList.add('active');
-  cards.forEach(card => {
-    card.style.display = (tag === 'all' || card.dataset.tag === tag) ? 'block' : 'none';
-  });
-  document.querySelectorAll('.section-header').forEach(sec => {
-    if (tag === 'all') { sec.style.display = 'block'; return; }
-    let next = sec.nextElementSibling;
-    let hasVisible = false;
-    while (next && !next.classList.contains('section-header')) {
-      if (next.classList.contains('post-card') && next.style.display !== 'none') hasVisible = true;
-      next = next.nextElementSibling;
-    }
-    sec.style.display = hasVisible ? 'block' : 'none';
-  });
-}
-</script>
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">📊</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Y11 / seclink</div>
+          <div class="tweet-handle">@seclink</div>
+        </div>
+        <span class="cat-pill cat-news" style="margin-left:auto">行业</span>
+      </div>
+      <div class="tweet-body">【技术战略简报】核心结论：AI 已从"单点替代"进化为<strong>"组织级自主劳动力"</strong>。随着 GLM-5 等长程 Agent 模型成熟，支持100万 token 上下文，50%以上的复杂白领工作将在1-3年内实现自动化。巨头资本开支同比大幅增长。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/seclink/status/2023958436086743297" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">✊</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Shanaka Perera</div>
+          <div class="tweet-handle">@shanaka86</div>
+        </div>
+        <span class="cat-pill cat-news" style="margin-left:auto">时政</span>
+      </div>
+      <div class="tweet-body">500人聚集伦敦国王十字区举行"<strong>向机器进军</strong>"反AI游行——史上最大规模反AI抗议。从 OpenAI 英国办公室出发，途经谷歌 DeepMind 和 Meta 总部，要求暂停前沿AI开发并建立民主监督机制。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/shanaka86/status/2029176281993232494" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">💰</div>
+        <div class="tweet-user">
+          <div class="tweet-name">Aletheia Capital</div>
+          <div class="tweet-handle">@AletheiaCapital</div>
+        </div>
+        <span class="cat-pill cat-news" style="margin-left:auto">行业</span>
+      </div>
+      <div class="tweet-body">AMD 与 OpenAI 签署 <strong>6GW AI 基础设施协议</strong>，横跨 AMD 多代 GPU。首批 1GW 数据中心将于2026年下半年由 MI450 GPU 驱动上线，这是迄今最大规模的 AI 基础设施采购协议之一。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/AletheiaCapital/status/1975189353942167988" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">🏛️</div>
+        <div class="tweet-user">
+          <div class="tweet-name">AI行业观察</div>
+          <div class="tweet-handle">@AIIndustry</div>
+        </div>
+        <span class="cat-pill cat-news" style="margin-left:auto">时政</span>
+      </div>
+      <div class="tweet-body">Anthropic 与<strong>五角大楼合同纠纷</strong>愈演愈烈——超200家风投机构注入的600亿美元投资面临风险，Anthropic 被列为供应链风险方。与此同时，AWS 阿联酋数据中心遭无人机袭击，AI基础设施安全成新议题。</div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/AnthropicAI" target="_blank">🔗 查看原帖</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <!-- ═══ 今日 AI 热文 TOP 3 ═══ -->
+  <!-- ═══════════════════════════════════════════════════════ -->
+  <div class="section-title" id="hot-articles" style="margin-top:56px">
+    🔥 今日 AI 热文 TOP 3
+    <span class="badge">全文翻译</span>
+  </div>
+
+  <div class="hot-grid">
+
+    <!-- ── 热文 #1 ── -->
+    <div class="hot-card">
+      <div class="hot-rank">
+        <span>#1</span>
+        <span class="hot-rank-label">🏆 最高热度</span>
+      </div>
+      <div class="hot-body">
+        <div class="hot-title">我亲历了伦敦有史以来最大规模的反AI抗议</div>
+        <div class="hot-source">
+          <span>MIT Technology Review</span>
+          <span>2026年3月2日</span>
+        </div>
+        <div class="hot-content">
+          <p>多达500名抗议者于2026年2月28日参加了"向机器进军"游行，地点在伦敦国王十字区的科技企业集中地带，这被描述为迄今全球最大规模的反AI示威活动。</p>
+
+          <h3>游行路线与组织者</h3>
+          <p>游行由五个团体联合组织：Pause AI、Pull the Plug、Mad Youth Organise、Blaksox 和 Assemble。每个团体代表不同的群体，提出不同诉求，但共同的主线是：AI 发展速度已超出民主制度的应对能力。</p>
+          <p>游行从 OpenAI 英国办公室（彭顿维尔路）出发，途经谷歌 DeepMind 和 Meta 总部，最终在布鲁姆斯伯里一处教堂大厅结束。参与者在那里举行"人民大会"，起草对英国政府的诉求。</p>
+
+          <h3>三大核心诉求</h3>
+          <p><strong>1. 暂停前沿AI开发：</strong>Pause AI 的英国分部主任 Joseph Miller 表示："每一部分的社会都需要在这场变革发生之前做好准备。"他们呼吁建立全球暂停机制，直到完善的安全协议确立为止。</p>
+          <p><strong>2. 民主监督机制：</strong>Pull the Plug 的核心诉求是建立具有约束力的"公民大会"，并要求政府将其 AI 政策决定付诸实施。</p>
+          <p><strong>3. 环境影响：</strong>组织者强调，英国已有140个数据中心申请电网接入，总需求达50吉瓦——超过英国整个冬季电力需求。</p>
+
+          <h3>抗议规模与社会支持</h3>
+          <p>尽管500人的游行规模看起来不大，但民调数据显示，84%的英国人担忧政府在 AI 监管上会优先考虑科技合作而非公众利益。文章指出，这一数字对于企业高管而言，其震撼程度远超游行人数本身，因为它代表着推动更严格监管的潜在政治动力。</p>
+
+          <h3>跨国联动</h3>
+          <p>与此同时，柏林也出现了同步抗议活动，这表明该运动正在从孤立的示威演变为有组织的基础设施网络。抗议者展示的标语覆盖了从"AI网络垃圾"到"虐待性图像"，再到"杀手机器人"和"人类灭绝"的广泛议题。</p>
+
+          <blockquote>"真正改变的是，这些担忧现在已被抗议运动所接纳，他们能够召集大量民众走上街头，大声疾呼。"</blockquote>
+        </div>
+        <div class="heat-bar">
+          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
+          <div class="heat-dot"></div><div class="heat-dot"></div>
+          <span class="heat-label">🔥🔥🔥🔥🔥 极高热度</span>
+        </div>
+        <a class="hot-link" href="https://www.technologyreview.com/2026/03/02/1133814/i-checked-out-londons-biggest-ever-anti-ai-protest/" target="_blank">🔗 阅读英文原文</a>
+      </div>
+    </div>
+
+    <!-- ── 热文 #2 ── -->
+    <div class="hot-card">
+      <div class="hot-rank">
+        <span>#2</span>
+        <span class="hot-rank-label">💥 病毒式传播</span>
+      </div>
+      <div class="hot-body">
+        <div class="hot-title">AI恐慌席卷华尔街：美国意识到自己或许还没准备好迎接这一切</div>
+        <div class="hot-source">
+          <span>Fortune</span>
+          <span>2026年2月28日</span>
+        </div>
+        <div class="hot-content">
+          <p>本文呈现了一场争论的张力：一方警告 AI 驱动的大规模失业即将到来，另一方则认为这些担忧被严重夸大。</p>
+
+          <h3>末日叙事的兴起</h3>
+          <p>近期病毒式传播的文章——尤其是 AI 高管 Matt Shumer 和研究机构 Citrini 的文章——警告将出现灾难性的白领失业浪潮。Shumer 的文章将当下比作"2020年2月，疫情正在逼近"。Citrini 的文章则提出了"幽灵 GDP"概念——经济产出仅惠及计算机算力所有者，可能导致抵押贷款违约和经济崩溃。</p>
+
+          <h3>市场真实反应</h3>
+          <p>这些警告引发了真实的市场波动。道琼斯指数单日暴跌超800点，软件股受创最重。Block 公司的 Jack Dorsey 随后宣布裁员40%，似乎印证了这些悲观预测。他表示"智能工具已经改变了构建和运营公司的意义"，与末日预测遥相呼应。</p>
+
+          <h3>华尔街强力反驳</h3>
+          <p>主要金融机构对此进行了强力回击。Citadel Securities 称末日论基于"递归技术谬误"，并指出软件工程师需求实际上同比增长了11%。摩根士丹利预测，新的就业类别将出现，而非永久性的岗位消失。</p>
+
+          <h3>中间立场</h3>
+          <p>部分人士认为极端观点之间存在真相。一位保险公司 CEO 指出，AI 自动化的是常规任务，而复杂决策仍需要人类判断——这意味着是痛苦但可控的转型，而非末日。</p>
+
+          <blockquote>"这不是2020年的疫情，而更像是工业革命——痛苦、颠覆性，但人类最终会适应。"</blockquote>
+        </div>
+        <div class="heat-bar">
+          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
+          <div class="heat-dot"></div><div class="heat-dot off"></div>
+          <span class="heat-label">🔥🔥🔥🔥 高热度</span>
+        </div>
+        <a class="hot-link" href="https://fortune.com/2026/02/28/ai-scare-trade-mass-layoffs-white-collar-recession-citrini-shumer-viral-doomsday-essays/" target="_blank">🔗 阅读英文原文</a>
+      </div>
+    </div>
+
+    <!-- ── 热文 #3 ── -->
+    <div class="hot-card">
+      <div class="hot-rank">
+        <span>#3</span>
+        <span class="hot-rank-label">📡 业界聚焦</span>
+      </div>
+      <div class="hot-body">
+        <div class="hot-title">NVIDIA GTC 2026：我们期待看到的最大揭秘——Feynman芯片与AI硬件新纪元</div>
+        <div class="hot-source">
+          <span>Tom's Guide / TrendForce</span>
+          <span>2026年2月28日 — 3月3日</span>
+        </div>
+        <div class="hot-content">
+          <p>NVIDIA 年度开发者大会 GTC 2026 定于3月16日至19日在加州圣荷西举行。黄仁勋承诺将发布"世界从未见过的芯片"，并宣称 NVIDIA 将让全世界"大吃一惊"。</p>
+
+          <h3>Feynman 芯片架构</h3>
+          <p>本届 GTC 最受期待的发布是 Feynman 芯片——NVIDIA 下一代 AI 架构。据报道，Feynman 将采用台积电的 A16 制程（1.6nm），部分低复杂度芯片（如 I/O 芯片）可能外包给英特尔的 14A 或 18A 工艺制造，并采用 EMIB 先进封装技术。</p>
+          <p>Feynman 芯片专为增强 AI 推理能力设计，有望显著提升个人设备上的 AI 应用性能。</p>
+
+          <h3>HBM4 内存生态</h3>
+          <p>三星电子将在 GTC 上展示其 HBM4 内存性能（HBM4 已于2月12日正式出货），SK海力士也将介绍其 HBM4 技术方案。这标志着 AI 加速器的内存生态正式进入 HBM4 时代。</p>
+
+          <h3>物理AI与机器人</h3>
+          <p>除芯片发布外，GTC 2026 预计将大力推进"物理AI"概念——将 AI 能力延伸至机器人、自动驾驶和工业自动化领域，这也是 CES 2026 设定的年度主旋律。</p>
+
+          <h3>Rubin 系列更新</h3>
+          <p>除 Feynman 架构外，现有的 Rubin AI 芯片系列也预计获得更新，以及针对个人电脑市场的全新 CPU 芯片。</p>
+
+          <blockquote>NVIDIA CEO 黄仁勋："我们将展示几款世界从未见过的新芯片，我们将让全世界大吃一惊。"</blockquote>
+
+          <p>分析师预计，Feynman 芯片将进一步巩固 NVIDIA 在 AI 算力市场的主导地位，同时面临来自 AMD MI500 系列（预计2027年）和 Intel Gaudi 的竞争压力。</p>
+        </div>
+        <div class="heat-bar">
+          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
+          <div class="heat-dot"></div><div class="heat-dot off"></div>
+          <span class="heat-label">🔥🔥🔥🔥 高热度</span>
+        </div>
+        <a class="hot-link" href="https://www.trendforce.com/news/2026/02/25/news-nvidia-gtc-2026-in-focus-feynman-reportedly-on-tsmc-a16-samsung-sk-hynix-to-showcase-hbm4/" target="_blank">🔗 阅读英文原文</a>
+      </div>
+    </div>
+
+  </div><!-- /hot-grid -->
+
+</div><!-- /container -->
+
+<footer>
+  🤖 由 Claude AI 自动生成 · 数据来源：X/Twitter + 主流科技媒体 · 2026年3月5日更新<br>
+  内容仅供参考，所有推文链接均为真实 X.com 来源
+</footer>
+
 </body>
 </html>
