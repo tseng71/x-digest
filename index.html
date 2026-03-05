@@ -1,704 +1,646 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>每日 X AI 摘要 · 2026年3月5日</title>
-<style>
-  :root {
-    --bg: #0f1117;
-    --surface: #1a1d27;
-    --surface2: #22263a;
-    --border: #2e3350;
-    --accent: #4f8ef7;
-    --accent2: #f75f5f;
-    --accent3: #4fcfa0;
-    --accent4: #f7c44f;
-    --text: #e4e6f0;
-    --text-muted: #8a8fa8;
-    --pill-blue: rgba(79,142,247,0.15);
-    --pill-red: rgba(247,95,95,0.15);
-    --pill-green: rgba(79,207,160,0.15);
-    --pill-yellow: rgba(247,196,79,0.15);
-    --pill-purple: rgba(180,100,247,0.15);
-  }
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    line-height: 1.65;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>每日 X AI 摘要 · 2026年3月5日</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --card: #1a1d27;
+      --card2: #1e2130;
+      --border: #2a2d3e;
+      --accent: #6366f1;
+      --accent2: #818cf8;
+      --fire: #f97316;
+      --green: #22c55e;
+      --text: #e2e8f0;
+      --muted: #94a3b8;
+      --tag-model: #7c3aed;
+      --tag-person: #0e7490;
+      --tag-tool: #15803d;
+      --tag-product: #b45309;
+      --tag-industry: #9f1239;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, "Segoe UI", "PingFang SC", "Noto Sans SC", sans-serif;
+      line-height: 1.7;
+    }
 
-  /* ── NAV ── */
-  nav {
-    position: sticky; top:0; z-index:100;
-    background: rgba(15,17,23,0.92);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; gap:12px;
-    padding: 12px 24px;
-    flex-wrap: wrap;
-  }
-  nav .logo { font-weight:700; font-size:18px; color:var(--accent); margin-right:auto; }
-  nav .date-badge {
-    background: var(--surface2); border:1px solid var(--border);
-    border-radius:6px; padding:4px 12px; font-size:13px; color:var(--text-muted);
-  }
-  nav a {
-    text-decoration:none; color:var(--text);
-    background: var(--surface2); border:1px solid var(--border);
-    border-radius:20px; padding:5px 14px; font-size:13px;
-    transition: all .2s; white-space:nowrap;
-  }
-  nav a:hover, nav a.hot { background: var(--accent2); border-color: var(--accent2); color:#fff; }
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 12px;
+      padding: 0 24px; height: 56px;
+    }
+    nav .logo { font-weight: 700; font-size: 1.05rem; color: var(--accent2); flex: 1; }
+    nav .logo span { color: var(--muted); font-weight: 400; font-size: .85rem; margin-left: 8px; }
+    nav a {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--fire); color: #fff;
+      padding: 6px 16px; border-radius: 20px;
+      font-size: .88rem; font-weight: 600;
+      text-decoration: none; transition: opacity .2s;
+    }
+    nav a:hover { opacity: .85; }
+    nav .nav-links { display: flex; gap: 8px; }
+    nav .nav-link-plain {
+      display: inline-flex; align-items: center;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: .88rem; color: var(--muted);
+      text-decoration: none; transition: color .2s;
+      border: 1px solid var(--border);
+    }
+    nav .nav-link-plain:hover { color: var(--text); border-color: var(--accent); }
 
-  /* ── LAYOUT ── */
-  .container { max-width:1100px; margin:0 auto; padding:32px 20px 80px; }
+    /* HERO */
+    .hero {
+      text-align: center; padding: 56px 24px 32px;
+      background: linear-gradient(180deg, #12142000 0%, var(--bg) 100%);
+    }
+    .hero .date { color: var(--muted); font-size: .9rem; margin-bottom: 12px; }
+    .hero h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #a5b4fc 0%, #818cf8 50%, #6366f1 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
+    .hero p { color: var(--muted); font-size: 1rem; max-width: 560px; margin: 0 auto; }
 
-  h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
-  .subtitle { color:var(--text-muted); font-size:14px; margin-bottom:32px; }
+    /* STATS BAR */
+    .stats {
+      display: flex; justify-content: center; gap: 32px;
+      padding: 20px 24px; flex-wrap: wrap;
+    }
+    .stat { text-align: center; }
+    .stat .n { font-size: 1.6rem; font-weight: 800; color: var(--accent2); }
+    .stat .l { font-size: .78rem; color: var(--muted); margin-top: 2px; }
 
-  /* ── SECTION HEADERS ── */
-  .section-title {
-    font-size:20px; font-weight:700; margin:40px 0 16px;
-    display:flex; align-items:center; gap:10px;
-  }
-  .section-title .badge {
-    background: var(--surface2); border:1px solid var(--border);
-    border-radius:12px; padding:2px 10px; font-size:12px;
-    color:var(--text-muted); font-weight:500;
-  }
+    /* SECTION */
+    section { max-width: 1100px; margin: 0 auto; padding: 32px 20px; }
+    .section-title {
+      font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::after {
+      content: ''; flex: 1; height: 1px; background: var(--border);
+    }
 
-  /* ── CATEGORY TABS ── */
-  .cat-bar {
-    display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap;
-  }
-  .cat-pill {
-    border-radius:20px; padding:4px 14px; font-size:12px; font-weight:600;
-    border:1px solid transparent; cursor:default;
-  }
-  .cat-model  { background:var(--pill-blue);   color:var(--accent);  border-color:rgba(79,142,247,.3); }
-  .cat-person { background:var(--pill-purple);  color:#b464f7;        border-color:rgba(180,100,247,.3); }
-  .cat-tool   { background:var(--pill-green);   color:var(--accent3); border-color:rgba(79,207,160,.3); }
-  .cat-product{ background:var(--pill-yellow);  color:var(--accent4); border-color:rgba(247,196,79,.3); }
-  .cat-news   { background:var(--pill-red);     color:var(--accent2); border-color:rgba(247,95,95,.3); }
+    /* TWEET GRID */
+    .tweet-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 16px;
+    }
+    .tweet-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px;
+      transition: border-color .2s, transform .2s;
+      display: flex; flex-direction: column; gap: 10px;
+    }
+    .tweet-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+    .tweet-header { display: flex; align-items: center; gap: 10px; }
+    .tweet-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 1rem; color: #fff; flex-shrink: 0;
+    }
+    .tweet-user .name { font-weight: 700; font-size: .95rem; }
+    .tweet-user .handle { font-size: .8rem; color: var(--muted); }
+    .tweet-tag {
+      display: inline-block; padding: 2px 10px; border-radius: 12px;
+      font-size: .72rem; font-weight: 600; margin-left: auto; flex-shrink: 0;
+    }
+    .tag-model   { background: rgba(124,58,237,.2); color: #c4b5fd; border: 1px solid rgba(124,58,237,.4); }
+    .tag-person  { background: rgba(14,116,144,.2);  color: #67e8f9; border: 1px solid rgba(14,116,144,.4); }
+    .tag-tool    { background: rgba(21,128,61,.2);  color: #86efac; border: 1px solid rgba(21,128,61,.4); }
+    .tag-product { background: rgba(180,83,9,.2);   color: #fcd34d; border: 1px solid rgba(180,83,9,.4); }
+    .tag-industry{ background: rgba(159,18,57,.2);  color: #fca5a5; border: 1px solid rgba(159,18,57,.4); }
 
-  /* ── TWEET GRID ── */
-  .tweet-grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap:14px;
-  }
-  .tweet-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius:12px;
-    padding:18px;
-    transition: border-color .2s, transform .15s;
-  }
-  .tweet-card:hover { border-color: var(--accent); transform:translateY(-2px); }
+    .tweet-body { font-size: .92rem; color: var(--text); flex: 1; }
+    .tweet-footer {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-top: 4px;
+    }
+    .tweet-ref {
+      font-size: .78rem; color: var(--muted);
+      background: rgba(99,102,241,.08); padding: 4px 10px; border-radius: 8px;
+      border: 1px solid rgba(99,102,241,.2);
+    }
+    .tweet-link {
+      font-size: .78rem; color: var(--accent2); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .tweet-link:hover { text-decoration: underline; }
 
-  .tweet-header { display:flex; align-items:center; gap:10px; margin-bottom:10px; }
-  .tweet-avatar {
-    width:38px; height:38px; border-radius:50%;
-    background: var(--surface2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:16px; flex-shrink:0;
-  }
-  .tweet-user { }
-  .tweet-name { font-weight:600; font-size:14px; }
-  .tweet-handle { color:var(--text-muted); font-size:12px; }
-  .tweet-body { font-size:14px; color:var(--text); margin-bottom:12px; }
-  .tweet-footer { display:flex; justify-content:space-between; align-items:center; }
-  .tweet-link {
-    font-size:12px; color:var(--accent); text-decoration:none;
-    display:flex; align-items:center; gap:4px;
-  }
-  .tweet-link:hover { text-decoration:underline; }
+    /* ARTICLE CARDS */
+    .article-section { scroll-margin-top: 64px; }
+    .article-cards { display: flex; flex-direction: column; gap: 32px; }
+    .article-card {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      transition: border-color .2s;
+    }
+    .article-card:hover { border-color: var(--fire); }
+    .article-card-header {
+      display: flex; align-items: center; gap: 14px;
+      padding: 20px 24px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rank-badge {
+      width: 44px; height: 44px; border-radius: 12px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; font-weight: 800;
+    }
+    .rank-1 { background: linear-gradient(135deg, #f97316, #ef4444); color: #fff; }
+    .rank-2 { background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; }
+    .rank-3 { background: linear-gradient(135deg, #0ea5e9, #06b6d4); color: #fff; }
+    .article-meta h3 { font-size: 1.05rem; font-weight: 700; line-height: 1.4; }
+    .article-meta .source { font-size: .8rem; color: var(--muted); margin-top: 3px; }
+    .heat-badge {
+      margin-left: auto; flex-shrink: 0;
+      background: rgba(249,115,22,.15); border: 1px solid rgba(249,115,22,.35);
+      color: var(--fire); font-size: .78rem; font-weight: 600;
+      padding: 4px 12px; border-radius: 20px;
+    }
+    .article-body { padding: 20px 24px; font-size: .93rem; line-height: 1.85; }
+    .article-body h4 {
+      font-size: .95rem; font-weight: 700; color: var(--accent2);
+      margin: 20px 0 8px; border-left: 3px solid var(--accent);
+      padding-left: 10px;
+    }
+    .article-body p { margin-bottom: 12px; color: var(--text); }
+    .article-body p:last-child { margin-bottom: 0; }
+    .article-footer {
+      padding: 12px 24px 18px;
+      display: flex; align-items: center; gap: 12px;
+      border-top: 1px solid var(--border);
+    }
+    .article-link {
+      font-size: .82rem; color: var(--accent2);
+      text-decoration: none; display: inline-flex; align-items: center; gap: 5px;
+    }
+    .article-link:hover { text-decoration: underline; }
 
-  /* ── HOT ARTICLES ── */
-  #hot-articles { scroll-margin-top: 70px; }
-  .hot-grid {
-    display:grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap:20px;
-  }
-  .hot-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius:14px;
-    overflow:hidden;
-    transition: border-color .2s, transform .15s;
-  }
-  .hot-card:hover { border-color: var(--accent2); transform:translateY(-2px); }
-  .hot-rank {
-    background: linear-gradient(135deg, var(--accent2), #c23434);
-    padding: 14px 20px;
-    font-size:28px; font-weight:800;
-    display:flex; justify-content:space-between; align-items:center;
-  }
-  .hot-rank-label { font-size:13px; font-weight:600; opacity:.85; }
-  .hot-body { padding:20px; }
-  .hot-title { font-size:17px; font-weight:700; margin-bottom:8px; line-height:1.4; }
-  .hot-source {
-    font-size:12px; color:var(--text-muted);
-    display:flex; gap:8px; align-items:center; margin-bottom:14px;
-  }
-  .hot-source span { background:var(--surface2); border-radius:4px; padding:2px 8px; }
-  .hot-content { font-size:13.5px; color:#c8cad8; line-height:1.75; }
-  .hot-content h3 { font-size:14px; font-weight:700; color:var(--text); margin:14px 0 6px; }
-  .hot-content blockquote {
-    border-left:3px solid var(--accent2);
-    padding:6px 12px; margin:10px 0;
-    background:var(--surface2); border-radius:0 6px 6px 0;
-    font-style:italic; color:var(--text-muted);
-  }
-  .hot-link {
-    display:inline-flex; align-items:center; gap:6px; margin-top:16px;
-    color:var(--accent); font-size:13px; text-decoration:none;
-    border:1px solid rgba(79,142,247,.3); border-radius:20px;
-    padding:5px 14px; transition:background .2s;
-  }
-  .hot-link:hover { background:rgba(79,142,247,.1); }
-  .heat-bar {
-    display:flex; gap:4px; align-items:center;
-    margin-top:12px;
-  }
-  .heat-dot { width:8px; height:8px; border-radius:50%; background:var(--accent2); }
-  .heat-dot.off { background:var(--surface2); }
-  .heat-label { font-size:11px; color:var(--text-muted); margin-left:4px; }
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
 
-  /* ── FOOTER ── */
-  footer {
-    text-align:center; padding:32px 20px;
-    color:var(--text-muted); font-size:12px;
-    border-top: 1px solid var(--border);
-  }
+    /* FOOTER */
+    footer {
+      text-align: center; padding: 32px 20px;
+      color: var(--muted); font-size: .82rem;
+      border-top: 1px solid var(--border);
+    }
 
-  @media(max-width:600px){
-    nav { gap:8px; padding:10px 14px; }
-    nav .logo { font-size:15px; }
-    h1 { font-size:20px; }
-    .section-title { font-size:16px; }
-  }
-</style>
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 1.5rem; }
+      .tweet-grid { grid-template-columns: 1fr; }
+      nav .nav-links { display: none; }
+    }
+  </style>
 </head>
 <body>
 
-<!-- ── NAV ── -->
+<!-- NAV -->
 <nav>
-  <span class="logo">𝕏 AI 日报</span>
-  <span class="date-badge">📅 2026年3月5日</span>
-  <a href="#ai-models">🤖 模型动态</a>
-  <a href="#people">👤 人物动态</a>
-  <a href="#tools">🛠 工具/教程</a>
-  <a href="#products">📦 产品发布</a>
-  <a href="#industry">🌐 行业/时政</a>
-  <a href="#hot-articles" class="hot">🔥 热文 TOP3</a>
+  <div class="logo">𝕏 每日 AI 摘要 <span>2026年3月5日</span></div>
+  <div class="nav-links">
+    <a class="nav-link-plain" href="#timeline">📰 时间线</a>
+  </div>
+  <a href="#top3">🔥 热文 TOP3</a>
 </nav>
 
-<div class="container">
-  <h1>每日 X AI 摘要</h1>
-  <p class="subtitle">自动汇总过去24小时 X 平台 AI 热门帖子 · 今日 AI 热文全文翻译 · 更新于 2026年3月5日</p>
+<!-- HERO -->
+<div class="hero">
+  <div class="date">📅 2026年3月5日 · 星期四</div>
+  <h1>每日 X · AI 动态摘要</h1>
+  <p>精选过去24小时内 X/Twitter 上最值得关注的人工智能帖子与热文，全部译为中文</p>
+</div>
 
-  <!-- ═══ AI模型动态 ═══ -->
-  <div class="section-title" id="ai-models">
-    🤖 AI 模型动态
-    <span class="badge">6条</span>
-  </div>
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="n">15</div><div class="l">精选推文</div></div>
+  <div class="stat"><div class="n">5</div><div class="l">话题分类</div></div>
+  <div class="stat"><div class="n">3</div><div class="l">热文全文翻译</div></div>
+  <div class="stat"><div class="n">🔥</div><div class="l">Anthropic × 五角大楼</div></div>
+</div>
+
+<hr class="divider" />
+
+<!-- TIMELINE SECTION -->
+<section id="timeline">
+  <div class="section-title">🤖 AI 模型动态</div>
   <div class="tweet-grid">
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🅰️</div>
+        <div class="tweet-avatar">SA</div>
         <div class="tweet-user">
-          <div class="tweet-name">Sam Altman</div>
-          <div class="tweet-handle">@sama</div>
+          <div class="name">Sam Altman</div>
+          <div class="handle">@sama</div>
         </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+        <span class="tweet-tag tag-model">AI模型</span>
       </div>
-      <div class="tweet-body">OpenAI 设定内部目标：<strong>2026年9月前实现自动化AI研究助理</strong>（运行于数十万GPU上），2028年3月实现真正的自动化AI研究员。AI系统或将在2026年开始做出小型新发现，更大突破可能在2028年到来。</div>
+      <div class="tweet-body">
+        我们已设立内部目标：到2026年9月，在数十万张GPU上运行一个自动化的AI研究实习生；到2028年3月，实现真正意义上的自动化AI研究员。我们可能完全无法实现这一目标，但考虑到目前的发展速度……2026年的AI系统或许已能做出小的新发现。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/sama/status/1983584366547829073" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/sama/status/1983584366547829073" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🎨</div>
+        <div class="tweet-avatar">MK</div>
         <div class="tweet-user">
-          <div class="tweet-name">GenIArt</div>
-          <div class="tweet-handle">@GenIArt_Fr</div>
+          <div class="name">Mark Kretschmann</div>
+          <div class="handle">@mark_k</div>
         </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+        <span class="tweet-tag tag-model">AI模型</span>
       </div>
-      <div class="tweet-body"><strong>Midjourney V8 进入最终阶段</strong>，采用渐进式发布策略。主要工作集中于提示管理、文字生成、自定义功能和界面优化，文字渲染能力大幅提升，V8 预计近期正式上线。</div>
+      <div class="tweet-body">
+        Sam Altman：相比GPT-5.2有重大提升的新模型将在2026年Q1发布！@sama 表示 OpenAI 或许在不知不觉间已超越AGI，因为这个词本身已变得模糊。他认为，如果当前模型具备真正的持续学习能力，显然足以被称为AGI。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/GenIArt_Fr/status/2014090791547781243" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/mark_k/status/2002751161128944110" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🔬</div>
+        <div class="tweet-avatar">CN</div>
         <div class="tweet-user">
-          <div class="tweet-name">OpenAI</div>
-          <div class="tweet-handle">@OpenAI</div>
+          <div class="name">CN Wire</div>
+          <div class="handle">@Sino_Market</div>
         </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
+        <span class="tweet-tag tag-model">AI模型</span>
       </div>
-      <div class="tweet-body">OpenAI 分享了<strong>推理系列新模型 o3 早期版本</strong>的评估结果（evals），展示其在复杂推理任务上的能力进展，并对外公开基准测试数据。</div>
+      <div class="tweet-body">
+        阿里巴巴旗下AI助手通义千问（Qwen）即将进军AI硬件市场，在2026年巴塞罗那世界移动通信大会（MWC）上发布首款AI智能眼镜。线上和线下预购已于3月2日开启。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/OpenAI/status/1870186518230511844" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/Sino_Market/status/2027215417903825107" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">🌐</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Dan Mac</div>
-          <div class="tweet-handle">@daniel_mac8</div>
-        </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
-      </div>
-      <div class="tweet-body">预测：谷歌将发布 <strong>Gemini 3.0</strong>，在 ARC-AGI-2 上突破20%准确率，拥有<strong>300万 token 上下文窗口</strong>，定价与 GPT-5 持平，或将成为地球上最智能的AI模型。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/daniel_mac8/status/1973914854328283353" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">🏭</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Jukan</div>
-          <div class="tweet-handle">@jukan05</div>
-        </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
-      </div>
-      <div class="tweet-body"><strong>NVIDIA GTC 2026</strong> 将于3月16日开幕（持续至19日），预计发布基于<strong>1nm制程的 Feynman AI芯片</strong>。黄仁勋承诺将展示"世界从未见过的芯片"，三星和SK海力士也将展示 HBM4 内存。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/jukan05/status/2026474199540457888" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">💻</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Alex Cheema</div>
-          <div class="tweet-handle">@alexocheema</div>
-        </div>
-        <span class="cat-pill cat-model" style="margin-left:auto">模型动态</span>
-      </div>
-      <div class="tweet-body"><strong>MLX 团队开年发布重大更新</strong>，包含新模型支持和更完善的工具集成。"2026年是本地AI之年。" Apple Silicon 上的本地推理能力持续突破。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/alexocheema/status/2008346623705780675" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-  </div><!-- /tweet-grid -->
-
-  <!-- ═══ 人物动态 ═══ -->
-  <div class="section-title" id="people">
-    👤 人物动态
-    <span class="badge">4条</span>
   </div>
+
+  <div class="section-title" style="margin-top:32px;">👤 人物动态</div>
   <div class="tweet-grid">
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🏗️</div>
+        <div class="tweet-avatar">AK</div>
         <div class="tweet-user">
-          <div class="tweet-name">Pieter Levels</div>
-          <div class="tweet-handle">@levelsio</div>
+          <div class="name">Andrej Karpathy</div>
+          <div class="handle">@karpathy</div>
         </div>
-        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+        <span class="tweet-tag tag-person">人物动态</span>
       </div>
-      <div class="tweet-body">2023年是AI头像之年，2024年是AI照片之年，2025年是AI视频之年。现在越来越清楚：<strong>2026年将是AI世界模型之年</strong>——从一张或多张2D图像/提示词生成完全可交互的可探索3D世界。</div>
+      <div class="tweet-body">
+        你可能听过一种常见说法：AI已发展太远，新的研究型初创公司无法与现有巨头竞争。这正是我在OpenAI起步时常常听到的声音。事实证明恰恰相反——正确的时机、正确的方向，任何团队都有机会。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/levelsio/status/1968747296604004362" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/karpathy/status/2016590919143952466" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">📈</div>
+        <div class="tweet-avatar">PG</div>
         <div class="tweet-user">
-          <div class="tweet-name">Greg Isenberg</div>
-          <div class="tweet-handle">@gregisenberg</div>
+          <div class="name">Pat Grady</div>
+          <div class="handle">@gradypb</div>
         </div>
-        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+        <span class="tweet-tag tag-person">人物动态</span>
       </div>
-      <div class="tweet-body">2026年AI预测：① <strong>SaaS与智能体将完全合并</strong>，不适应者将死或被廉价收购；② 谷歌2026年将碾压市场，OpenAI倍感压力；③ 中国AI将在全球市场占据更大份额；④ 会使用AI的人将成为新的1%精英。</div>
+      <div class="tweet-body">
+        2026年：这就是AGI。（简短而充满意味的一句话，引发大量讨论。Sequoia Capital 合伙人 Pat Grady 认为当前AI能力已达到通用人工智能级别。）
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/gregisenberg/status/1993309765426962612" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/gradypb/status/2011491957730918510" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🔋</div>
+        <div class="tweet-avatar">AA</div>
         <div class="tweet-user">
-          <div class="tweet-name">NETSNIX</div>
-          <div class="tweet-handle">@NetSnix</div>
+          <div class="name">Anish Acharya</div>
+          <div class="handle">@illscience</div>
         </div>
-        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
+        <span class="tweet-tag tag-person">人物动态</span>
       </div>
-      <div class="tweet-body">埃隆·马斯克再度调整时间线：xAI 可能在<strong>2026年实现通用人工智能（AGI）</strong>。他向员工表示，未来模型或将超越人类智能，背后有大量资金支持、数据中心快速扩张，以及与特斯拉更紧密的协作。</div>
+      <div class="tweet-body">
+        关于2026年AI应用的思考笔记：当前AI应用格局正在从"演示产品"转向真正能替代专业工作的垂直工具。API成本持续下降，让原本难以商业化的场景成为可能。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/NetSnix/status/2001589039401402409" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">🔑</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Sanjay Kalra</div>
-          <div class="tweet-handle">@sanjaykalra</div>
-        </div>
-        <span class="cat-pill cat-person" style="margin-left:auto">人物动态</span>
-      </div>
-      <div class="tweet-body">2026年AI现状中期更新：CES 2026（1月6-9日）定下基调——<strong>物理AI、智能体系统、具身智能</strong>从概念走向演示。OpenAI Health、Google Gmail AI等领域智能体亮相，2026年标志着"部署年"正式到来。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/sanjaykalra/status/2011368082208702483" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/illscience/status/2007855098513240255" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
   </div>
 
-  <!-- ═══ 工具/教程 ═══ -->
-  <div class="section-title" id="tools">
-    🛠 工具 / 教程
-    <span class="badge">3条</span>
-  </div>
+  <div class="section-title" style="margin-top:32px;">🛠️ 工具 / 教程</div>
   <div class="tweet-grid">
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🎭</div>
+        <div class="tweet-avatar">RP</div>
         <div class="tweet-user">
-          <div class="tweet-name">Rohan Paul</div>
-          <div class="tweet-handle">@rohanpaul_ai</div>
+          <div class="name">Rohan Paul</div>
+          <div class="handle">@rohanpaul_ai</div>
         </div>
-        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
+        <span class="tweet-tag tag-tool">工具/教程</span>
       </div>
-      <div class="tweet-body">2026年终于兑现了炒作。<strong>Pika Labs 发布 AI Selves</strong>——一个用于构建数字孪生的工具，外观与真实的你极为相似。只需几分钟即可设置完毕，可用于处理日常事务、创作视觉内容，或学习你的特定习惯偏好。</div>
+      <div class="tweet-body">
+        2026年终于兑现了炒作——@pika_labs 刚发布了 AI Selves，一个可以构建"数字孪生"的工具，外观与真人极为相似。几分钟内即可完成设置，用于代替你处理琐事、创作内容，或帮助你学习日常工作流；还可接入 WhatsApp、Slack、Sheets 和 Notion 代你行动。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/2027564821328404780" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/2027564821328404780" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🌐</div>
+        <div class="tweet-avatar">AC</div>
         <div class="tweet-user">
-          <div class="tweet-name">WeGPT</div>
-          <div class="tweet-handle">@WeGPTai</div>
+          <div class="name">Alex Cheema</div>
+          <div class="handle">@alexocheema</div>
         </div>
-        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
+        <span class="tweet-tag tag-tool">工具/教程</span>
       </div>
-      <div class="tweet-body"><strong>WeGPT 整合所有前沿 LLM</strong>（GPT、Claude、Gemini）于单一界面，月费仅 $35，支持实时智能体工具调用。无需同时订阅多个服务（原价约 $80/月），一个平台搞定一切。</div>
+      <div class="tweet-body">
+        MLX 团队在2026年开年就发布了一个重大版本。2026年是本地AI之年。新版 mlx-lm 包含大量新模型，并大幅改善了对工具（tools）的支持。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/WeGPTai/status/1920703016945996064" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">🧠</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Anthropic</div>
-          <div class="tweet-handle">@AnthropicAI</div>
-        </div>
-        <span class="cat-pill cat-tool" style="margin-left:auto">工具</span>
-      </div>
-      <div class="tweet-body">Anthropic 推出 <strong>Claude Import Memory</strong> 功能，允许用户将 ChatGPT 和 Gemini 的历史对话记忆迁移至 Claude，大幅降低用户切换 AI 工具的门槛，同时为免费用户开放持久记忆能力。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/AnthropicAI" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/alexocheema/status/2008346623705780675" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
   </div>
 
-  <!-- ═══ 产品发布 ═══ -->
-  <div class="section-title" id="products">
-    📦 产品发布
-    <span class="badge">4条</span>
-  </div>
+  <div class="section-title" style="margin-top:32px;">🚀 产品发布</div>
   <div class="tweet-grid">
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🕶️</div>
+        <div class="tweet-avatar">GI</div>
         <div class="tweet-user">
-          <div class="tweet-name">CN Wire</div>
-          <div class="tweet-handle">@Sino_Market</div>
+          <div class="name">GenIArt</div>
+          <div class="handle">@GenIArt_Fr</div>
         </div>
-        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+        <span class="tweet-tag tag-product">产品发布</span>
       </div>
-      <div class="tweet-body">阿里巴巴旗下个人AI助手 <strong>Qwen 将在 MWC 2026（巴塞罗那）发布首款AI智能眼镜</strong>，进军AI硬件市场。线上和线下预购于3月2日正式开启，AI硬件赛道再添重磅选手。</div>
+      <div class="tweet-body">
+        📅 Midjourney 办公室时间回顾（1月21日）：V8模型已进入最终阶段，正以逐步发布策略接近正式上线。提示词管理、文字渲染、自定义功能和界面均在大幅改进中，预计发布时间临近。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/Sino_Market/status/2027215417903825107" target="_blank">🔗 查看原帖</a>
+        <span class="tweet-ref">引用：Midjourney 官方博客</span>
+        <a class="tweet-link" href="https://x.com/GenIArt_Fr/status/2014090791547781243" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🌟</div>
+        <div class="tweet-avatar">MS</div>
         <div class="tweet-user">
-          <div class="tweet-name">Google DeepMind</div>
-          <div class="tweet-handle">@GoogleDeepMind</div>
+          <div class="name">MeshyAI</div>
+          <div class="handle">@MeshyAI</div>
         </div>
-        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
+        <span class="tweet-tag tag-product">产品发布</span>
       </div>
-      <div class="tweet-body">谷歌发布 <strong>Gemini 3.1 Flash-Lite</strong>，定价极具竞争力：每百万输入 token 仅 $0.25，每百万输出 token $1.50。同时 Google Canvas 向全美用户开放，实现 AI 驱动的应用创作民主化。</div>
+      <div class="tweet-body">
+        我们很高兴宣布 Meshy 将亮相 CES 2026！今年我们与 Jupiter SR 合作，展示AI 3D生成如何驱动下一代视觉展示。📍 展位 21837 | 中央馆 🗓️ 1月7–10日
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/GoogleDeepMind" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">⚡</div>
-        <div class="tweet-user">
-          <div class="tweet-name">OpenAI</div>
-          <div class="tweet-handle">@OpenAI</div>
-        </div>
-        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
-      </div>
-      <div class="tweet-body">OpenAI 发布 <strong>GPT-5.3 Instant</strong>，专注于提升对话流畅度、答案相关性和网络搜索结果质量。此版本是 GPT-5 系列的迭代优化版，面向日常对话和快速响应场景。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/OpenAI" target="_blank">🔗 查看原帖</a>
-      </div>
-    </div>
-
-    <div class="tweet-card">
-      <div class="tweet-header">
-        <div class="tweet-avatar">🐉</div>
-        <div class="tweet-user">
-          <div class="tweet-name">Alibaba AI</div>
-          <div class="tweet-handle">@AlibabaResearch</div>
-        </div>
-        <span class="cat-pill cat-product" style="margin-left:auto">产品发布</span>
-      </div>
-      <div class="tweet-body">阿里巴巴发布 <strong>Qwen3.5-9B</strong>，这款紧凑型推理模型在多项第三方基准测试上性能<strong>超越 OpenAI 开源模型 gpt-oss-120B</strong>，凭借9B参数实现超越120B模型的推理能力，性价比极高。</div>
-      <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/AlibabaResearch" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/MeshyAI/status/2008116272106749959" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
   </div>
 
-  <!-- ═══ 行业/时政 ═══ -->
-  <div class="section-title" id="industry">
-    🌐 行业 / 时政
-    <span class="badge">4条</span>
-  </div>
+  <div class="section-title" style="margin-top:32px;">🌐 行业 / 时政</div>
   <div class="tweet-grid">
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">📊</div>
+        <div class="tweet-avatar">AL</div>
         <div class="tweet-user">
-          <div class="tweet-name">Y11 / seclink</div>
-          <div class="tweet-handle">@seclink</div>
+          <div class="name">Aletheia Capital</div>
+          <div class="handle">@AletheiaCapital</div>
         </div>
-        <span class="cat-pill cat-news" style="margin-left:auto">行业</span>
+        <span class="tweet-tag tag-industry">行业/时政</span>
       </div>
-      <div class="tweet-body">【技术战略简报】核心结论：AI 已从"单点替代"进化为<strong>"组织级自主劳动力"</strong>。随着 GLM-5 等长程 Agent 模型成熟，支持100万 token 上下文，50%以上的复杂白领工作将在1-3年内实现自动化。巨头资本开支同比大幅增长。</div>
+      <div class="tweet-body">
+        今天早些时候，AMD 和 OpenAI 签署了一项跨越 AMD 多代 GPU 的 6GW AI基础设施协议。首个1GW数据中心将由 MI450 GPU 在2026年下半年落地。该公告与我们2025年7月29日发布的研究一致：AI 可能在2026年成为 AMD 最大的业务部门。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/seclink/status/2023958436086743297" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/AletheiaCapital/status/1975189353942167988" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">✊</div>
+        <div class="tweet-avatar">PL</div>
         <div class="tweet-user">
-          <div class="tweet-name">Shanaka Perera</div>
-          <div class="tweet-handle">@shanaka86</div>
+          <div class="name">Pieter Levels</div>
+          <div class="handle">@levelsio</div>
         </div>
-        <span class="cat-pill cat-news" style="margin-left:auto">时政</span>
+        <span class="tweet-tag tag-industry">行业/时政</span>
       </div>
-      <div class="tweet-body">500人聚集伦敦国王十字区举行"<strong>向机器进军</strong>"反AI游行——史上最大规模反AI抗议。从 OpenAI 英国办公室出发，途经谷歌 DeepMind 和 Meta 总部，要求暂停前沿AI开发并建立民主监督机制。</div>
+      <div class="tweet-body">
+        2023年是AI头像之年，2024年是AI照片之年，2025年是AI视频之年。现在越来越清晰的是：2026年将是AI世界模型之年——由一张或多张2D图像或文本提示生成完全可交互、可探索的3D世界。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/shanaka86/status/2029176281993232494" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/levelsio/status/1968747296604004362" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">💰</div>
+        <div class="tweet-avatar">SK</div>
         <div class="tweet-user">
-          <div class="tweet-name">Aletheia Capital</div>
-          <div class="tweet-handle">@AletheiaCapital</div>
+          <div class="name">Sanjay Kalra</div>
+          <div class="handle">@sanjaykalra</div>
         </div>
-        <span class="cat-pill cat-news" style="margin-left:auto">行业</span>
+        <span class="tweet-tag tag-industry">行业/时政</span>
       </div>
-      <div class="tweet-body">AMD 与 OpenAI 签署 <strong>6GW AI 基础设施协议</strong>，横跨 AMD 多代 GPU。首批 1GW 数据中心将于2026年下半年由 MI450 GPU 驱动上线，这是迄今最大规模的 AI 基础设施采购协议之一。</div>
+      <div class="tweet-body">
+        2026年AI进展更新（一月中旬回顾）：仅仅两周，2026年就已在快速重塑AI格局。CES 2026奠定了基调：实体AI、智能体系统、具身智能从概念走向演示。亮点包括：实体AI与机器人激增；智能体AI任务处理能力显著提升；边缘设备AI大范围普及。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/AletheiaCapital/status/1975189353942167988" target="_blank">🔗 查看原帖</a>
+        <a class="tweet-link" href="https://x.com/sanjaykalra/status/2011368082208702483" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
     <div class="tweet-card">
       <div class="tweet-header">
-        <div class="tweet-avatar">🏛️</div>
+        <div class="tweet-avatar">BI</div>
         <div class="tweet-user">
-          <div class="tweet-name">AI行业观察</div>
-          <div class="tweet-handle">@AIIndustry</div>
+          <div class="name">BusinessIntelligence</div>
+          <div class="handle">@bimedotcom</div>
         </div>
-        <span class="cat-pill cat-news" style="margin-left:auto">时政</span>
+        <span class="tweet-tag tag-industry">行业/时政</span>
       </div>
-      <div class="tweet-body">Anthropic 与<strong>五角大楼合同纠纷</strong>愈演愈烈——超200家风投机构注入的600亿美元投资面临风险，Anthropic 被列为供应链风险方。与此同时，AWS 阿联酋数据中心遭无人机袭击，AI基础设施安全成新议题。</div>
+      <div class="tweet-body">
+        AI in 2026：两种AI的故事（Sequoia @DavidCahn6）：2026年将是数据中心和AGI的"延迟之年"，同时也是终端用户AI采用加速之年。"企业从自建疲劳转向初创公司解决方案"——从DIY AI项目退出，转向购买专业AI产品。
+      </div>
       <div class="tweet-footer">
-        <a class="tweet-link" href="https://x.com/AnthropicAI" target="_blank">🔗 查看原帖</a>
+        <span class="tweet-ref">引用：Sequoia Capital 研究报告</span>
+        <a class="tweet-link" href="https://x.com/bimedotcom/status/1999529395627622501" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">TS</div>
+        <div class="tweet-user">
+          <div class="name">Tech Startups</div>
+          <div class="handle">@thetechstartups</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        🚨 刚发布：2026年AI TOP 50预测——2025年是整合之年，2026年将是"智能体跃迁"之年，AI从副驾驶走向自主同事。从主权AI区域到AI关系，再到真相、权力与使命的未来，这份报告绘制了全景图。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/thetechstartups/status/1994455627112788074" target="_blank">查看推文 ↗</a>
       </div>
     </div>
 
   </div>
+</section>
 
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <!-- ═══ 今日 AI 热文 TOP 3 ═══ -->
-  <!-- ═══════════════════════════════════════════════════════ -->
-  <div class="section-title" id="hot-articles" style="margin-top:56px">
-    🔥 今日 AI 热文 TOP 3
-    <span class="badge">全文翻译</span>
+<hr class="divider" />
+
+<!-- TOP 3 ARTICLES -->
+<section id="top3" class="article-section">
+  <div class="section-title">🔥 今日 AI 热文 TOP 3</div>
+  <div class="article-cards">
+
+    <!-- ARTICLE 1 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-1">🥇</div>
+        <div class="article-meta">
+          <h3>特朗普政府命令联邦机构切断与Anthropic的关系；五角大楼宣布"供应链风险"</h3>
+          <div class="source">ABC News · Selina Wang · 2026年2月28日</div>
+        </div>
+        <div class="heat-badge">🔥🔥🔥 超高热度</div>
+      </div>
+      <div class="article-body">
+        <p>特朗普总统指示所有联邦机构停止使用Anthropic的AI技术，国防部长皮特·赫格塞斯（Pete Hegseth）将该公司列为国家安全"供应链风险"——这一称号通常只授予外国对手。</p>
+
+        <h4>最后期限与Anthropic的回应</h4>
+        <p>在周五下午5点的最后期限截止后，赫格塞斯在社交媒体上宣布了这一认定，称国防承包商不得使用Anthropic的AI。他表示，该公司将有六个月时间将其服务迁移至其他地方。</p>
+        <p>Anthropic方面回应称，尚未收到五角大楼或白宫关于谈判状态的"直接沟通"。</p>
+
+        <h4>核心争议</h4>
+        <p>Anthropic拒绝放弃合同中的两项关键要求：禁止将AI用于完全自主武器系统，以及禁止用于大规模国内监控应用。据该公司表示，五角大楼最新的合同语言将允许这些安全保障被"随意忽视"。</p>
+        <p>特朗普警告称将采取进一步行动，威胁道："我将动用总统的全部权力迫使他们合规，并将面临重大民事和刑事后果。"</p>
+
+        <h4>双方立场</h4>
+        <p>五角大楼坚持称其无意将Anthropic的AI用于大规模监控或自主武器。但它认为，Anthropic的安全限制可能危害军事行动。</p>
+        <p>Anthropic表示将在法庭上挑战这一供应链认定，称其"在法律上站不住脚"。</p>
+        <p>OpenAI随后另行宣布与五角大楼达成协议，并纳入了与Anthropic所声明原则一致的安全承诺。</p>
+
+        <h4>行业影响</h4>
+        <p>继特朗普政府决定将Anthropic列入黑名单并认定其技术为供应链风险后，国防科技公司纷纷通知员工停止使用Claude，并切换到其他人工智能模型。</p>
+        <p>Anthropic CEO达里奥·阿莫迪（Dario Amodei）称此举"史无前例"，表示这通常是针对外国对手、而非美国本土企业的措施。他将政府的声明定性为"报复性和惩罚性的"。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://abcnews.com/Politics/anthropic-latest-pentagon-contract-bar-ai-autonomous-weapons/story?id=130558898" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：ABC News</span>
+      </div>
+    </div>
+
+    <!-- ARTICLE 2 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-2">🥈</div>
+        <div class="article-meta">
+          <h3>Qwen 3.5：在小型模型中扩展智能——阿里巴巴0.8B至9B紧凑模型全面解析</h3>
+          <div class="source">HowAIWorks.ai · HowAIWorks Team · 2026年3月3日</div>
+        </div>
+        <div class="heat-badge">🔥🔥 高热度</div>
+      </div>
+      <div class="article-body">
+        <p>阿里巴巴发布了Qwen 3.5紧凑系列，将"旗舰级智能带入更小、更高效的形态"，参数规模从0.8B到9B不等。该系列通过门控差分网络（Gated Delta Networks）和稀疏专家混合（sparse Mixture-of-Experts）等架构创新，强调"智能密度"。</p>
+
+        <h4>模型阵容</h4>
+        <p>本次发布涵盖四个层级：</p>
+        <p>· 0.8B和2B：专为需要快速推理的边缘设备和本地应用设计，电池续航表现优异，适合原型开发与部署；</p>
+        <p>· 4B：在体积与推理能力之间取得平衡，适用于轻量级多模态智能体；</p>
+        <p>· 9B：高性能层，"在多项关键基准上超越了此前的Qwen3-30B"。</p>
+
+        <h4>核心特性</h4>
+        <p>所有模型均支持原生多模态能力，可同时处理文本、图像和视频。模型经过基于推理信号的广泛强化学习，以提升指令遵循能力和多步任务执行表现。</p>
+
+        <h4>性能指标</h4>
+        <p>9B模型取得了亮眼的基准成绩：MMLU-Pro得分82.5分，GPQA Diamond得分81.7分，超越了参数量超过其十倍的gpt-oss-120b（80.1分）。</p>
+        <p>在视觉推理基准MMMU-Pro中，Qwen3.5-9B得分70.1，超越Gemini 2.5 Flash-Lite（59.7）以及专门优化的Qwen3-VL-30B-A3B（63.0）。</p>
+        <p>在视频理解方面（Video-MME含字幕），9B模型得分84.5，4B得分83.5，均显著领先Gemini 2.5 Flash-Lite（74.6）。</p>
+        <p>在HMMT 2025哈佛-麻省理工数学锦标赛评测中，9B得分83.2，4B得分74.0，证明高水平STEM推理不再需要庞大的计算集群。</p>
+
+        <h4>边缘设备优化</h4>
+        <p>Qwen3.5-0.8B和Qwen3.5-2B通过优化密集令牌训练流程，专为高吞吐量、低延迟的边缘设备应用而设计，显著降低了显存占用，使其与移动芯片和物联网硬件兼容。</p>
+
+        <h4>开放获取</h4>
+        <p>所有Instruct和Base版本均以Apache 2.0许可证发布，可在Hugging Face和ModelScope上免费获取，供研究和商业使用。无论是运行在智能手机上的0.8B模型，还是驱动编程终端的9B模型，Qwen 3.5系列都在有效推动"智能体时代"的民主化进程。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://howaiworks.ai/blog/alibaba-qwen-3-5-compact-models-announcement" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：HowAIWorks.ai</span>
+      </div>
+    </div>
+
+    <!-- ARTICLE 3 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-3">🥉</div>
+        <div class="article-meta">
+          <h3>苹果计划发布谷歌Gemini驱动的全新Siri：iOS 26.4将带来颠覆性AI升级</h3>
+          <div class="source">MacRumors · Joe Rossignol · 2026年1月25日</div>
+        </div>
+        <div class="heat-badge">🔥🔥 高热度</div>
+      </div>
+      <div class="article-body">
+        <p>据马克·古尔曼（Mark Gurman）报道，苹果公司计划在2月中旬展示由谷歌Gemini驱动的增强版Siri。苹果将在该发布期内"进行功能演示"。</p>
+
+        <h4>发布时间线</h4>
+        <p>升级后的Siri将作为iOS 26.4的一部分推出，2月进入测试版，公开版预计在3月或4月初发布。此次更新将支持iPhone 15 Pro及更新机型。</p>
+
+        <h4>功能概述</h4>
+        <p>全新Siri设计为能够"利用个人数据和屏幕上的内容来完成任务"，实现更具上下文感知的辅助体验。苹果最初在2024年WWDC上宣布了这一功能，但在落地实施过程中遭遇挑战，最终选择与谷歌的AI技术合作。</p>
+
+        <h4>更长远的规划</h4>
+        <p>展望未来，iOS 27将推出更加雄心勃勃的版本——将Siri改造为完整的聊天机器人体验，媲美ChatGPT或Gemini，直接在苹果生态系统内实现持续的多轮对话。</p>
+
+        <h4>商业细节</h4>
+        <p>苹果与谷歌的协议规定，Gemini的角色将以"白标"形式呈现，对终端用户不显示谷歌品牌。从用户角度来看，这依然是Siri——只是变得更加聪明。据报道，苹果计划每年为谷歌的1.2万亿参数AI模型的使用权支付约10亿美元，该模型将运行在苹果的私有云计算服务器上，以维护隐私标准。</p>
+
+        <h4>发布方式</h4>
+        <p>古尔曼表示，苹果尚未确定是举办专属发布活动，还是以私人媒体简报会的形式向外界介绍这些Siri改进成果。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://www.macrumors.com/2026/01/25/siri-google-gemini-release-date/" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：MacRumors</span>
+      </div>
+    </div>
+
   </div>
-
-  <div class="hot-grid">
-
-    <!-- ── 热文 #1 ── -->
-    <div class="hot-card">
-      <div class="hot-rank">
-        <span>#1</span>
-        <span class="hot-rank-label">🏆 最高热度</span>
-      </div>
-      <div class="hot-body">
-        <div class="hot-title">我亲历了伦敦有史以来最大规模的反AI抗议</div>
-        <div class="hot-source">
-          <span>MIT Technology Review</span>
-          <span>2026年3月2日</span>
-        </div>
-        <div class="hot-content">
-          <p>多达500名抗议者于2026年2月28日参加了"向机器进军"游行，地点在伦敦国王十字区的科技企业集中地带，这被描述为迄今全球最大规模的反AI示威活动。</p>
-
-          <h3>游行路线与组织者</h3>
-          <p>游行由五个团体联合组织：Pause AI、Pull the Plug、Mad Youth Organise、Blaksox 和 Assemble。每个团体代表不同的群体，提出不同诉求，但共同的主线是：AI 发展速度已超出民主制度的应对能力。</p>
-          <p>游行从 OpenAI 英国办公室（彭顿维尔路）出发，途经谷歌 DeepMind 和 Meta 总部，最终在布鲁姆斯伯里一处教堂大厅结束。参与者在那里举行"人民大会"，起草对英国政府的诉求。</p>
-
-          <h3>三大核心诉求</h3>
-          <p><strong>1. 暂停前沿AI开发：</strong>Pause AI 的英国分部主任 Joseph Miller 表示："每一部分的社会都需要在这场变革发生之前做好准备。"他们呼吁建立全球暂停机制，直到完善的安全协议确立为止。</p>
-          <p><strong>2. 民主监督机制：</strong>Pull the Plug 的核心诉求是建立具有约束力的"公民大会"，并要求政府将其 AI 政策决定付诸实施。</p>
-          <p><strong>3. 环境影响：</strong>组织者强调，英国已有140个数据中心申请电网接入，总需求达50吉瓦——超过英国整个冬季电力需求。</p>
-
-          <h3>抗议规模与社会支持</h3>
-          <p>尽管500人的游行规模看起来不大，但民调数据显示，84%的英国人担忧政府在 AI 监管上会优先考虑科技合作而非公众利益。文章指出，这一数字对于企业高管而言，其震撼程度远超游行人数本身，因为它代表着推动更严格监管的潜在政治动力。</p>
-
-          <h3>跨国联动</h3>
-          <p>与此同时，柏林也出现了同步抗议活动，这表明该运动正在从孤立的示威演变为有组织的基础设施网络。抗议者展示的标语覆盖了从"AI网络垃圾"到"虐待性图像"，再到"杀手机器人"和"人类灭绝"的广泛议题。</p>
-
-          <blockquote>"真正改变的是，这些担忧现在已被抗议运动所接纳，他们能够召集大量民众走上街头，大声疾呼。"</blockquote>
-        </div>
-        <div class="heat-bar">
-          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
-          <div class="heat-dot"></div><div class="heat-dot"></div>
-          <span class="heat-label">🔥🔥🔥🔥🔥 极高热度</span>
-        </div>
-        <a class="hot-link" href="https://www.technologyreview.com/2026/03/02/1133814/i-checked-out-londons-biggest-ever-anti-ai-protest/" target="_blank">🔗 阅读英文原文</a>
-      </div>
-    </div>
-
-    <!-- ── 热文 #2 ── -->
-    <div class="hot-card">
-      <div class="hot-rank">
-        <span>#2</span>
-        <span class="hot-rank-label">💥 病毒式传播</span>
-      </div>
-      <div class="hot-body">
-        <div class="hot-title">AI恐慌席卷华尔街：美国意识到自己或许还没准备好迎接这一切</div>
-        <div class="hot-source">
-          <span>Fortune</span>
-          <span>2026年2月28日</span>
-        </div>
-        <div class="hot-content">
-          <p>本文呈现了一场争论的张力：一方警告 AI 驱动的大规模失业即将到来，另一方则认为这些担忧被严重夸大。</p>
-
-          <h3>末日叙事的兴起</h3>
-          <p>近期病毒式传播的文章——尤其是 AI 高管 Matt Shumer 和研究机构 Citrini 的文章——警告将出现灾难性的白领失业浪潮。Shumer 的文章将当下比作"2020年2月，疫情正在逼近"。Citrini 的文章则提出了"幽灵 GDP"概念——经济产出仅惠及计算机算力所有者，可能导致抵押贷款违约和经济崩溃。</p>
-
-          <h3>市场真实反应</h3>
-          <p>这些警告引发了真实的市场波动。道琼斯指数单日暴跌超800点，软件股受创最重。Block 公司的 Jack Dorsey 随后宣布裁员40%，似乎印证了这些悲观预测。他表示"智能工具已经改变了构建和运营公司的意义"，与末日预测遥相呼应。</p>
-
-          <h3>华尔街强力反驳</h3>
-          <p>主要金融机构对此进行了强力回击。Citadel Securities 称末日论基于"递归技术谬误"，并指出软件工程师需求实际上同比增长了11%。摩根士丹利预测，新的就业类别将出现，而非永久性的岗位消失。</p>
-
-          <h3>中间立场</h3>
-          <p>部分人士认为极端观点之间存在真相。一位保险公司 CEO 指出，AI 自动化的是常规任务，而复杂决策仍需要人类判断——这意味着是痛苦但可控的转型，而非末日。</p>
-
-          <blockquote>"这不是2020年的疫情，而更像是工业革命——痛苦、颠覆性，但人类最终会适应。"</blockquote>
-        </div>
-        <div class="heat-bar">
-          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
-          <div class="heat-dot"></div><div class="heat-dot off"></div>
-          <span class="heat-label">🔥🔥🔥🔥 高热度</span>
-        </div>
-        <a class="hot-link" href="https://fortune.com/2026/02/28/ai-scare-trade-mass-layoffs-white-collar-recession-citrini-shumer-viral-doomsday-essays/" target="_blank">🔗 阅读英文原文</a>
-      </div>
-    </div>
-
-    <!-- ── 热文 #3 ── -->
-    <div class="hot-card">
-      <div class="hot-rank">
-        <span>#3</span>
-        <span class="hot-rank-label">📡 业界聚焦</span>
-      </div>
-      <div class="hot-body">
-        <div class="hot-title">NVIDIA GTC 2026：我们期待看到的最大揭秘——Feynman芯片与AI硬件新纪元</div>
-        <div class="hot-source">
-          <span>Tom's Guide / TrendForce</span>
-          <span>2026年2月28日 — 3月3日</span>
-        </div>
-        <div class="hot-content">
-          <p>NVIDIA 年度开发者大会 GTC 2026 定于3月16日至19日在加州圣荷西举行。黄仁勋承诺将发布"世界从未见过的芯片"，并宣称 NVIDIA 将让全世界"大吃一惊"。</p>
-
-          <h3>Feynman 芯片架构</h3>
-          <p>本届 GTC 最受期待的发布是 Feynman 芯片——NVIDIA 下一代 AI 架构。据报道，Feynman 将采用台积电的 A16 制程（1.6nm），部分低复杂度芯片（如 I/O 芯片）可能外包给英特尔的 14A 或 18A 工艺制造，并采用 EMIB 先进封装技术。</p>
-          <p>Feynman 芯片专为增强 AI 推理能力设计，有望显著提升个人设备上的 AI 应用性能。</p>
-
-          <h3>HBM4 内存生态</h3>
-          <p>三星电子将在 GTC 上展示其 HBM4 内存性能（HBM4 已于2月12日正式出货），SK海力士也将介绍其 HBM4 技术方案。这标志着 AI 加速器的内存生态正式进入 HBM4 时代。</p>
-
-          <h3>物理AI与机器人</h3>
-          <p>除芯片发布外，GTC 2026 预计将大力推进"物理AI"概念——将 AI 能力延伸至机器人、自动驾驶和工业自动化领域，这也是 CES 2026 设定的年度主旋律。</p>
-
-          <h3>Rubin 系列更新</h3>
-          <p>除 Feynman 架构外，现有的 Rubin AI 芯片系列也预计获得更新，以及针对个人电脑市场的全新 CPU 芯片。</p>
-
-          <blockquote>NVIDIA CEO 黄仁勋："我们将展示几款世界从未见过的新芯片，我们将让全世界大吃一惊。"</blockquote>
-
-          <p>分析师预计，Feynman 芯片将进一步巩固 NVIDIA 在 AI 算力市场的主导地位，同时面临来自 AMD MI500 系列（预计2027年）和 Intel Gaudi 的竞争压力。</p>
-        </div>
-        <div class="heat-bar">
-          <div class="heat-dot"></div><div class="heat-dot"></div><div class="heat-dot"></div>
-          <div class="heat-dot"></div><div class="heat-dot off"></div>
-          <span class="heat-label">🔥🔥🔥🔥 高热度</span>
-        </div>
-        <a class="hot-link" href="https://www.trendforce.com/news/2026/02/25/news-nvidia-gtc-2026-in-focus-feynman-reportedly-on-tsmc-a16-samsung-sk-hynix-to-showcase-hbm4/" target="_blank">🔗 阅读英文原文</a>
-      </div>
-    </div>
-
-  </div><!-- /hot-grid -->
-
-</div><!-- /container -->
+</section>
 
 <footer>
-  🤖 由 Claude AI 自动生成 · 数据来源：X/Twitter + 主流科技媒体 · 2026年3月5日更新<br>
-  内容仅供参考，所有推文链接均为真实 X.com 来源
+  <p>🤖 由 Claude AI 自动生成 · 每日10:00 更新 · 内容来源于 X/Twitter 及各科技媒体</p>
+  <p style="margin-top:6px;">数据截至 2026年3月5日 · <a href="https://tseng71.github.io/x-digest/" style="color:var(--accent2);">tseng71.github.io/x-digest</a></p>
 </footer>
 
 </body>
