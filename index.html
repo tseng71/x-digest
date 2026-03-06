@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>每日 X AI 摘要 · 2026年3月5日</title>
+  <title>每日 X AI 摘要 · 最新：2026年3月6日</title>
   <style>
     :root {
       --bg: #0f1117;
@@ -58,6 +58,26 @@
       border: 1px solid var(--border);
     }
     nav .nav-link-plain:hover { color: var(--text); border-color: var(--accent); }
+
+    /* DAY TABS */
+    .day-tabs {
+      display: flex; gap: 8px; justify-content: center;
+      padding: 12px 24px;
+      background: var(--card); border-bottom: 1px solid var(--border);
+    }
+    .day-tab {
+      padding: 6px 18px; border-radius: 20px;
+      font-size: .85rem; font-weight: 600;
+      cursor: pointer; border: 1px solid var(--border);
+      color: var(--muted); background: transparent;
+      transition: all .2s;
+    }
+    .day-tab:hover { color: var(--text); border-color: var(--accent); }
+    .day-tab.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* DAY SECTIONS */
+    .day-section { display: none; }
+    .day-section.active { display: block; }
 
     /* HERO */
     .hero {
@@ -202,6 +222,7 @@
       .hero h1 { font-size: 1.5rem; }
       .tweet-grid { grid-template-columns: 1fr; }
       nav .nav-links { display: none; }
+      .day-tabs { flex-wrap: wrap; }
     }
   </style>
 </head>
@@ -209,12 +230,441 @@
 
 <!-- NAV -->
 <nav>
-  <div class="logo">𝕏 每日 AI 摘要 <span>2026年3月5日</span></div>
+  <div class="logo">𝕏 每日 AI 摘要 <span>最新：2026年3月6日</span></div>
   <div class="nav-links">
     <a class="nav-link-plain" href="#timeline">📰 时间线</a>
   </div>
   <a href="#top3">🔥 热文 TOP3</a>
 </nav>
+
+<!-- DAY TABS -->
+<div class="day-tabs">
+  <button class="day-tab active" onclick="switchDay('d-20260306', this)">📅 3月6日（今日）</button>
+  <button class="day-tab" onclick="switchDay('d-20260305', this)">📅 3月5日</button>
+</div>
+
+<!-- ========== 2026年3月6日 ========== -->
+<div id="d-20260306" class="day-section active">
+
+<!-- HERO -->
+<div class="hero">
+  <div class="date">📅 2026年3月6日 · 星期五</div>
+  <h1>每日 X · AI 动态摘要</h1>
+  <p>精选过去24小时内 X/Twitter 上最值得关注的人工智能帖子与热文，全部译为中文</p>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><div class="n">15</div><div class="l">精选推文</div></div>
+  <div class="stat"><div class="n">5</div><div class="l">话题分类</div></div>
+  <div class="stat"><div class="n">3</div><div class="l">热文全文翻译</div></div>
+  <div class="stat"><div class="n">🔥</div><div class="l">Claude 登顶 App Store</div></div>
+</div>
+
+<hr class="divider" />
+
+<!-- TIMELINE SECTION -->
+<section id="timeline">
+  <div class="section-title">🤖 AI 模型动态</div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">宝</div>
+        <div class="tweet-user">
+          <div class="name">宝玉</div>
+          <div class="handle">@dotey</div>
+        </div>
+        <span class="tweet-tag tag-model">AI模型</span>
+      </div>
+      <div class="tweet-body">
+        Google 发布 Gemini 3.1 Pro：推理能力翻倍，重回 AI 模型第一梯队。2026年2月19日，距离 Gemini 3 Pro 上线仅三个月，Google 就发布了 Gemini 3.1 Pro。核心卖点：推理能力翻倍，价格不变。目前以 Preview 形式向开发者、企业和消费者全面开放。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/dotey/status/2024611287091589499" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">SA</div>
+        <div class="tweet-user">
+          <div class="name">Sam Altman</div>
+          <div class="handle">@sama</div>
+        </div>
+        <span class="tweet-tag tag-model">AI模型</span>
+      </div>
+      <div class="tweet-body">
+        我们很期待在未来几个月发布一款强大的新开源权重语言模型（含推理能力），并希望听取开发者意见以使其尽可能实用。这将是我们自 GPT-2 以来发布的首个开源权重模型。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/sama/status/1906793591944646898" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">MS</div>
+        <div class="tweet-user">
+          <div class="name">Matt Shumer</div>
+          <div class="handle">@mattshumer_</div>
+        </div>
+        <span class="tweet-tag tag-model">AI模型</span>
+      </div>
+      <div class="tweet-body">
+        某件大事正在发生。（这条简短而意味深长的推文在社区引发广泛猜测，普遍认为与新一代 AI 模型即将发布有关，引发了大量转发和讨论。）
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/mattshumer_/status/2021256989876109403" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">👤 人物动态</div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">SM</div>
+        <div class="tweet-user">
+          <div class="name">Slashdot Media</div>
+          <div class="handle">@SlashdotMedia</div>
+        </div>
+        <span class="tweet-tag tag-person">人物动态</span>
+      </div>
+      <div class="tweet-body">
+        在五角大楼争议之后，Anthropic 的 Claude 反超 ChatGPT，登上苹果"热门应用"排行榜第一名。此前 Anthropic 因拒绝放弃自主武器和大规模监控限制条款，被特朗普政府列为"供应链风险"，却反而引发公众对 Claude 的关注热潮。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/SlashdotMedia/status/2028218843752010035" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">OB</div>
+        <div class="tweet-user">
+          <div class="name">Oliver Bussmann</div>
+          <div class="handle">@obussmann</div>
+        </div>
+        <span class="tweet-tag tag-person">人物动态</span>
+      </div>
+      <div class="tweet-body">
+        OpenAI 的 2026 年愿景：Sam Altman 发布路线图。内容涵盖：到2026年9月实现自动化 AI 研究实习生；到2028年3月实现真正的自动化 AI 研究员；未来五年内有望实现重大科学突破。
+      </div>
+      <div class="tweet-footer">
+        <span class="tweet-ref">引用：OpenAI 路线图直播</span>
+        <a class="tweet-link" href="https://x.com/obussmann/status/2003135960796586109" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">RP</div>
+        <div class="tweet-user">
+          <div class="name">Rohan Paul</div>
+          <div class="handle">@rohanpaul_ai</div>
+        </div>
+        <span class="tweet-tag tag-person">人物动态</span>
+      </div>
+      <div class="tweet-body">
+        Sam Altman 和 OpenAI 现在处于美国经济关键领域的核心地位。OpenAI 预先承诺大量采购算力、网络和云服务，供应商依此扩建工厂和数据中心——金融承诺总规模达 1.4 万亿美元，这是科技史上罕见的供应链预承诺规模。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/1985331853696344119" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">🛠️ 工具 / 教程</div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">RP</div>
+        <div class="tweet-user">
+          <div class="name">Rohan Paul</div>
+          <div class="handle">@rohanpaul_ai</div>
+        </div>
+        <span class="tweet-tag tag-tool">工具/教程</span>
+      </div>
+      <div class="tweet-body">
+        Anthropic 将 Claude Memory（记忆）功能向所有人免费开放，并推出工具让用户可直接将 ChatGPT 或 Gemini 中的偏好设置迁移到 Claude。这是降低用户切换成本的重要一步——新用户不必从头再解释一遍自己的工作习惯。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/2028747394683437358" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">GK</div>
+        <div class="tweet-user">
+          <div class="name">Grok</div>
+          <div class="handle">@grok</div>
+        </div>
+        <span class="tweet-tag tag-tool">工具/教程</span>
+      </div>
+      <div class="tweet-body">
+        确认属实！Anthropic 上周推出了 Claude 开源项目计划。符合条件的开源项目维护者/核心贡献者可获得 6 个月免费 Claude Max 20x（最高档 $200/月）。申请条件：需为 5k+ GitHub Star 或月下载量 100 万+ 的公开 OSS 项目主要维护者。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/grok/status/2028703486628565472" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">🚀 产品发布</div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">RP</div>
+        <div class="tweet-user">
+          <div class="name">Rohan Paul</div>
+          <div class="handle">@rohanpaul_ai</div>
+        </div>
+        <span class="tweet-tag tag-product">产品发布</span>
+      </div>
+      <div class="tweet-body">
+        2026年终于兑现了炒作——@pika_labs 刚发布了 AI Selves，一个可以构建"数字孪生"的工具，外观与真人极为相似。几分钟内即可完成设置，用于代替你处理琐事、创作内容，或帮助你学习日常工作流；还可接入 WhatsApp、Slack、Sheets 和 Notion 代你行动。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/rohanpaul_ai/status/2027564821328404780" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">CN</div>
+        <div class="tweet-user">
+          <div class="name">CN Wire</div>
+          <div class="handle">@Sino_Market</div>
+        </div>
+        <span class="tweet-tag tag-product">产品发布</span>
+      </div>
+      <div class="tweet-body">
+        阿里巴巴旗下 AI 助手通义千问（Qwen）即将进军 AI 硬件市场，在 2026 年巴塞罗那世界移动通信大会（MWC）上发布首款 AI 智能眼镜。线上和线下预购已于 3 月 2 日开启。据悉，全年还将陆续发布 AI 指环、AI 耳机等多款智能硬件设备，目标是全球市场。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/Sino_Market/status/2027215417903825107" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-title" style="margin-top:32px;">🌐 行业 / 时政</div>
+  <div class="tweet-grid">
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">勃</div>
+        <div class="tweet-user">
+          <div class="name">勃勃OC</div>
+          <div class="handle">@bboczeng</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        OpenAI 将在 7300 亿美元估值下筹集 1100 亿美元新投资。预融资估值（pre-money valuation）达 7300 亿美元，较其 2025 年 10 月的二级融资估值 5000 亿美元大幅提升，也远高于 2025 年 3 月上一轮融资（当时融资 400 亿美元，估值 3000 亿美元）。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/bboczeng/status/2027465553632497963" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">CS</div>
+        <div class="tweet-user">
+          <div class="name">Cyber Security News</div>
+          <div class="handle">@The_Cyber_News</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        Claude AI 遭遇全球服务中断。2026年3月2日，Anthropic 的 AI 助手 Claude 发生重大全球故障，导致全球用户及开发者工作流程中断。依赖该 AI 模型的企业被迫临时切换到替代平台。
+      </div>
+      <div class="tweet-footer">
+        <span class="tweet-ref">引用：CyberSecurityNews.com</span>
+        <a class="tweet-link" href="https://x.com/The_Cyber_News/status/2028499746063855864" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">TA</div>
+        <div class="tweet-user">
+          <div class="name">Tom Arbuthnot</div>
+          <div class="handle">@tomarbuthnot</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        从 2026 年 1 月 7 日起，Anthropic 模型已默认集成至大多数商业租户的 Microsoft 365 Copilot，适用于 Microsoft 产品条款和数据保护附录（DPA）。此举意味着微软数亿企业用户现在可以直接在 Office 应用中使用 Claude 模型。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/tomarbuthnot/status/1998320907744379105" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">NS</div>
+        <div class="tweet-user">
+          <div class="name">NETSNIX</div>
+          <div class="handle">@NetSnix</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        Elon Musk 再次调整时间表，称其 AI 公司 xAI 可能在 2026 年实现通用人工智能（AGI）。他对员工表示，未来模型可能超越人类智能，背后有重额资金投入、快速扩张的数据中心，以及与 X 平台更紧密的整合支撑。
+      </div>
+      <div class="tweet-footer">
+        <a class="tweet-link" href="https://x.com/NetSnix/status/2001589039401402409" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+    <div class="tweet-card">
+      <div class="tweet-header">
+        <div class="tweet-avatar">GL</div>
+        <div class="tweet-user">
+          <div class="name">Glean</div>
+          <div class="handle">@glean</div>
+        </div>
+        <span class="tweet-tag tag-industry">行业/时政</span>
+      </div>
+      <div class="tweet-body">
+        好消息！我们被 @bloomberg 评选为 2026 年最值得关注的 AI 初创公司之一！我们相信，当人们拥有正确的上下文信息时，工作效果最佳。我们很荣幸被认可为将这一理念变为现实的公司——通过可信赖的企业级 AI 技术。
+      </div>
+      <div class="tweet-footer">
+        <span class="tweet-ref">引用：Bloomberg 2026 AI初创公司榜单</span>
+        <a class="tweet-link" href="https://x.com/glean/status/1983587161652769126" target="_blank">查看推文 ↗</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TOP 3 ARTICLES -->
+<section id="top3" class="article-section">
+  <div class="section-title">🔥 今日 AI 热文 TOP 3</div>
+  <div class="article-cards">
+
+    <!-- ARTICLE 1 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-1">🥇</div>
+        <div class="article-meta">
+          <h3>AI新闻与趋势 2026年3月：完整月度摘要</h3>
+          <div class="source">HumAI Blog · HumAI Team · 2026年3月</div>
+        </div>
+        <div class="heat-badge">🔥🔥🔥 超高热度</div>
+      </div>
+      <div class="article-body">
+        <p>2026 年 3 月，人工智能行业正在经历一次深刻的范式转变——从技术能力的竞争，转向实际部署的可靠性与商业模式的可持续性。本月多项重大进展值得关注。</p>
+
+        <h4>主要模型发布</h4>
+        <p>OpenAI 发布了 GPT-5.4，具备原生计算机控制功能，错误率比上一版本降低 18%，并新增"思考模式（Thinking Mode）"以提升推理密集型任务的处理能力。</p>
+        <p>Luma AI 推出了基于"统一智能（Unified Intelligence）"模型的创意智能体，定位是将多种创意 AI 工具整合到一个平台，涵盖图像、视频、3D 等跨模态创作。</p>
+        <p>Google 的 Gemini Canvas 向美国全部用户开放，用户无需手动激活，即可通过自然语言描述直接创建应用程序和游戏。</p>
+
+        <h4>行业挑战与隐忧</h4>
+        <p>商业化压力凸显：各大 AI 实验室正从单纯的能力竞赛，转向构建可持续的商业模式，货币化路径成为 2026 年行业核心命题。</p>
+        <p>幻觉问题依然顽固：大型语言模型在准确性上的系统性缺陷尚未解决，制约了其在高精度场景中的部署空间。</p>
+        <p>法律风险已然落地：康涅狄格州最高法院正在审理一起案件，起因是 GLG 律师事务所的律师承认使用生成式 AI 生成了捏造引文——引用的判例根本不存在，这一事件引发业界对 AI 在法律专业领域应用的广泛反思。</p>
+        <p>心理健康风险引发警惕：另有诉讼指控 Google 的 Gemini 对一名用户的心理健康产生了负面影响，推动业界重新审视对话式 AI 的设计伦理。</p>
+
+        <h4>新兴趋势</h4>
+        <p>集成方法兴起：初创公司 CollectivIQ 开发出一种方案——同时向多个 AI 模型发起查询，通过多模型交叉验证提升整体准确率，以弥补单一模型的不足。</p>
+        <p>垂直专用 AI：GSMA 推出"开放电信 AI（Open Telco AI）"，原因是通用大模型在处理电信特定任务时表现欠佳，专用化趋势在各行业持续蔓延。</p>
+        <p>企业 AI 深度渗透：四大广告代理集团正越来越多地借助 Anthropic Claude 的企业工具，自动化 SEO 审计、创意简报等品牌相关任务，AI 已深度融入代理商的日常作业流程。</p>
+        <p>监管滞后于技术：新西兰选举前，AI 生成的选举宣传内容大量涌现，速度远超现有监管框架的应对能力，凸显 AI 治理的全球性紧迫课题。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://www.humai.blog/ai-news-trends-march-2026-complete-monthly-digest/" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：HumAI Blog</span>
+      </div>
+    </div>
+
+    <!-- ARTICLE 2 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-2">🥈</div>
+        <div class="article-meta">
+          <h3>AI新闻简报公告栏 · 2026年3月：微软Phi-4、OpenAI GPT-5.4、Qwen3.5全面解析</h3>
+          <div class="source">Radical Data Science · 2026年3月4日</div>
+        </div>
+        <div class="heat-badge">🔥🔥 高热度</div>
+      </div>
+      <div class="article-body">
+        <p>本期简报汇聚了2026年3月初AI行业的前沿动态，聚焦多项足以改变市场格局的技术突破。</p>
+
+        <h4>微软发布 Phi-4-reasoning-vision-15B</h4>
+        <p>微软发布了 Phi-4-reasoning-vision-15B，这是一款 150 亿参数的多模态系统，仅使用约 2000 亿 token 进行训练，却能达到参数量更大的竞品的同等性能水平。该模型具备图像处理、复杂数学推理、图表解读和 GUI 导航等能力，是微软小型高效模型系列的重要一员。</p>
+
+        <h4>OpenAI GPT-5.4 即将发布</h4>
+        <p>据悉，OpenAI 即将推出的 GPT-5.4 将搭载百万 token 的上下文窗口，并配备面向计算密集型查询的"极致思考（Extreme Thinking）模式"。此次发布被视为对此前用户增长放缓的直接回应——通过更频繁的模型迭代保持竞争势头。</p>
+
+        <h4>Google 贝叶斯教学方法</h4>
+        <p>Google 研究人员发布了一种新方法，使语言模型能够随新信息的出现动态更新概率估计，解决了现有模型将每次交互视为独立事件、无法在对话过程中适应性学习的核心局限，在多跳推理和长文本理解任务上取得显著进展。</p>
+
+        <h4>阿里巴巴 Qwen3.5 系列</h4>
+        <p>阿里巴巴推出了 Qwen3.5 小型高效开源系列，参数规模从 0.8B 到 9B 不等。其中 Qwen3.5-9B 在多项关键基准测试中超越了 OpenAI 的 gpt-oss-120B，而后者的参数量是前者的十倍以上，充分验证了"小模型、大智能"的技术路线。</p>
+
+        <h4>行业生态动态</h4>
+        <p>麻省理工学院（MIT）发布了全新免费 AI 库，为研究人员和开发者提供高质量开源工具。行业知名人士吴恩达（Andrew Ng）就 AGI 时间线及基础设施投资规模发表了独到见解，认为当前对 AGI 时间线的预测普遍偏于乐观。此外，地缘政治分裂正在重塑全球 AI 战略格局——多个国家正在推进"主权 AI"计划，力求摆脱对单一供应商的依赖。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://radicaldatascience.wordpress.com/2026/03/04/ai-news-briefs-bulletin-board-for-march-2026/" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：Radical Data Science</span>
+      </div>
+    </div>
+
+    <!-- ARTICLE 3 -->
+    <div class="article-card">
+      <div class="article-card-header">
+        <div class="rank-badge rank-3">🥉</div>
+        <div class="article-meta">
+          <h3>也许 AI 智能体真的可以胜任律师工作——Anthropic Opus 4.6 在法律评测中大幅突破</h3>
+          <div class="source">TechCrunch · Russell Brandom · 2026年2月6日</div>
+        </div>
+        <div class="heat-badge">🔥🔥 高热度</div>
+      </div>
+      <div class="article-body">
+        <p>TechCrunch 报道，Anthropic 最新发布的 Opus 4.6 模型在一项此前 AI 表现极为惨淡的专业能力评估中取得了重大突破，迫使外界重新审视 AI 是否真的能够胜任法律等高技能专业工作。</p>
+
+        <h4>评测背景：Mercor 基准测试</h4>
+        <p>文章引用的是 Mercor 基准测试，该测试专门评估 AI 智能体在法律分析与企业事务处理等任务上的实际表现。就在一月份，所有主流 AI 实验室的模型在这些评估中的得分还普遍低于 25%，表明 AI 在这类需要深度专业判断的任务上距离实用化仍有相当差距。</p>
+
+        <h4>Opus 4.6 的突破性表现</h4>
+        <p>然而，Anthropic 新发布的 Opus 4.6 显著改变了这一局面。在单次尝试（one-shot）条件下，该模型得分接近 30%；若允许多次尝试，平均得分可达 45%。新版本还引入了全新的智能体功能，包括"智能体群（agent swarms）"机制，可能对需要多步推理的复杂任务有所助益。</p>
+
+        <h4>关键启示</h4>
+        <p>文章作者 Russell Brandom 指出："AI 能力在短短几周内就可以发生翻天覆地的变化。"这句话揭示了当前 AI 评测领域的一个核心困境：基准测试的结论可能在新模型发布后迅速过时，此前对 AI 在特定专业领域"不可用"的判断需要持续更新。</p>
+
+        <h4>更广泛的影响</h4>
+        <p>这一进展意味着，专业服务领域对 AI 能力的悲观预期或许需要重新校准。随着模型迭代速度加快，AI 在法律、金融分析等高技能领域的渗透速度可能远超行业预期，相关从业者和机构应对此保持高度关注。</p>
+      </div>
+      <div class="article-footer">
+        <a class="article-link" href="https://techcrunch.com/2026/02/06/maybe-ai-agents-can-be-lawyers-after-all/" target="_blank">📰 阅读原文 ↗</a>
+        <span style="font-size:.78rem;color:var(--muted);">来源：TechCrunch</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+</div><!-- end d-20260306 -->
+
+
+<!-- ========== 2026年3月5日（历史存档） ========== -->
+<div id="d-20260305" class="day-section">
 
 <!-- HERO -->
 <div class="hero">
@@ -234,7 +684,7 @@
 <hr class="divider" />
 
 <!-- TIMELINE SECTION -->
-<section id="timeline">
+<section id="timeline-0305">
   <div class="section-title">🤖 AI 模型动态</div>
   <div class="tweet-grid">
 
@@ -521,7 +971,7 @@
 <hr class="divider" />
 
 <!-- TOP 3 ARTICLES -->
-<section id="top3" class="article-section">
+<section id="top3-0305" class="article-section">
   <div class="section-title">🔥 今日 AI 热文 TOP 3</div>
   <div class="article-cards">
 
@@ -638,10 +1088,32 @@
   </div>
 </section>
 
+</div><!-- end d-20260305 -->
+
+
 <footer>
   <p>🤖 由 Claude AI 自动生成 · 每日10:00 更新 · 内容来源于 X/Twitter 及各科技媒体</p>
-  <p style="margin-top:6px;">数据截至 2026年3月5日 · <a href="https://tseng71.github.io/x-digest/" style="color:var(--accent2);">tseng71.github.io/x-digest</a></p>
+  <p style="margin-top:6px;">数据截至 2026年3月6日 · <a href="https://tseng71.github.io/x-digest/" style="color:var(--accent2);">tseng71.github.io/x-digest</a></p>
 </footer>
+
+<script>
+  function switchDay(dayId, btn) {
+    // Hide all day sections
+    document.querySelectorAll('.day-section').forEach(function(el) {
+      el.classList.remove('active');
+    });
+    // Deactivate all tabs
+    document.querySelectorAll('.day-tab').forEach(function(el) {
+      el.classList.remove('active');
+    });
+    // Show selected day
+    document.getElementById(dayId).classList.add('active');
+    // Activate clicked tab
+    btn.classList.add('active');
+    // Scroll to top of content
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+</script>
 
 </body>
 </html>
